@@ -1,0 +1,42 @@
+schema_version: "1"
+managed_by: "agent-project-governance"
+profile: "<minimal|product|high-risk>"
+status: "<adopting|conformant|degraded>"
+initialized_at: "<YYYY-MM-DD>"
+last_audited_at: "<YYYY-MM-DD>"
+
+entrypoints:
+  agent_guide: "AGENTS.md"
+  evolution: "EVOLUTION.md"
+  backlog: "docs/backlog/PRODUCT-BACKLOG.md"
+  iterations: "docs/iterations/"
+  decisions: "docs/decisions/"
+  roadmap: "docs/roadmap/IMPLEMENTATION-ROADMAP.md"
+  proposals: "docs/proposals/"
+  reference: "docs/reference/"
+  sop: "docs/sop/"
+
+capabilities:
+  task_router: "<conformant|legacy|missing|not_applicable|degraded>"
+  evolution_feedback: "<conformant|legacy|missing|not_applicable|degraded>"
+  testing_policy: "<conformant|legacy|missing|not_applicable|degraded>"
+  git_workflow: "<conformant|legacy|missing|not_applicable|degraded>"
+  requirement_intake: "<conformant|legacy|missing|not_applicable|degraded>"
+  iteration_workflow: "<conformant|legacy|missing|not_applicable|degraded>"
+  change_control: "<conformant|legacy|missing|not_applicable|degraded>"
+  decision_records: "<conformant|legacy|missing|not_applicable|degraded>"
+  release_workflow: "<conformant|legacy|missing|not_applicable|degraded>"
+  risk_specific_gates: "<conformant|legacy|missing|not_applicable|degraded>"
+
+risk_gates:
+  - signal: "<observed project characteristic>"
+    gate: "<derived required check>"
+    owner: "<AGENTS.md or docs/sop/...>"
+
+migration:
+  legacy_assets:
+    - path: "<existing file path>"
+      maps_to: "<standard responsibility or path>"
+      action: "<preserve|link|extract-and-link|supersede|archive>"
+  next_actions:
+    - "<smallest next useful adoption action>"

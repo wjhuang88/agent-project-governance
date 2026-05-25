@@ -1,0 +1,4 @@
+interface:
+  display_name: "Agent Project Governance"
+  short_description: "提炼项目特征并引导建立可持续的Agent工程治理结构"
+  default_prompt: "Use $agent-project-governance to assess this project and guide it into a durable Agent-friendly governance structure."
