@@ -45,7 +45,7 @@ smaller projects.
 ## Manifest Contract
 
 The project-level output `.agent-governance/manifest.yaml` records adoption state, not policy
-text. Begin with `assets/manifest.yaml.template` and tailor it.
+text. Begin with `assets/manifest.template.yaml` and tailor it.
 
 Required logical content:
 

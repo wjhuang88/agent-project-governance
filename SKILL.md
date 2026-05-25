@@ -130,7 +130,7 @@ material.
 
 Read [references/standard-structure.md](references/standard-structure.md) for target profiles and
 document responsibilities. Copy and tailor
-[assets/manifest.yaml.template](assets/manifest.yaml.template) when establishing the manifest.
+[assets/manifest.template.yaml](assets/manifest.template.yaml) when establishing the manifest.
 
 ### 5. Audit and Improve
 
@@ -201,7 +201,7 @@ When implementing, also report:
   deriving gates from technical risk.
 - [references/evaluation-cases.md](references/evaluation-cases.md): forward-test scenarios and
   success criteria.
-- [assets/manifest.yaml.template](assets/manifest.yaml.template): manifest starting point for an
+- [assets/manifest.template.yaml](assets/manifest.template.yaml): manifest starting point for an
   initialized or adopting project.
 - [scripts/validate_project_governance.py](scripts/validate_project_governance.py): deterministic
   checks for generated or adopted project governance artifacts.
