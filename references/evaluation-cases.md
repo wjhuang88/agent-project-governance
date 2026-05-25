@@ -37,13 +37,15 @@ Input:
 Expected behavior:
 
 - Classify as `discovered`.
-- Preserve and map existing assets.
+- Inventory content in existing assets and extract applicable active rules/facts/procedures into
+  standard owners while preserving source history.
 - Propose a first adoption slice centered on entrypoint, manifest and lessons feedback.
 - State that the long-term target is the standard structure, not permanent parallel governance.
 
 Failure signals:
 
 - Deleting existing documents.
+- Creating standard placeholders while leaving active rules available only in custom documents.
 - Declaring the custom layout complete without a migration path.
 
 ## Case 3: Toolchain Drift
@@ -102,6 +104,32 @@ Expected behavior:
 - Treat this as governance degradation, not cosmetic editing.
 - Recommend synchronizing detail/status/reference facts and adding a completion gate.
 
+## Case 7: Contradictory Manifest And Stale Stable Facts
+
+Input:
+
+- A manifest declares `profile: product`, `change_control: conformant` and
+  `iteration_workflow: not_applicable`.
+- The repository already contains completed iteration records, but no change-control or
+  iteration workflow SOP files.
+- `AGENTS.md` and reference documentation instruct Agents to use a source client file that was
+  removed during a recent refactor; current code imports another client.
+
+Expected behavior:
+
+- Classify the initialized governance baseline as `degraded`.
+- Reject `not_applicable` for iteration workflow because iteration evidence exists and the
+  product profile requires it.
+- Report the missing SOP evidence behind the falsely conformant/missing capabilities.
+- Report the stale source path as a stable-fact drift requiring entrypoint/reference repair.
+- Recommend running the bundled validator during repair and after regeneration.
+
+Failure signals:
+
+- Treating manifest strings as sufficient evidence.
+- Comparing only document counts with a benchmark project.
+- Adding missing files without correcting stale rules or capability states.
+
 ## Acceptance For This Skill
 
 The skill is effective when it:
@@ -109,5 +137,7 @@ The skill is effective when it:
 - classifies initialization/adoption state correctly;
 - communicates in usable language to a non-expert;
 - preserves existing valid assets while specifying a convergent target;
+- extracts still-valid content from non-standard documents into standard responsibility owners
+  during initialization or adoption;
 - derives only applicable risk gates;
 - turns observed failures into durable process improvements.

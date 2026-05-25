@@ -8,6 +8,7 @@ last_audited_at: "<YYYY-MM-DD>"
 entrypoints:
   agent_guide: "AGENTS.md"
   evolution: "EVOLUTION.md"
+  document_map: "docs/README.md"
   backlog: "docs/backlog/PRODUCT-BACKLOG.md"
   iterations: "docs/iterations/"
   decisions: "docs/decisions/"
@@ -38,5 +39,8 @@ migration:
     - path: "<existing file path>"
       maps_to: "<standard responsibility or path>"
       action: "<preserve|link|extract-and-link|supersede|archive>"
+      extracted_to:
+        - "<standard path containing extracted active content>"
+      status: "<inventoried|partially-extracted|extracted|archived|superseded|preserved>"
   next_actions:
     - "<smallest next useful adoption action>"

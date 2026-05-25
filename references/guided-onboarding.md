@@ -61,7 +61,8 @@ First initialization slice:
 This step will not modify:
 - business code;
 - build/deployment behavior unless specifically approved;
-- existing useful documents.
+- existing useful documents without an explicit preservation, extraction, archive, or
+  supersession action.
 ```
 
 Request confirmation before writing files unless the user already explicitly requested
@@ -83,12 +84,13 @@ Main gaps:
 
 Recommended first migration slice:
 - Create the standard entrypoint and manifest.
-- Reference or map existing rules without deleting history.
+- Extract active rules, facts, decisions, procedures and lessons into their standard locations,
+  recording where each source was mapped without deleting history.
 - Defer deeper file migration until the entrypoint is usable.
 
 Long-term destination:
 - The project converges on the standard governance structure, with legacy sources either
-  incorporated, linked as authoritative references, or explicitly superseded.
+  incorporated into standard owners, archived as history, or explicitly superseded.
 ```
 
 ## After Initialization

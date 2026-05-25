@@ -7,6 +7,7 @@
 - Manifest contract
 - Initializing a new project
 - Adopting an existing project
+- Extracting non-standard documents
 - Repairing degraded governance
 
 ## Governance States
@@ -35,6 +36,9 @@ smaller projects.
 4. If no manifest exists:
    - search for governance assets such as `AGENTS.md`, `CONTRIBUTING*`, architecture docs,
      ADR directories, issue/backlog documents, release/testing instructions, and lessons learned;
+   - search for non-standard or mixed-responsibility documents such as root-level planning files,
+     migration reports, implementation summaries, custom `notes/` directories, or docs whose
+     content spans procedures, decisions and historical records;
    - classify as `discovered` if useful assets exist, otherwise `uninitialized`.
 5. Present findings and a minimal implementation slice before writing.
 
@@ -50,7 +54,8 @@ Required logical content:
 - standard entrypoint paths;
 - capability states;
 - project-derived risk gates;
-- legacy mappings and next migration actions when not yet conformant.
+- legacy mappings, extraction destinations/status, and next migration actions when not yet
+  conformant.
 
 Capability status values:
 
@@ -64,6 +69,23 @@ Capability status values:
 
 Never mark a capability conformant just because a file with a matching name exists.
 
+## Profile And Capability Invariants
+
+Use these invariants before writing the manifest and again after every governance edit:
+
+| Condition | Required interpretation |
+| --- | --- |
+| A capability is `conformant` | Its standard owning file(s) exist, are routed when recurring work needs them, and accurately describe the current project. |
+| Profile is `product` or `high-risk` | `task_router`, `evolution_feedback`, `testing_policy`, `git_workflow`, `requirement_intake`, `iteration_workflow` and `change_control` cannot be `not_applicable`. |
+| Iteration records already exist | `iteration_workflow` cannot be `not_applicable`; `START-ITERATION.md` and `ITERATION-WORKFLOW.md` must exist or the capability is `missing`/`degraded`. |
+| `change_control` is `conformant` | `docs/sop/CHANGE-CONTROL.md` exists and is reachable from the task router. |
+| Profile is `product` or `high-risk` | `docs/README.md` exists as a documentation map, unless the manifest explicitly records it as an unfinished migration action. |
+| A recurring workflow is `conformant` | Its owning SOP or reference entry is reachable from `AGENTS.md` task routing, not only present on disk. |
+| A declared rule names code paths, commands or dependencies | They are checked against the current repository; obsolete stable facts make the owning capability `degraded`. |
+
+An adopting repository may intentionally leave applicable capabilities `missing` while completing
+a small slice. It may not mark an absent, stale or contradictory capability as `conformant`.
+
 ## Initializing A New Project
 
 Establish the smallest usable control surface first:
@@ -72,7 +94,9 @@ Establish the smallest usable control surface first:
 2. Create `.agent-governance/manifest.yaml` with initial capability status.
 3. Create `EVOLUTION.md` for recurring lessons and process improvements.
 4. Add minimum testing and Git instructions when Agents may modify code.
-5. Mark later planning or risk workflows as `missing` or `not_applicable`; do not fabricate
+5. If existing non-standard documents were discovered, extract their active content into the
+   standard owners described below and record source-to-target mappings in the manifest.
+6. Mark later planning or risk workflows as `missing` or `not_applicable`; do not fabricate
    mature process content prematurely.
 
 For projects with continuing features, proceed after user agreement to requirements, iteration,
@@ -93,11 +117,60 @@ Protect useful assets while converging:
 Recommended adoption sequence:
 
 1. Create the standard entrypoint, manifest, and evolution record.
-2. Register legacy assets and immediate conflicts.
-3. Migrate daily execution rules: testing, Git, requirement intake, iteration, and change
+2. Inventory each legacy or non-standard source and classify its useful content by
+   responsibility.
+3. Extract active content into standard owners; preserve, link, archive, or explicitly
+   supersede the original sources.
+4. Register source-to-target mappings and immediate conflicts in the manifest.
+5. Migrate daily execution rules: testing, Git, requirement intake, iteration, and change
    control.
-4. Migrate planning, decisions, stable reference facts, and proposals.
-5. Add project-specific risk gates and change state to `conformant` only after an audit.
+6. Migrate planning, decisions, stable reference facts, and proposals.
+7. Add project-specific risk gates and change state to `conformant` only after an audit.
+
+## Extracting Non-Standard Documents
+
+Initialization and adoption must not leave active knowledge stranded in arbitrary document
+locations. A document is non-standard when its authoritative content belongs to a standard
+governance responsibility but is stored elsewhere, or when it mixes several responsibilities
+that Agents need to query independently.
+
+### Extraction Mapping
+
+| Content found in an existing document | Standard owner | Source handling |
+| --- | --- | --- |
+| Mandatory Agent rules and task routing | `AGENTS.md` | Extract active rules; retain a link or supersession note. |
+| Reusable failures, corrections and checks | `EVOLUTION.md` | Extract lessons; preserve original history or archive it. |
+| Stable architecture, commands, boundaries and contracts | `docs/reference/` | Extract current facts; do not copy obsolete facts as current. |
+| Repeatable operating procedure | `docs/sop/` | Extract actionable sequence and checks. |
+| Implementable requirement or defect | `docs/backlog/` | Create or update a tracked work item with acceptance evidence. |
+| Active bounded execution record | `docs/iterations/` | Preserve status and validation results in an iteration record. |
+| Important selected tradeoff | `docs/decisions/` | Extract as an ADR or map to an existing decision record. |
+| Sequenced future direction | `docs/roadmap/` | Extract only committed direction, not speculative ideas. |
+| Immature idea or candidate direction | `docs/proposals/` | Extract without making it executable work. |
+| Historical plan or obsolete snapshot | `docs/archive/` | Preserve as history; link from current owners only if useful. |
+
+### Required Procedure
+
+1. Build an inventory with each source path, content categories, whether it is still valid, and
+   proposed standard owner.
+2. Identify contradictions between a source document and current code, configuration or newer
+   documentation; do not migrate contradicted text as active policy.
+3. Extract still-valid active content into one or more standard owners. Do not merely create an
+   empty standard file while leaving the rule only in the legacy source.
+4. Preserve historical context. Move to `docs/archive/`, leave a source pointer, or explicitly
+   mark supersession according to user agreement and repository conventions.
+5. Record each source in `migration.legacy_assets` with an action, `extracted_to` destination
+   paths, and current status.
+6. Audit that Agents can reach all active extracted rules through `AGENTS.md` routing or the
+   standard document map without reading arbitrary legacy files first.
+7. Run `scripts/validate_project_governance.py` from this skill against the target repository
+   before claiming that the produced or repaired governance baseline is valid.
+
+### Completion Rule
+
+A repository with useful active governance content only in non-standard sources is `adopting`,
+not `conformant`. If an initialized repository claims conformance while extraction mappings or
+active content are missing, classify the affected capability as `degraded`.
 
 ## Repairing Degraded Governance
 

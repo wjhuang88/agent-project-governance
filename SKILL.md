@@ -20,8 +20,10 @@ Before proposing files or editing a project:
 2. Inspect project technology, delivery shape, test/build commands, deployment surface, and risky
    domains such as authentication, databases, payments, permissions, or external integrations.
 3. Look for `.agent-governance/manifest.yaml`.
-4. Look for existing governance assets: `AGENTS.md`, contribution rules, backlog or issue files,
-   ADRs, roadmap, iteration notes, test/release instructions, CI files, and lessons learned.
+4. Look for existing governance assets and non-standard documents: `AGENTS.md`, contribution
+   rules, root-level or custom documentation folders, backlog or issue files, ADRs, roadmap,
+   iteration notes, test/release instructions, CI files, migration plans, and lessons learned.
+   Inventory useful content even when its current location or shape is not standard.
 5. Classify the repository:
 
 | State | Meaning | Required response |
@@ -102,15 +104,26 @@ After confirmation, build toward the standard structure in stages:
 
 1. Establish control entrypoints: `AGENTS.md`, `.agent-governance/manifest.yaml`, and
    `EVOLUTION.md`.
-2. Add daily execution gates: testing, Git, requirement intake, iteration flow, and change
+2. Extract applicable content from existing non-standard documents into standard owners:
+   mandatory rules and routes into `AGENTS.md`, stable facts into `docs/reference/`, procedures
+   into `docs/sop/`, executable work into `docs/backlog/` or `docs/iterations/`, significant
+   decisions into `docs/decisions/`, direction into `docs/roadmap/`, immature proposals into
+   `docs/proposals/`, lessons into `EVOLUTION.md`, and historical source material into
+   `docs/archive/`.
+3. Record each preserved, extracted, superseded, or archived source in the manifest migration
+   mapping. A source document may remain in place while its active content is extracted and
+   linked; do not leave active rules discoverable only through non-standard sources.
+4. Add daily execution gates: testing, Git, requirement intake, iteration flow, and change
    control as applicable.
-3. Add planning and stable-fact layers: backlog, iterations, decisions, roadmap, proposals, and
+5. Add planning and stable-fact layers: backlog, iterations, decisions, roadmap, proposals, and
    reference material as applicable.
-4. Add project-specific gates derived from risk, such as contract-first APIs, database
+6. Add project-specific gates derived from risk, such as contract-first APIs, database
    migration, release, security, or visual validation rules.
 
-Preserve useful legacy documents during adoption. Link, extract, or supersede explicitly; do not
-silently delete historical or still-authoritative material.
+Preserve useful legacy documents during adoption. Non-standard location is not a reason to drop
+content: extract each active responsibility into its standard owner, then link, archive, or
+supersede the source explicitly. Do not silently delete historical or still-authoritative
+material.
 
 Read [references/standard-structure.md](references/standard-structure.md) for target profiles and
 document responsibilities. Copy and tailor
@@ -120,6 +133,8 @@ document responsibilities. Copy and tailor
 
 For initialized projects, verify that declared capabilities remain real:
 
+- profile and capability states satisfy the invariants in
+  [references/initialization-and-adoption.md](references/initialization-and-adoption.md);
 - task routes lead to existing, current instructions;
 - commands match the repository toolchain and lock files;
 - backlog and iteration states agree;
@@ -134,11 +149,16 @@ governance model itself.
 
 After editing governance artifacts:
 
-1. Verify links, declared entrypoints, and manifest paths.
-2. Confirm no useful legacy source was unintentionally overwritten.
-3. Run a scenario-based check using real project risks or
+1. Run `python3 <skill-path>/scripts/validate_project_governance.py <project-root>` to check
+   required profile files, capability evidence, `AGENTS.md` execution sections, local Markdown
+   links, and missing explicit `src/...` file references in active governance documents.
+2. Compare inventoried non-standard documents with the new standard owners; confirm every
+   still-applicable rule, fact, decision, work item, procedure, or lesson was extracted or
+   explicitly mapped for later migration.
+3. Confirm no useful legacy source was unintentionally overwritten or silently discarded.
+4. Run a scenario-based check using real project risks or
    [references/evaluation-cases.md](references/evaluation-cases.md).
-4. Explain what the user can now ask an Agent to do, and which governance capabilities remain
+5. Explain what the user can now ask an Agent to do, and which governance capabilities remain
    intentionally deferred.
 
 ## Output Contract
@@ -178,3 +198,5 @@ When implementing, also report:
   success criteria.
 - [assets/manifest.yaml.template](assets/manifest.yaml.template): manifest starting point for an
   initialized or adopting project.
+- [scripts/validate_project_governance.py](scripts/validate_project_governance.py): deterministic
+  checks for generated or adopted project governance artifacts.
