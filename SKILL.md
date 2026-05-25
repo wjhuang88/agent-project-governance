@@ -65,6 +65,8 @@ Read enough of the repository to determine:
 - whether work is one-off maintenance or continuing product development;
 - whether Agents may edit code, validate behavior, commit, or release;
 - which systems can fail expensively;
+- whether registered tools, webhooks, mailers, agents, or other executors can initiate outbound
+  actions on behalf of a caller;
 - which rules and project facts already exist;
 - whether current commands, architectural targets, and documentation agree.
 
@@ -76,9 +78,10 @@ Create an internal mapping:
 project characteristic -> plausible recurring failure -> protective gate -> owning document
 ```
 
-Examples include a public email entrypoint requiring URL/route/auth-middleware checks, or a
-dual-database service requiring paired migrations and tests. Do not import a gate merely because
-another project needed it.
+Examples include a public email entrypoint requiring URL/route/auth-middleware checks, a
+dual-database service requiring paired migrations and tests, or an outbound tool executor
+requiring caller authentication, bounded responses, explicit network behavior and deterministic
+local tests. Do not import a gate merely because another project needed it.
 
 Read [references/risk-to-gate-patterns.md](references/risk-to-gate-patterns.md) when the project
 contains cross-layer, security, data, deployment, or migration risk.
@@ -138,6 +141,8 @@ For initialized projects, verify that declared capabilities remain real:
 - task routes lead to existing, current instructions;
 - commands match the repository toolchain and lock files;
 - backlog and iteration states agree;
+- completion claims are backed by recorded commands or concrete manual evidence, not only
+  checked status boxes;
 - transitional architecture is not presented as the final design;
 - new failure lessons have been converted to checks where useful;
 - validation gates cover the changed risk surface.

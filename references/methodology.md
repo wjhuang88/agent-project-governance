@@ -25,6 +25,21 @@ Separate:
 
 An Agent should implement only work that is small enough and specific enough to validate.
 
+### Make Evidence Precede Completion
+
+A status field or checked acceptance box is not verification. For any executable story, require
+the recorded validation result to identify what was actually run or manually checked and whether
+it passed. Planning records should exist before implementation begins; retroactively writing a
+story as started and completed in one close-out step removes the review point that could have
+caught scope and validation gaps.
+
+Use these completion rules:
+
+- do not mark a required gate complete when it failed, was not run, or was replaced by a narrower
+  check;
+- keep a story in review or create a repair slice when verification finds a blocking defect;
+- for high-risk work, require a distinct review conclusion before completion.
+
 ### Generate Gates From Risk
 
 Use this reasoning chain:
@@ -38,6 +53,22 @@ What can fail repeatedly or expensively?
 
 A gate without a project-derived failure mode is overhead. A known expensive failure without a
 gate is unfinished process design.
+
+### Treat Outbound Execution As A Security Boundary
+
+When a project lets API clients, agents, webhooks, plugins, or configured tools trigger outbound
+requests or side effects, registration and discovery are not sufficient controls. Derive gates
+for:
+
+- who may trigger execution, including public-discovery versus execution boundaries;
+- deterministic initialization that does not depend on implicit host proxy or optional
+  infrastructure discovery;
+- timeout, response-size and error-mapping behavior;
+- local controllable tests for success, rejection and failure cases rather than public network
+  dependencies.
+
+Do not prescribe a specific HTTP library or proxy strategy. Require the target project to make
+its network behavior explicit and verifiable.
 
 ### Control Scope Before Continuing Implementation
 

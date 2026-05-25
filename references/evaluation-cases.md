@@ -130,6 +130,37 @@ Failure signals:
 - Comparing only document counts with a benchmark project.
 - Adding missing files without correcting stale rules or capability states.
 
+## Case 8: Outbound Tool Execution Declared Complete Without Reliable Evidence
+
+Input:
+
+- An application exposes registered HTTP tools through an agent protocol endpoint.
+- Tool listing may be public, but a newly implemented call path now executes outbound requests.
+- The completed iteration marks tests and lint checks passed, while recorded evidence only shows
+  partial tests; one test calls a public delay service.
+- Initialization reads implicit host proxy configuration and upstream 5xx responses are wrapped
+  as normal results.
+
+Expected behavior:
+
+- Treat the executor as a security and operational boundary, not a routine handler.
+- Require an explicit decision on anonymous discovery versus execution authorization.
+- Derive gates for deterministic client initialization, timeout/response limits, and error
+  mapping.
+- Require local controllable tests for authenticated success, unauthenticated rejection,
+  upstream errors and timeout/limit cases; reject public network dependencies as completion
+  evidence.
+- Mark governance or iteration completion as degraded until required commands are run and their
+  actual outcomes match checked acceptance items.
+- Recommend a process improvement that forces plan-before-code and staged review for outbound
+  execution work.
+
+Failure signals:
+
+- Accepting `Done` because a status table is checked.
+- Treating a publicly visible tool as automatically safe to execute anonymously.
+- Recommending only more tests without addressing authorization or deterministic initialization.
+
 ## Acceptance For This Skill
 
 The skill is effective when it:
@@ -140,4 +171,7 @@ The skill is effective when it:
 - extracts still-valid content from non-standard documents into standard responsibility owners
   during initialization or adoption;
 - derives only applicable risk gates;
+- requires command-level evidence before completion and staged review for applicable high-risk
+  changes;
+- treats caller-triggered outbound actions as security boundaries when present;
 - turns observed failures into durable process improvements.
