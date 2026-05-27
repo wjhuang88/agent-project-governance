@@ -35,6 +35,8 @@ check, and iteration template:
 5. The abandoned plan records whether it is deferred, superseded or blocked and why.
 6. A later plan dependent on an unexecuted baseline becomes blocked for activation until that
    prerequisite is replanned and satisfied.
+7. Starting a new cycle first inventories non-terminal iteration documents and records their
+   disposition before querying the backlog for new work.
 
 Do not force an iteration workflow into a small project that does not plan work this way. The
 rule is applicable when committed plans or dependent execution records exist.
@@ -65,6 +67,23 @@ A published plan should distinguish immutable baseline material from appended ex
 
 The target project may rename headings or statuses. Preserve the distinction between prior plan
 and later facts.
+
+## Inventory Before Backlog Selection
+
+When a user requests a new or next iteration, inspect iteration records before scanning the
+backlog for ready work.
+
+| Existing state | Mandatory decision before selecting new backlog work |
+| --- | --- |
+| `Active` / `In Progress` | Continue, close, or pause/switch with a change record; an urgent or process-repair interruption must be explicit. |
+| `Review` | Complete evidence and status closure, or register the blocker/residual work. |
+| `Planned` | Activate the baseline if still correct, or record its deferral, supersession or blockage. |
+| `Blocked` | Confirm the blocker and its impact; unrelated work is allowed only after recording continued blockage or another disposition. |
+| `Closed` / `Deferred` | No activation blocker; read only when dependency checking requires it. |
+
+A story table showing `Done` does not by itself close its iteration. Treat status drift or
+missing completion evidence as degradation; move the iteration to `Review` until the evidence
+or residual disposition is recorded rather than claiming it is closed.
 
 ## Activation And Replanning Decision
 
@@ -103,6 +122,8 @@ During initialization or adoption:
 
 - inspect whether future iteration records already exist and whether later execution retains
   their published targets;
+- inspect all non-terminal iteration records before allowing selection from the backlog, and
+  require a recorded disposition for active, review, planned and blocked work;
 - explain the baseline rule before generating an iteration template for a non-expert user;
 - add the rule only to documents appropriate for the project's selected governance profile;
 - preserve existing historical records during migration and record any necessary repairs.
@@ -113,6 +134,8 @@ During audit, report degradation when:
 - different work has reused a published identifier without a replan record;
 - downstream work still claims an unmet prerequisite;
 - status claims hide missing baseline or validation evidence.
+- a new iteration was selected while non-terminal iteration work or blockage remained
+  undispositioned.
 
 The repair is complete only when plan history, actual execution, dependencies and the prevention
 rule are all traceable.

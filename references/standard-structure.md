@@ -68,7 +68,7 @@ It is not an excuse for a complex product to omit essential controls.
 | `manifest.yaml` | Governance adoption/state metadata and capability map. | A duplicate of SOP content. |
 | `EVOLUTION.md` | Reusable lessons from observed failures or corrections. | A generic changelog. |
 | Backlog | Implementable stories and, when needed, Epic containers with child/dependency traceability. | A long-term brainstorm list or untracked large plan. |
-| Iterations | Published plan baseline, selected work, execution result, validation and retrospective. | A reusable identifier whose original target can be replaced by unrelated execution. |
+| Iterations | Published plan baseline, lifecycle disposition, selected work, execution result, validation and retrospective. | A reusable identifier whose original target can be replaced by unrelated execution or ignored when new work starts. |
 | Decisions | Important tradeoffs, alternatives, and supersession. | Routine implementation notes. |
 | Roadmap | Stage ordering and prioritization logic. | A substitute for executable work items. |
 | Proposals | Uncommitted directions not yet executable. | Tasks Agents directly start coding. |
@@ -120,6 +120,7 @@ workflow already depends on.
 | `docs/README.md` | Profile is `product` or `high-risk`, or governance uses three or more `docs/` responsibility directories. |
 | `docs/sop/START-ITERATION.md` and `docs/sop/ITERATION-WORKFLOW.md` | Iteration records exist, or the project uses planned feature iterations. |
 | Published-plan baseline rule in iteration SOP/template | Iteration plans may be committed before execution or execution priority can change after planning. |
+| Iteration inventory-before-selection rule in start workflow | Multiple iteration records may coexist or future plans are published ahead of work. |
 | Epic/Story rules inside `docs/sop/REQUIREMENT-INTAKE.md` | Product work includes outcomes that span multiple independently testable slices, ordered stages, or iterations. |
 | `docs/sop/CHANGE-CONTROL.md` | Profile is `product` or `high-risk`, or work can change after implementation begins. |
 | `docs/sop/LOCAL-DEV.md` | Agents are expected to run or debug the application locally. |
@@ -162,6 +163,8 @@ A project is structurally conformant only when:
   iteration traceability;
 - a committed iteration plan remains identifiable after execution or reprioritization, and
   unrelated work has not silently replaced its baseline target;
+- iteration-start procedures inventory non-terminal cycles before selecting new backlog stories,
+  and expose status drift instead of bypassing it;
 - project-specific high-risk surfaces have gates;
 - lessons can feed process changes back into the structure.
 - discovered non-standard documents have their still-valid active content extracted into standard

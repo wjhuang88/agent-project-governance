@@ -110,6 +110,8 @@ Read enough of the repository to determine:
   parent/child identity and dependencies are currently represented;
 - whether committed future iteration plans retain their original targets when execution changes
   priority or selects different work;
+- whether starting a new iteration inventories active, review, planned and blocked cycles before
+  selecting new backlog work;
 - whether current commands, architectural targets, and documentation agree.
 
 ### 2. Map Features to Failure Modes
@@ -168,6 +170,9 @@ After confirmation, build toward the standard structure in stages:
    When iteration plans are published ahead of implementation, make the workflow preserve each
    published plan as a baseline: execution may append results for the same target, while a new
    target receives a new iteration identifier and explicitly blocks affected downstream plans.
+   When multiple iteration records can coexist, require an inventory gate before backlog
+   selection: active or review work must be resolved first, and planned or blocked work must
+   receive an explicit activation, deferral or continued-blockage decision.
 6. Add project-specific gates derived from risk, such as contract-first APIs, database
    migration, release, security, or visual validation rules.
 
@@ -193,6 +198,8 @@ For initialized projects, verify that declared capabilities remain real:
   child dependencies and iteration selection can be audited;
 - published iteration baselines remain traceable; actual execution appends evidence instead of
   replacing a committed plan with unrelated completed work;
+- starting a new iteration cannot bypass existing active, review, planned or blocked work merely
+  because the backlog also contains ready stories;
 - completion claims are backed by recorded commands or concrete manual evidence, not only
   checked status boxes;
 - transitional architecture is not presented as the final design;

@@ -252,6 +252,33 @@ Failure signals:
 - Omitting validation or silently ignoring a promised artifact/status update.
 - Mentioning remaining work in prose without recording where it will be tracked.
 
+## Case 12: New Iteration Requested While Existing Cycles Are Not Settled
+
+Input:
+
+- A product project has ready backlog stories.
+- One iteration is `In Progress` or `Review`; its stories show `Done`, but one mandatory
+  acceptance item has no completion evidence.
+- One future iteration is `Planned` or `Blocked`.
+- The user asks to start the next iteration.
+
+Expected behavior:
+
+- Inspect iteration inventory before selecting work from the backlog.
+- Treat the status mismatch as degraded governance and keep the first iteration in `Review`
+  until its evidence or residual-work disposition is recorded.
+- Assess the planned or blocked iteration and record whether it activates, remains blocked or is
+  deferred before considering new work.
+- Select unrelated backlog work only after those dispositions are explicit; a recorded blocker
+  does not permanently freeze unrelated work.
+
+Failure signals:
+
+- Immediately selecting the highest-priority ready story without inspecting existing iterations.
+- Closing an iteration merely because its stories show `Done`.
+- Treating a blocked plan as either invisible or an indefinite prohibition without recording a
+  decision.
+
 ## Acceptance For This Skill
 
 The skill is effective when it:
@@ -268,6 +295,8 @@ The skill is effective when it:
 - supplies executable Epic/Story decomposition rules when planned work spans independent slices;
 - preserves published iteration baselines and repairs dependency traceability when execution
   diverges from a committed plan;
+- forces iteration inventory disposition before new backlog selection when non-terminal cycles
+  exist;
 - forces implementation work through an explicit closure sequence and prevents unsupported
   `complete` claims when status, evidence or residual tracking is missing;
 - turns observed failures into durable process improvements.

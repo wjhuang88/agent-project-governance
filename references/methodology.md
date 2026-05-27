@@ -62,6 +62,12 @@ Derive the following rules when projects publish iteration plans:
   concise original-baseline and deviation note rather than pretending either history did not
   happen.
 
+Preserving published plans is insufficient if agents can ignore them at the next start command.
+Before selecting backlog work, require a disposition of existing iteration inventory: continue
+or close active and review work; activate, defer or explicitly leave planned and blocked work
+blocked. A blocked plan may permit unrelated work only after that decision and its dependency
+impact are recorded.
+
 Use [iteration-baseline-integrity.md](iteration-baseline-integrity.md) when generating or
 repairing the project-specific workflow.
 

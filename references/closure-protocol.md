@@ -83,6 +83,7 @@ After verification, inspect every applicable owner:
 manifest capability state
 backlog/story status and acceptance
 iteration execution/validation result
+non-terminal iteration inventory and disposition before new backlog selection
 dependency or blocked-plan state
 ADR/supersession mapping
 lessons or known-trap record
