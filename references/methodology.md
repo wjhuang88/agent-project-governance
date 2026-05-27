@@ -24,6 +24,10 @@ Separate:
 - execution records and validation results.
 
 An Agent should implement only work that is small enough and specific enough to validate.
+When one planned outcome contains several independently valid results or ordered phases, keep it
+as an Epic-level container and execute child stories instead of letting a large status label hide
+partial delivery. Use
+[epic-and-story-decomposition.md](epic-and-story-decomposition.md) when designing that contract.
 
 ### Make Evidence Precede Completion
 
@@ -39,6 +43,44 @@ Use these completion rules:
   check;
 - keep a story in review or create a repair slice when verification finds a blocking defect;
 - for high-risk work, require a distinct review conclusion before completion.
+
+### Preserve Published Plans As Comparison Evidence
+
+An iteration plan committed before execution is not an unused identifier that later work may
+reuse. It records the target against which delivery, variance and prioritization should be
+evaluated.
+
+Derive the following rules when projects publish iteration plans:
+
+- execution for the same target appends activation, results, evidence and retrospective to the
+  existing baseline without deleting its original scope;
+- execution for a different target uses a new iteration identifier, while the old plan records
+  its delay, supersession or blockage;
+- downstream planned work that depended on an abandoned prerequisite cannot be activated until
+  the prerequisite is re-established under an auditable plan;
+- if an existing document was overwritten already, retain the actual work evidence and restore a
+  concise original-baseline and deviation note rather than pretending either history did not
+  happen.
+
+Use [iteration-baseline-integrity.md](iteration-baseline-integrity.md) when generating or
+repairing the project-specific workflow.
+
+### Design For Agents That May Stop Too Early
+
+Process instructions that only state correct principles still permit a weak executor to edit a
+few files and announce success. For governance implementation, reduce freedom at the completion
+boundary:
+
+- require a closure ledger before edits so the Agent cannot silently omit status owners,
+  validation or residual work;
+- require a fixed sequence of establish, implement, verify, synchronize and deliver;
+- define `complete`, `partial` and `blocked` so useful intermediate work is reportable without
+  falsifying completion;
+- turn observed omissions into an evaluation case and, where deterministic, a validator check.
+
+Do not turn every design decision into a script. Use low-freedom steps for state transitions and
+evidence; retain judgment for choosing project-appropriate artifacts and gates. See
+[closure-protocol.md](closure-protocol.md).
 
 ### Generate Gates From Risk
 

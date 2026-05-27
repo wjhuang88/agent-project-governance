@@ -56,6 +56,44 @@ problem first, then introduce the artifact only when useful.
 Read [references/guided-onboarding.md](references/guided-onboarding.md) whenever initializing a
 project or presenting migration options to a user.
 
+## Mandatory Closure Contract For Implementation
+
+Apply this whenever editing or generating governance artifacts, repairing governance drift, or
+performing an initialization/adoption slice. Do not report the task complete merely because
+files were created or edited.
+
+Before editing, identify these closure items:
+
+```text
+requested outcome | artifacts to change | records/status to synchronize |
+validation evidence required | residual work destination
+```
+
+Then execute all five stages in order:
+
+1. **Establish**: confirm current governance state, preserved assets, scope and applicable
+   closure items.
+2. **Implement**: create or update the smallest complete artifact slice.
+3. **Verify**: run available structural checks and inspect semantic consistency for the changed
+   scope; record failures truthfully.
+4. **Synchronize**: update applicable manifest/capability state, backlog or iteration status,
+   lessons, dependency/blocker records and supersession mappings.
+5. **Deliver**: report changed artifacts, checks and results, residual gaps and an explicit
+   outcome status: `complete`, `partial`, or `blocked`.
+
+Status is strict:
+
+- `complete` only when the requested slice is implemented, applicable status owners are
+  synchronized, validation evidence is recorded, and remaining gaps are explicitly out of scope
+  or registered for follow-up;
+- `partial` when useful work was produced but at least one closure item remains unfinished;
+- `blocked` when a required decision, permission, missing source or failing prerequisite
+  prevents a valid completion claim.
+
+Do not hide incomplete closure behind recommendations. Read
+[references/closure-protocol.md](references/closure-protocol.md) before implementing a
+governance change or generating an initialization/adoption workflow.
+
 ## Standard Workflow
 
 ### 1. Discover
@@ -68,6 +106,10 @@ Read enough of the repository to determine:
 - whether registered tools, webhooks, mailers, agents, or other executors can initiate outbound
   actions on behalf of a caller;
 - which rules and project facts already exist;
+- whether planned work distinguishes large outcomes from executable child slices, and how
+  parent/child identity and dependencies are currently represented;
+- whether committed future iteration plans retain their original targets when execution changes
+  priority or selects different work;
 - whether current commands, architectural targets, and documentation agree.
 
 ### 2. Map Features to Failure Modes
@@ -120,6 +162,12 @@ After confirmation, build toward the standard structure in stages:
    control as applicable.
 5. Add planning and stable-fact layers: backlog, iterations, decisions, roadmap, proposals, and
    reference material as applicable.
+   For product work containing multi-stage requirements, make requirement intake define Epic
+   versus executable Story, parent/child identifiers, dependency readiness, and iteration
+   selection rather than leaving large items as informal prose.
+   When iteration plans are published ahead of implementation, make the workflow preserve each
+   published plan as a baseline: execution may append results for the same target, while a new
+   target receives a new iteration identifier and explicitly blocks affected downstream plans.
 6. Add project-specific gates derived from risk, such as contract-first APIs, database
    migration, release, security, or visual validation rules.
 
@@ -141,6 +189,10 @@ For initialized projects, verify that declared capabilities remain real:
 - task routes lead to existing, current instructions;
 - commands match the repository toolchain and lock files;
 - backlog and iteration states agree;
+- large backlog outcomes are either executable stories or explicitly decomposed Epics whose
+  child dependencies and iteration selection can be audited;
+- published iteration baselines remain traceable; actual execution appends evidence instead of
+  replacing a committed plan with unrelated completed work;
 - completion claims are backed by recorded commands or concrete manual evidence, not only
   checked status boxes;
 - transitional architecture is not presented as the final design;
@@ -165,6 +217,8 @@ After editing governance artifacts:
    [references/evaluation-cases.md](references/evaluation-cases.md).
 5. Explain what the user can now ask an Agent to do, and which governance capabilities remain
    intentionally deferred.
+6. Apply the closure status rule: a failed or unperformed required check, stale status owner, or
+   unregistered residual gap prevents a `complete` claim.
 
 ## Output Contract
 
@@ -185,7 +239,8 @@ When implementing, also report:
 - initialized or updated capabilities;
 - paths created or mapped;
 - checks performed;
-- residual gaps and the next natural stage.
+- residual gaps and the next natural stage;
+- closure status (`complete`, `partial`, or `blocked`) and the evidence supporting that status.
 
 ## Resources
 
@@ -195,6 +250,15 @@ When implementing, also report:
   machine, manifest schema, legacy adoption, and degraded-state repair.
 - [references/methodology.md](references/methodology.md): principles that generate governance
   rules from project conditions and failure history.
+- [references/epic-and-story-decomposition.md](references/epic-and-story-decomposition.md):
+  read when a product needs large-requirement decomposition, parent/child tracking, dependency
+  readiness, or iteration-selection rules.
+- [references/iteration-baseline-integrity.md](references/iteration-baseline-integrity.md):
+  read when a project publishes iteration plans, changes selected work after planning, or must
+  repair a plan document that was overwritten by later execution.
+- [references/closure-protocol.md](references/closure-protocol.md): read before implementing
+  governance changes when completion may require status synchronization, evidence recording or
+  follow-up registration.
 - [references/standard-structure.md](references/standard-structure.md): convergent target
   structure and scaled profiles.
 - [references/risk-to-gate-patterns.md](references/risk-to-gate-patterns.md): patterns for

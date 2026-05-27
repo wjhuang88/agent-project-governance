@@ -12,8 +12,11 @@ design the governance model.
 - Say "place to record planned work" before "backlog", and explain the term if it becomes useful.
 - Say "record of important technical choices" before "ADR".
 - Say "what must be true before work begins/ends" before "DoR/DoD".
+- Say "overall outcome with smaller verifiable tasks" before "Epic with child Stories".
 - Avoid presenting internal profile names as choices.
 - Distinguish business-code changes from governance-file changes explicitly.
+- Explain that generated files are only part of completion: the Agent must also synchronize
+  status, run agreed checks and record anything intentionally left for later.
 
 ## Discovery Before Questions
 
@@ -38,6 +41,24 @@ Ask a small group of plain-language questions when intent cannot be inferred:
    security/access mistakes, deployment failure, or something else?
 
 Use the answers to recommend a structure; do not ask the user to assemble one.
+
+## When A Request Is Too Large To Execute Directly
+
+If one request appears to contain several separately verifiable results, explain the split before
+introducing process terms:
+
+```markdown
+This outcome includes several pieces that can finish at different times or depend on each other.
+I recommend keeping one parent record for the overall result, then creating smaller tasks that
+can each be implemented and checked without pretending the whole effort is complete.
+
+I will preserve your existing task numbering. For new child tasks, we can use a visible
+relationship such as <existing-prefix>-012-A and record what each task depends on.
+```
+
+Only ask what cannot be inferred, for example which outcomes are mandatory for the overall goal
+or whether an external deadline forces a particular delivery order. For the detailed rules to
+generate, read [epic-and-story-decomposition.md](epic-and-story-decomposition.md).
 
 ## Uninitialized Project Message Pattern
 
@@ -103,3 +124,15 @@ Do not end with file names only. Explain normal requests the user can now make, 
 - "Prepare a release and identify missing verification."
 
 Explain what was intentionally deferred and when it should be added.
+
+When implementation was requested, close in plain language:
+
+```markdown
+Completion status: complete / partial / blocked
+What is now in place:
+What was checked:
+What remains and where it is recorded:
+```
+
+Do not call initialization complete if a required manifest, status mapping, validation result or
+known follow-up is still absent.

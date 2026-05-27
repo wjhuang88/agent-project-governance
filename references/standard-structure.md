@@ -64,11 +64,11 @@ It is not an excuse for a complex product to omit essential controls.
 
 | Artifact | Responsibility | Must not become |
 | --- | --- | --- |
-| `AGENTS.md` | Compact launch rules, task router, known active traps. | A dump of all design and historical documentation. |
+| `AGENTS.md` | Compact launch rules, task router, known active traps and applicable close-out gates. | A dump of all design and historical documentation. |
 | `manifest.yaml` | Governance adoption/state metadata and capability map. | A duplicate of SOP content. |
 | `EVOLUTION.md` | Reusable lessons from observed failures or corrections. | A generic changelog. |
-| Backlog | Implementable work and its acceptance/validation requirements. | A long-term brainstorm list. |
-| Iterations | Selected work, execution result, validation and retrospective. | The canonical product requirements source. |
+| Backlog | Implementable stories and, when needed, Epic containers with child/dependency traceability. | A long-term brainstorm list or untracked large plan. |
+| Iterations | Published plan baseline, selected work, execution result, validation and retrospective. | A reusable identifier whose original target can be replaced by unrelated execution. |
 | Decisions | Important tradeoffs, alternatives, and supersession. | Routine implementation notes. |
 | Roadmap | Stage ordering and prioritization logic. | A substitute for executable work items. |
 | Proposals | Uncommitted directions not yet executable. | Tasks Agents directly start coding. |
@@ -88,7 +88,7 @@ Minimum sections for a `product` or `high-risk` project:
 | Hard Constraints | Worktree check, routing-before-process-work, backlog/change-control rules, documentation ownership, lessons and decision write-back, and project-derived prohibitions. |
 | Git Rules | Staged-diff review, safe staging, commit convention and traceability rule when applicable. |
 | Task Router | Routes for project orientation, intake, iteration start, in-iteration change, implementation, testing, Git, diagnosis, document maintenance and decisions; all mandatory targets must exist. |
-| Session End Checklist | Status synchronization, verification evidence, lessons/decision write-back, and commit readiness checks. |
+| Session End Checklist | Status synchronization, verification evidence, residual-work registration, lessons/decision write-back, and commit readiness checks. |
 | Current Known Traps | Include when discovery or `EVOLUTION.md` exposes active project-specific traps. |
 
 For `minimal` projects, include the same sections that apply to its actual work; at minimum an
@@ -119,6 +119,8 @@ workflow already depends on.
 | --- | --- |
 | `docs/README.md` | Profile is `product` or `high-risk`, or governance uses three or more `docs/` responsibility directories. |
 | `docs/sop/START-ITERATION.md` and `docs/sop/ITERATION-WORKFLOW.md` | Iteration records exist, or the project uses planned feature iterations. |
+| Published-plan baseline rule in iteration SOP/template | Iteration plans may be committed before execution or execution priority can change after planning. |
+| Epic/Story rules inside `docs/sop/REQUIREMENT-INTAKE.md` | Product work includes outcomes that span multiple independently testable slices, ordered stages, or iterations. |
 | `docs/sop/CHANGE-CONTROL.md` | Profile is `product` or `high-risk`, or work can change after implementation begins. |
 | `docs/sop/LOCAL-DEV.md` | Agents are expected to run or debug the application locally. |
 | `docs/sop/NEW-FEATURE.md` | Agents are expected to add product behavior repeatedly. |
@@ -152,8 +154,14 @@ A project is structurally conformant only when:
 - the manifest exists and states a justified profile;
 - all applicable standard entrypoints exist or explicitly map migrated sources;
 - `AGENTS.md` meets its quality contract and routes recurring process tasks;
+- implementation workflows define when a result is complete versus partial or blocked, so an
+  Agent cannot finish after file creation while omitting status/evidence/follow-up closure;
 - procedures point to current toolchain, paths, and architecture;
 - planned work/status sources do not contradict completed records;
+- applicable Epic/child relationships preserve project identifiers, dependency readiness and
+  iteration traceability;
+- a committed iteration plan remains identifiable after execution or reprioritization, and
+  unrelated work has not silently replaced its baseline target;
 - project-specific high-risk surfaces have gates;
 - lessons can feed process changes back into the structure.
 - discovered non-standard documents have their still-valid active content extracted into standard

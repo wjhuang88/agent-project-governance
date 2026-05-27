@@ -161,6 +161,97 @@ Failure signals:
 - Treating a publicly visible tool as automatically safe to execute anonymously.
 - Recommending only more tests without addressing authorization or deterministic initialization.
 
+## Case 9: A Multi-Stage Requirement Hidden As One Story
+
+Input:
+
+- A continuing product repository has a backlog item called "replace the frontend delivery
+  stack", covering build migration, runtime configuration, deployment switching, cleanup and
+  eventual CI updates.
+- Some phases have already been assigned independent identifiers under an existing project
+  prefix, while new requirements are still written as one large row.
+- The user asks whether child work can be taken from different large initiatives in one
+  iteration.
+
+Expected behavior:
+
+- Identify the oversized item as an Epic candidate because it has independently verifiable
+  results and dependency ordering, not merely because it touches multiple directories.
+- Preserve the existing identifier prefix and historical identifiers; recommend a parent/child
+  convention such as `<PREFIX>-012` and `<PREFIX>-012-A` only for newly governed families or
+  future children, rather than renumbering history.
+- Require an Epic completion condition, child outcome/status/dependency table, and reciprocal
+  parent reference in each child story.
+- Distinguish Epic readiness for planning from Story readiness for implementation.
+- Allow a normal iteration to select children across Epics only when each is ready, dependency
+  closure is clear, WIP is controlled and the iteration goal remains coherent.
+- Explain these choices in plain language before introducing terms such as Epic or DoR.
+
+Failure signals:
+
+- Forcing every layer or team into a separate child even though no child is independently
+  testable.
+- Selecting the parent Epic as executable work.
+- Requiring renumbering of existing history solely to match the new convention.
+
+## Case 10: A Published Future Iteration Is Reused For Different Work
+
+Input:
+
+- A product project commits future iteration documents before implementation.
+- One published plan reserves an iteration for a prerequisite design/refinement story.
+- Later, an executor edits that same document into the completion record for unrelated
+  higher-priority stories, while a downstream plan still declares the original prerequisite.
+- The user wants the already completed work retained and the process improved.
+
+Expected behavior:
+
+- Identify loss of the published comparison baseline and broken dependency traceability as a
+  governance defect, not merely a stale title.
+- Preserve actual completed-work evidence, while restoring a concise record of the original
+  target and explicitly stating that it was not executed.
+- Mark dependent future plans blocked until the original prerequisite is completed or deliberately
+  replanned.
+- Require new work with a different target to receive a new iteration identifier; only same-target
+  execution may append progress and results to an existing published plan.
+- Add this rule to the project entrypoint, relevant SOPs, iteration template, document audit and
+  lessons feedback, scaled to the repository's existing structure.
+
+Failure signals:
+
+- Rewriting the document back to the original plan and losing real completion evidence.
+- Accepting the repurposed document as valid because the replacement work is Done.
+- Leaving dependent planned iterations activatable without their prerequisite.
+
+## Case 11: Governance Files Are Generated But Initialization Is Not Closed
+
+Input:
+
+- A user asks an Agent to initialize governance for an existing product repository.
+- The Agent creates `AGENTS.md` and several SOP files, but does not create or update the
+  promised manifest, does not map existing process assets, does not run its validator and does
+  not record missing release/change-control capability.
+- The Agent says initialization is complete because the new files exist.
+
+Expected behavior:
+
+- Treat this as `partial`, not complete: file generation is only the implementation stage of the
+  closure sequence.
+- Before editing, identify required artifacts, state/status owners, evidence and residual-work
+  destination in a closure ledger.
+- Preserve useful existing assets and explicitly map or defer them rather than silently ignoring
+  them.
+- Run applicable deterministic validation and report the result; failed or unavailable required
+  evidence prevents a complete claim.
+- Synchronize manifest/capability state and register any intentionally deferred capability or
+  discovered defect before delivering a closure status.
+
+Failure signals:
+
+- Declaring completion solely from the presence of generated files.
+- Omitting validation or silently ignoring a promised artifact/status update.
+- Mentioning remaining work in prose without recording where it will be tracked.
+
 ## Acceptance For This Skill
 
 The skill is effective when it:
@@ -174,4 +265,9 @@ The skill is effective when it:
 - requires command-level evidence before completion and staged review for applicable high-risk
   changes;
 - treats caller-triggered outbound actions as security boundaries when present;
+- supplies executable Epic/Story decomposition rules when planned work spans independent slices;
+- preserves published iteration baselines and repairs dependency traceability when execution
+  diverges from a committed plan;
+- forces implementation work through an explicit closure sequence and prevents unsupported
+  `complete` claims when status, evidence or residual tracking is missing;
 - turns observed failures into durable process improvements.
