@@ -108,6 +108,8 @@ Read enough of the repository to determine:
 - which rules and project facts already exist;
 - whether planned work distinguishes large outcomes from executable child slices, and how
   parent/child identity and dependencies are currently represented;
+- whether user stories use a format that matches their work type, and whether behavior-facing
+  stories have BDD-style acceptance instead of vague implementation checklists;
 - whether committed future iteration plans retain their original targets when execution changes
   priority or selects different work;
 - whether starting a new iteration inventories active, review, planned and blocked cycles before
@@ -167,6 +169,12 @@ After confirmation, build toward the standard structure in stages:
    For product work containing multi-stage requirements, make requirement intake define Epic
    versus executable Story, parent/child identifiers, dependency readiness, and iteration
    selection rather than leaving large items as informal prose.
+   Make story format explicit: user-visible, API, permission or state-transition work needs a
+   role, goal, value and Given/When/Then acceptance; technical, governance and spike work should
+   not be forced into fake user-story wording, but must have equivalent verification, state
+   owners and residual-work destinations. Read
+   [references/story-format-and-bdd.md](references/story-format-and-bdd.md) when designing these
+   rules.
    When iteration plans are published ahead of implementation, make the workflow preserve each
    published plan as a baseline: execution may append results for the same target, while a new
    target receives a new iteration identifier and explicitly blocks affected downstream plans.
@@ -196,6 +204,8 @@ For initialized projects, verify that declared capabilities remain real:
 - backlog and iteration states agree;
 - large backlog outcomes are either executable stories or explicitly decomposed Epics whose
   child dependencies and iteration selection can be audited;
+- ready backlog stories use a format appropriate to their type, and behavior-facing stories
+  have testable Given/When/Then acceptance or an explicit non-applicability reason;
 - published iteration baselines remain traceable; actual execution appends evidence instead of
   replacing a committed plan with unrelated completed work;
 - starting a new iteration cannot bypass existing active, review, planned or blocked work merely

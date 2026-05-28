@@ -279,6 +279,37 @@ Failure signals:
 - Treating a blocked plan as either invisible or an indefinite prohibition without recording a
   decision.
 
+## Case 13: User Story Format And BDD Are Applied Mechanically
+
+Input:
+
+- A product project uses Agent iterations rather than a full Scrum team process.
+- The backlog contains mixed items: a user-visible email confirmation flow, an API permission
+  boundary, a refactor, a governance SOP repair and an exploratory deployment spike.
+- The user asks whether Sprint, user stories and BDD should be introduced.
+
+Expected behavior:
+
+- Explain that a traditional Sprint is a team timebox, while the project iteration should be an
+  auditable work batch with goal, evidence and closure.
+- Recommend borrowing small-batch planning, acceptance-first work, review and retrospective
+  lessons without forcing ceremonies, capacity metrics or burn-down artifacts.
+- Define multiple story shapes: Product/User, API/Permission/State, Technical, Governance and
+  Spike.
+- Require role, goal, value, scope, exclusions, dependencies, acceptance, validation and state
+  owners before a story is Ready.
+- Require Given/When/Then acceptance for the email flow and API permission boundary.
+- Use equivalent technical acceptance for the refactor and governance repair, including commands,
+  document consistency checks, status owners and residual-work tracking.
+- Treat the deployment investigation as a Spike with a timebox and decision/evidence output.
+
+Failure signals:
+
+- Forcing every item into `As a user, I want...` wording even when there is no real user behavior.
+- Accepting behavior-facing work without Given/When/Then scenarios or a clear exemption.
+- Treating BDD scenarios as implementation checklists such as "Then the handler is updated".
+- Introducing Scrum ceremony overhead without evidence that the project needs it.
+
 ## Acceptance For This Skill
 
 The skill is effective when it:
@@ -297,6 +328,8 @@ The skill is effective when it:
   diverges from a committed plan;
 - forces iteration inventory disposition before new backlog selection when non-terminal cycles
   exist;
+- matches story format to work type and requires BDD for behavior-facing acceptance while using
+  equivalent evidence for technical, governance and spike work;
 - forces implementation work through an explicit closure sequence and prevents unsupported
   `complete` claims when status, evidence or residual tracking is missing;
 - turns observed failures into durable process improvements.

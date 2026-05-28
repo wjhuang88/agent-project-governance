@@ -29,6 +29,40 @@ as an Epic-level container and execute child stories instead of letting a large 
 partial delivery. Use
 [epic-and-story-decomposition.md](epic-and-story-decomposition.md) when designing that contract.
 
+### Match Story Format To The Work
+
+Traditional user-story wording is valuable for behavior a user or caller can observe. It becomes
+misleading when every technical, governance or exploratory task is forced into `As a user` form.
+For Agent-governed projects, make requirement intake distinguish Product/User, API/Permission,
+Technical, Governance and Spike stories.
+
+Require behavior-facing stories to state role, goal, value and Given/When/Then acceptance. For
+technical, governance and spike work, require equivalent evidence instead: engineering or process
+goal, scope, exclusions, command or manual validation, status owners and residual-work tracking.
+
+The goal is not format uniformity; the goal is that an Agent can decide whether the item is ready,
+what it must not do, and what evidence proves completion. Use
+[story-format-and-bdd.md](story-format-and-bdd.md) when designing this part of the governance
+model.
+
+### Adapt Sprint Concepts Without Copying Scrum
+
+A Scrum Sprint is a team timebox with planning, capacity, ceremonies and review. An Agent
+iteration is an auditable work batch. It may be a one-story micro-iteration, a product batch, a
+published future plan, or a governance repair slice.
+
+Borrow these Sprint ideas when useful:
+
+- a clear iteration goal;
+- small work selection;
+- acceptance before implementation;
+- review against evidence;
+- retrospective lessons converted into process checks.
+
+Do not require team-capacity rituals, burn-down reporting or ceremony artifacts unless the target
+project already benefits from them. The invariant is traceability from selected story to evidence
+and closure, not conformance to Scrum vocabulary.
+
 ### Make Evidence Precede Completion
 
 A status field or checked acceptance box is not verification. For any executable story, require
