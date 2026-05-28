@@ -1,6 +1,7 @@
 ---
 name: agent-project-governance
 description: Analyze, initialize, migrate, and improve an Agent-friendly project governance system with guided onboarding, task routing, risk-based engineering gates, and feedback-driven process evolution. Use when a user asks to set up project rules for AI coding agents, initialize or audit AGENTS.md/SOP/backlog/iteration/ADR structures, migrate existing project workflows into a standard governance layout, check whether a repository has already been initialized, or improve development process quality after defects, regressions, deployment failures, or planning drift.
+license: MIT
 ---
 
 # Agent Project Governance
