@@ -117,6 +117,18 @@ Read enough of the repository to determine:
   selecting new backlog work;
 - whether current commands, architectural targets, and documentation agree.
 
+Then classify project constraints:
+
+| Type | Meaning | Use for |
+| --- | --- | --- |
+| **Hard** | Immutable fact (platform limit, irreversible operation, external contract) | Deriving mandatory gates |
+| **Soft** | Policy or convention that can change | Recording in decisions when a choice affects one |
+| **Assumption** | Unvalidated belief that may be false | Flagging for validation, creating Spikes when blocking |
+
+Constraint classification replaces "match patterns by project type" with "derive rules from what
+is actually constrained in this project." This is first principles applied to governance: every
+gate should trace to a specific Hard constraint, not a generic best practice.
+
 ### 2. Map Features to Failure Modes
 
 Create an internal mapping:
@@ -138,12 +150,17 @@ contains cross-layer, security, data, deployment, or migration risk.
 Provide a plain-language diagnosis:
 
 - current governance state;
+- constraint classification (Hard / Soft / Assumption) derived from project facts;
 - assets worth retaining;
+- gates that Hard constraints require, and why Soft constraints do not need gates;
 - gaps that can cause actual mistakes;
 - recommended target structure and why;
 - the smallest next implementation slice;
 - files that would be created or modified;
 - files and behavior explicitly left unchanged.
+
+Derive each recommended gate from a specific Hard constraint rather than from a generic pattern
+table. If a gate cannot trace to a Hard constraint, question whether it is needed.
 
 Do not edit a project during assessment unless the user has already clearly requested
 implementation.
