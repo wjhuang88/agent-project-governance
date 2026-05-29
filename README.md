@@ -90,7 +90,42 @@ python3 scripts/validate_project_governance.py /path/to/your-project
 
 ## Quick Start
 
-### 审计项目状态
+### 安装
+
+Agent Skills 通过目录放置安装，无专用包管理器。将本仓库克隆到目标 Agent 的 skill 目录即可。
+
+**项目级安装**（仅当前项目可用）：
+
+```bash
+# OpenCode
+git clone https://github.com/wjhuang88/agent-project-governance.git .opencode/skills/agent-project-governance
+
+# Claude Code
+git clone https://github.com/wjhuang88/agent-project-governance.git .claude/skills/agent-project-governance
+
+# 通用 Agent（Codex / Copilot 等）
+git clone https://github.com/wjhuang88/agent-project-governance.git .agents/skills/agent-project-governance
+```
+
+**全局安装**（所有项目可用）：
+
+```bash
+# OpenCode
+git clone https://github.com/wjhuang88/agent-project-governance.git ~/.config/opencode/skills/agent-project-governance
+
+# Claude Code
+git clone https://github.com/wjhuang88/agent-project-governance.git ~/.claude/skills/agent-project-governance
+```
+
+安装后无需额外配置。Agent 在启动时自动发现 skill 并根据描述匹配加载。
+
+> 本 skill 遵循 [Agent Skills 开放标准](https://agentskills.io)，兼容所有支持该标准的 Agent 工具（OpenCode、Claude Code、Cursor、GitHub Copilot、Codex、Amp 等）。
+
+### 使用
+
+安装完成后，在 Agent 对话中以自然语言触发即可。Agent 根据 skill 描述自动判断何时加载。
+
+#### 审计项目状态
 
 分析当前治理现状，不修改文件：
 
@@ -99,21 +134,21 @@ python3 scripts/validate_project_governance.py /path/to/your-project
 只分析，不修改文件。说明已有资产、实际风险、主要缺口和推荐的最小下一步。
 ```
 
-### 初始化治理框架
+#### 初始化治理框架
 
 ```text
 使用 $agent-project-governance 为当前项目初始化 Agent 工程治理。
 先读取代码和现有文档，说明建议结构及会保留/提取/创建的内容，再开始实施。
 ```
 
-### 资产规范化迁移
+#### 资产规范化迁移
 
 ```text
 使用 $agent-project-governance 将当前项目已有的规则、计划、技术决策和经验文档迁移到规范结构。
 不要删除有价值历史；在 manifest 中记录来源到目标的映射。
 ```
 
-### 扩展指令
+#### 其他场景
 
 | 场景 | 指令示例 |
 | --- | --- |
