@@ -153,7 +153,12 @@ implementation.
 After confirmation, build toward the standard structure in stages:
 
 1. Establish control entrypoints: `AGENTS.md`, `.agent-governance/manifest.yaml`, and
-   `EVOLUTION.md`.
+    `EVOLUTION.md`. The `AGENTS.md` file should contain both process rules and coding behavior
+    rules. Coding behavior rules govern how the Agent writes code: state assumptions before
+    implementing; only write code directly asked for (no speculative features, no premature
+    abstractions, no unsolicited refactoring); match existing style even if different from personal
+    preference; define verifiable success criteria before starting; clean up only what your own
+    changes orphan.
 2. Extract applicable content from existing non-standard documents into standard owners:
    mandatory rules and routes into `AGENTS.md`, stable facts into `docs/reference/`, procedures
    into `docs/sop/`, executable work into `docs/backlog/` or `docs/iterations/`, significant

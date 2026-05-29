@@ -36,6 +36,7 @@ PRODUCT_REQUIRED_CAPABILITIES = {
 
 AGENT_GUIDE_SECTIONS = (
     "Hard Constraints",
+    "Coding Behavior",
     "Git Rules",
     "Task Router",
     "Session End Checklist",

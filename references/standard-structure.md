@@ -86,13 +86,15 @@ Minimum sections for a `product` or `high-risk` project:
 | Section | Required content |
 | --- | --- |
 | Hard Constraints | Worktree check, routing-before-process-work, backlog/change-control rules, documentation ownership, lessons and decision write-back, and project-derived prohibitions. |
+| Coding Behavior | Rules governing how the Agent writes code: state assumptions before implementing; only write code directly asked for (no speculative features, no premature abstractions, no unsolicited refactoring); match existing style even if different from personal preference; define verifiable success criteria before starting; clean up only what your own changes orphan. |
 | Git Rules | Staged-diff review, safe staging, commit convention and traceability rule when applicable. |
 | Task Router | Routes for project orientation, intake, iteration start, in-iteration change, implementation, testing, Git, diagnosis, document maintenance and decisions; all mandatory targets must exist. |
 | Session End Checklist | Status synchronization, verification evidence, residual-work registration, lessons/decision write-back, and commit readiness checks. |
 | Current Known Traps | Include when discovery or `EVOLUTION.md` exposes active project-specific traps. |
 
 For `minimal` projects, include the same sections that apply to its actual work; at minimum an
-Agent that edits code needs Hard Constraints, Git Rules, Task Router and Session End Checklist.
+Agent that edits code needs Hard Constraints, Coding Behavior, Git Rules, Task Router and Session
+End Checklist.
 
 ## Evolution Feedback Quality Contract
 

@@ -165,6 +165,7 @@ project-root/
 由 Agent 持续修改代码的项目，`AGENTS.md` 至少应有：
 
 - **Hard Constraints** — 修改前检查工作树、项目禁令
+- **Coding Behavior** — 编码行为准则：动手前先说假设、只写被要求的代码（不夹带私货）、匹配已有风格、先定义成功标准再动手、只清理自己制造的孤儿代码
 - **Git Rules** — 提交格式、暂存检查
 - **Task Router** — 不同类型的任务先读什么
 - **Session End Checklist** — 状态是否更新、验证是否执行
