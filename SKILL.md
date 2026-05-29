@@ -204,6 +204,13 @@ After confirmation, build toward the standard structure in stages:
    When multiple iteration records can coexist, require an inventory gate before backlog
    selection: active or review work must be resolved first, and planned or blocked work must
    receive an explicit activation, deferral or continued-blockage decision.
+   **Iteration deliverable rule**: each iteration must produce a runnable, testable output
+   (MVP principle). When the selected Stories cannot yield something verifiable end-to-end,
+   the plan is incomplete. Prefer the smallest set of Stories that delivers observable value.
+   **Documentation synchronization rule**: Stories that change observable behavior must include
+   documentation updates in their acceptance criteria. The iteration template must list affected
+   user-facing documentation (README, usage guide, changelog, release notes). Unresolved
+   documentation debt is a residual item, not silently deferred.
 6. Add project-specific gates derived from risk, such as contract-first APIs, database
    migration, release, security, or visual validation rules.
 
@@ -231,6 +238,11 @@ For initialized projects, verify that declared capabilities remain real:
   have testable Given/When/Then acceptance or an explicit non-applicability reason;
 - published iteration baselines remain traceable; actual execution appends evidence instead of
   replacing a committed plan with unrelated completed work;
+- each iteration produces a runnable, testable deliverable; iterations that deliver only internal
+  infrastructure without testable output are flagged as incomplete;
+- user-facing documentation (README, usage instructions, changelog, release notes) was updated
+  within each iteration that changed observable behavior; documentation debt is tracked as
+  residual work, not silently deferred;
 - starting a new iteration cannot bypass existing active, review, planned or blocked work merely
   because the backlog also contains ready stories;
 - completion claims are backed by recorded commands or concrete manual evidence, not only
