@@ -69,7 +69,7 @@ It is not an excuse for a complex product to omit essential controls.
 | `EVOLUTION.md` | Reusable lessons from observed failures or corrections. | A generic changelog. |
 | Backlog | Implementable stories and, when needed, Epic containers with child/dependency traceability. | A long-term brainstorm list or untracked large plan. |
 | Iterations | Published plan baseline, lifecycle disposition, selected work, execution result, validation and retrospective. | A reusable identifier whose original target can be replaced by unrelated execution or ignored when new work starts. |
-| Decisions | Important tradeoffs, alternatives, and supersession. | Routine implementation notes. |
+| Decisions | Important tradeoffs, alternatives, and supersession. Each decision record should include a constraint decomposition (Hard/Soft/Assumption) and a reversal trigger stating when to revisit the decision. | Routine implementation notes. |
 | Roadmap | Stage ordering and prioritization logic. | A substitute for executable work items. |
 | Proposals | Uncommitted directions not yet executable. | Tasks Agents directly start coding. |
 | Reference | Stable facts such as architecture, contracts, config, test inventory. | Procedures and moving status. |
@@ -89,7 +89,7 @@ Minimum sections for a `product` or `high-risk` project:
 | Coding Behavior | Rules governing how the Agent writes code. Read [references/coding-behavior.md](coding-behavior.md) for the full guidelines; at minimum include: state assumptions before implementing; only write code directly asked for (no speculative features, no premature abstractions, no unsolicited refactoring); match existing style even if different from personal preference; define verifiable success criteria before starting; clean up only what your own changes orphan. |
 | Git Rules | Staged-diff review, safe staging, commit convention and traceability rule when applicable. |
 | Task Router | Routes for project orientation, intake, iteration start, in-iteration change, implementation, testing, Git, diagnosis, document maintenance and decisions; all mandatory targets must exist. |
-| Session End Checklist | Status synchronization, verification evidence, residual-work registration, lessons/decision write-back, and commit readiness checks. |
+| Session End Checklist | Status synchronization, verification evidence, residual-work registration, lessons/decision write-back, commit readiness checks, and a decision review: "Did this session make any technical choice that affects Soft or Assumption constraints? If yes, is it recorded in docs/decisions/?" |
 | Current Known Traps | Include when discovery or `EVOLUTION.md` exposes active project-specific traps. |
 
 For `minimal` projects, include the same sections that apply to its actual work; at minimum an
@@ -171,3 +171,44 @@ A project is structurally conformant only when:
 - lessons can feed process changes back into the structure.
 - discovered non-standard documents have their still-valid active content extracted into standard
   owners or explicitly mapped, without losing source history.
+
+## Decision Record Template
+
+When an Agent makes a technical choice that affects Soft or Assumption constraints, it should
+record the decision in `docs/decisions/` using this structure:
+
+```markdown
+# [Decision Title]
+
+## Context
+[Why a decision is needed]
+
+## Constraint Decomposition
+
+| Constraint | Type | Source | Can Change? |
+| --- | --- | --- | --- |
+| [constraint] | Hard / Soft / Assumption | [fact/decision/assumption] | No / Yes / Maybe |
+
+## Reasoning
+[From Hard constraints: what is the simplest approach that satisfies them?
+From Soft constraints: why deviate from the simplest approach if we chose to?
+From Assumptions: which need validation before this decision is trustworthy?]
+
+## Decision
+[What was chosen and what was rejected]
+
+## Reversal Trigger
+[Under what conditions should this decision be revisited? What facts would need to change?]
+```
+
+### When to Write a Decision Record
+
+| Trigger | Example |
+| --- | --- |
+| Choosing between approaches that all satisfy Hard constraints | REST vs gRPC for internal services |
+| Proceeding based on an unvalidated Assumption | "Scaling won't be needed until next year" |
+| Overriding a Soft constraint with justification | "Using a cache despite the 'no caching' convention" |
+| A Hard constraint forces an unpopular choice | "Must use stored procedures due to compliance" |
+
+Do NOT write a decision record for trivial changes that follow established patterns with no
+constraint implications.

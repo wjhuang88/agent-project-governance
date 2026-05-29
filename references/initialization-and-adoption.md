@@ -40,7 +40,17 @@ smaller projects.
      migration reports, implementation summaries, custom `notes/` directories, or docs whose
      content spans procedures, decisions and historical records;
    - classify as `discovered` if useful assets exist, otherwise `uninitialized`.
-5. Present findings and a minimal implementation slice before writing.
+5. **Classify project constraints** before recommending governance depth:
+
+| Constraint type | Meaning | Example | Governance implication |
+| --- | --- | --- | --- |
+| **Hard** | Immutable fact; cannot change | "Uses MySQL; migrations are irreversible" | Derive mandatory gates from these |
+| **Soft** | Policy or convention; can change | "Team prefers REST APIs" | Record in decisions when a choice is made |
+| **Assumption** | Unvalidated belief; may be false | "User count won't exceed 10K" | Flag for validation; create Spike if blocking |
+
+6. Present findings, the constraint classification, and a minimal implementation slice before
+   writing. Explain which gates derive from Hard constraints and which Soft constraints are
+   respected but not mandatory.
 
 ## Manifest Contract
 
