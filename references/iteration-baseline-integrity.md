@@ -29,21 +29,31 @@ check, and iteration template:
 1. A committed `Planned` iteration becomes a published plan baseline.
 2. The baseline includes original objective, selected or candidate stories, dependencies, scope
    exclusions, acceptance checks and planned validation.
-3. Work for the same objective may activate the document and append evidence, variance and
+3. Each iteration must define a **runnable, testable deliverable**. When the selected stories
+   together cannot produce something that can be verified end-to-end, the plan is incomplete.
+   Prefer MVP-style slicing: the smallest set of stories that delivers observable value.
+4. The baseline must list **documentation to update**: user-facing README, usage/installation
+   instructions, changelog, or release notes affected by this iteration's deliverable.
+5. Work for the same objective may activate the document and append evidence, variance and
    retrospective; it must not erase the original target.
-4. Work for a different objective or story set must use a new iteration identifier.
-5. The abandoned plan records whether it is deferred, superseded or blocked and why.
-6. A later plan dependent on an unexecuted baseline becomes blocked for activation until that
+6. Work for a different objective or story set must use a new iteration identifier.
+7. The abandoned plan records whether it is deferred, superseded or blocked and why.
+8. A later plan dependent on an unexecuted baseline becomes blocked for activation until that
    prerequisite is replanned and satisfied.
-7. Starting a new cycle first inventories non-terminal iteration documents and records their
+9. Starting a new cycle first inventories non-terminal iteration documents and records their
    disposition before querying the backlog for new work.
+10. The retrospective must confirm whether user-facing documentation was updated to reflect the
+    deliverable. If not, this is a residual item before the iteration can close.
 
 Do not force an iteration workflow into a small project that does not plan work this way. The
 rule is applicable when committed plans or dependent execution records exist.
 
 ## Minimal Template Content
 
-A published plan should distinguish immutable baseline material from appended execution facts:
+A published plan should distinguish immutable baseline material from appended execution facts.
+Each iteration should produce a **runnable, testable deliverable** aligned with MVP thinking:
+the smallest version that demonstrates progress and can be verified end-to-end. An iteration
+that only produces partial infrastructure without a testable output is incomplete.
 
 ```markdown
 # Iteration NNN: <planned objective>
@@ -52,6 +62,7 @@ A published plan should distinguish immutable baseline material from appended ex
 > Published plan date:
 > Planned objective:
 > Baseline rule: once published, this planned target is preserved; changed targets use a new ID.
+> MVP deliverable: <what runnable/testable output this iteration produces>
 
 ## Published Baseline
 - selected or candidate stories and parent relationship where applicable
@@ -59,6 +70,7 @@ A published plan should distinguish immutable baseline material from appended ex
 - scope and explicit non-goals
 - planned acceptance and validation
 - risks and rollback assumptions
+- documentation to update (user-facing README, usage guide, changelog, or release notes)
 
 ## Actual Activation And Execution
 | Date | Type | Record |

@@ -69,7 +69,10 @@ A child Story should:
 - fit the project's small delivery window;
 - be independently reviewable and status-trackable;
 - include acceptance checks, minimum validation and exclusions;
-- state what dependency it consumes and what future work it unlocks.
+- state what dependency it consumes and what future work it unlocks;
+- identify user-facing documentation affected by the outcome (README, usage guide, API docs,
+  changelog, release notes). A Story that changes observable behavior without updating the
+  corresponding documentation is incomplete.
 
 If a child cannot be meaningfully validated without a sibling, merge them or describe it as an
 explicit enabling Story with an honest dependency boundary.
@@ -146,6 +149,28 @@ inside it.
   remain explicit.
 - Completing a child updates the parent summary; the Epic becomes done only when its required
   child outcomes are complete or deliberately removed with an explicit scope decision.
+
+### MVP Deliverable Per Iteration
+
+Each iteration must produce a **runnable, testable version** of the product. When selecting
+Stories for an iteration:
+
+1. The combined Stories must yield something that can be executed and verified end-to-end.
+2. Prefer the smallest set that delivers observable user value (MVP thinking).
+3. If no combination of ready Stories produces a testable deliverable, reconsider the Story
+   boundaries or add a thin integration Story.
+4. An iteration that produces only internal infrastructure without a testable output is
+   acceptable only as an explicit, documented exception (e.g., foundational migration).
+
+### Documentation Synchronization
+
+User-facing documentation is not a separate phase. It is part of each iteration's deliverable:
+
+- Every Story that changes observable behavior (UI, API, CLI, configuration) must include a
+  documentation update task in its acceptance criteria.
+- The iteration plan lists which documentation files are expected to change.
+- The iteration retrospective confirms whether all listed documentation was updated.
+- Unresolved documentation debt is recorded as a residual item, not silently deferred.
 
 ## Governance Artifacts To Generate Or Repair
 

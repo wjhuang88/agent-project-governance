@@ -63,6 +63,37 @@ Do not require team-capacity rituals, burn-down reporting or ceremony artifacts 
 project already benefits from them. The invariant is traceability from selected story to evidence
 and closure, not conformance to Scrum vocabulary.
 
+### Make Every Iteration Produce A Runnable Deliverable
+
+Inspired by MVP thinking: the purpose of an iteration is to produce something that can be run
+and tested, not just a collection of completed tasks. This principle applies to planning and
+Story selection:
+
+1. **Plan for testable output.** When selecting Stories for an iteration, ensure their combined
+   result is something a user or reviewer can execute and validate end-to-end.
+2. **Prefer the smallest viable increment.** Choose the minimum set of Stories that delivers
+   observable value. An iteration that produces only internal plumbing without a testable
+   surface is acceptable only as an explicit, documented exception.
+3. **Slice vertically when possible.** A thin vertical slice (frontend + backend + test) that
+   demonstrates one capability is preferable to a thick horizontal layer that demonstrates
+   nothing independently.
+
+An iteration plan that cannot articulate its runnable deliverable is incomplete.
+
+### Synchronize User-Facing Documentation Within Each Iteration
+
+Documentation is not a post-release cleanup task. It is part of the iteration's Definition of
+Done:
+
+- Stories that change observable behavior must include documentation updates in their acceptance
+  criteria.
+- The iteration template includes a documentation checklist: which user-facing files (README,
+  usage instructions, API docs, changelog, release notes) are expected to change.
+- The iteration retrospective confirms documentation was updated. Unresolved documentation debt
+  is a residual item, not silently deferred to a future iteration.
+- For `product` and `high-risk` profiles, the iteration-start SOP must prompt the Agent to
+  identify affected documentation before coding begins.
+
 ### Make Evidence Precede Completion
 
 A status field or checked acceptance box is not verification. For any executable story, require

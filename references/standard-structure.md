@@ -73,6 +73,7 @@ It is not an excuse for a complex product to omit essential controls.
 | Roadmap | Stage ordering and prioritization logic. | A substitute for executable work items. |
 | Proposals | Uncommitted directions not yet executable. | Tasks Agents directly start coding. |
 | Reference | Stable facts such as architecture, contracts, config, test inventory. | Procedures and moving status. |
+| User Documentation | README, usage/installation instructions, changelog, release notes. Updated as part of each iteration's deliverable, not deferred to a separate documentation phase. | Internal governance procedures. |
 | SOP | Procedures and checks for recurring actions. | Duplicated technical truth that drifts from reference/code. |
 
 ## Agent Guide Quality Contract
@@ -89,7 +90,7 @@ Minimum sections for a `product` or `high-risk` project:
 | Coding Behavior | Rules governing how the Agent writes code. Read [references/coding-behavior.md](coding-behavior.md) for the full guidelines; at minimum include: state assumptions before implementing; only write code directly asked for (no speculative features, no premature abstractions, no unsolicited refactoring); match existing style even if different from personal preference; define verifiable success criteria before starting; clean up only what your own changes orphan. |
 | Git Rules | Staged-diff review, safe staging, commit convention and traceability rule when applicable. |
 | Task Router | Routes for project orientation, intake, iteration start, in-iteration change, implementation, testing, Git, diagnosis, document maintenance and decisions; all mandatory targets must exist. |
-| Session End Checklist | Status synchronization, verification evidence, residual-work registration, lessons/decision write-back, commit readiness checks, and a decision review: "Did this session make any technical choice that affects Soft or Assumption constraints? If yes, is it recorded in docs/decisions/?" |
+| Session End Checklist | Status synchronization, verification evidence, residual-work registration, lessons/decision write-back, commit readiness checks, documentation synchronization check ("Did this session change observable behavior? If yes, are user-facing docs updated?"), and a decision review: "Did this session make any technical choice that affects Soft or Assumption constraints? If yes, is it recorded in docs/decisions/?" |
 | Current Known Traps | Include when discovery or `EVOLUTION.md` exposes active project-specific traps. |
 
 For `minimal` projects, include the same sections that apply to its actual work; at minimum an
@@ -130,6 +131,8 @@ workflow already depends on.
 | `docs/sop/DOC-CHECK.md` | The project uses multiple standard governance document layers or migrates legacy documentation. |
 | `docs/sop/PAIRING-WORKFLOW.md` | Complex/high-risk work needs staged implementation and review. |
 | `docs/sop/RELEASE.md` | Agents support packaging, deployment or release verification. |
+| Iteration MVP deliverable requirement | Profile is `product` or `high-risk`. Each iteration must produce a runnable, testable output. |
+| Documentation synchronization in iteration workflow | Profile is `product` or `high-risk`. User-facing docs (README, usage guide, changelog) are updated as part of each iteration, not deferred. |
 
 ## Non-Standard Source Migration
 
