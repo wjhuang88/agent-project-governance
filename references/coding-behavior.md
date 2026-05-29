@@ -86,6 +86,37 @@ For multi-step tasks, state a brief plan:
 Strong success criteria let you loop independently. Weak criteria ("make it work") require
 constant clarification.
 
+## 5. Commit Message Model Declaration
+
+**Every Agent-generated commit must declare the AI model used.**
+
+When an Agent authors or co-authors a commit, the commit message must end with a model tag:
+
+```text
+[model: <model-name>]
+```
+
+Examples:
+
+```text
+feat: add role-based access control [model: gpt-5]
+fix: resolve Docker Compose database config key [model: claude-sonnet-4]
+docs: update API documentation [model: glm-4]
+```
+
+Rules:
+
+- The model tag is **mandatory** for all commits where the Agent generated or modified code,
+  documentation, or configuration.
+- Use the model's commonly known name, not an internal identifier.
+- If multiple models were used in the same commit (e.g., one planned, another executed), declare
+  the primary model that produced the output.
+- This applies regardless of commit prefix (`feat`, `fix`, `docs`, etc.).
+- Commits authored entirely by a human without Agent involvement are exempt.
+
+This ensures every commit in the repository is traceable to the AI model that produced it,
+supporting quality analysis, model comparison, and accountability.
+
 ---
 
 These guidelines are working if: fewer unnecessary changes in diffs, fewer rewrites due to

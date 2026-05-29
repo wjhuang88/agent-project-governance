@@ -197,7 +197,7 @@ project-root/
 
 - **Hard Constraints**：不可逾越的项目禁区与前置检查。
 - **Coding Behavior**：编码规范，包括假设先行、最小化变更、风格对齐、成功指标定义、孤儿代码清理。
-- **Git Rules**：提交规范与暂存区审查。
+- **Git Rules**：提交规范与暂存区审查。Agent 生成的提交须在提交信息末尾标注 `[model: <model-name>]` 以声明所用 AI 模型。
 - **Task Router**：根据任务类型指引相关治理文档。
 - **Session End Checklist**：状态同步与最终验证。
 - **Current Known Traps**：已知高频故障模式。
