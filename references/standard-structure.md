@@ -86,7 +86,7 @@ Minimum sections for a `product` or `high-risk` project:
 | Section | Required content |
 | --- | --- |
 | Hard Constraints | Worktree check, routing-before-process-work, backlog/change-control rules, documentation ownership, lessons and decision write-back, and project-derived prohibitions. |
-| Coding Behavior | Rules governing how the Agent writes code: state assumptions before implementing; only write code directly asked for (no speculative features, no premature abstractions, no unsolicited refactoring); match existing style even if different from personal preference; define verifiable success criteria before starting; clean up only what your own changes orphan. |
+| Coding Behavior | Rules governing how the Agent writes code. Read [references/coding-behavior.md](coding-behavior.md) for the full guidelines; at minimum include: state assumptions before implementing; only write code directly asked for (no speculative features, no premature abstractions, no unsolicited refactoring); match existing style even if different from personal preference; define verifiable success criteria before starting; clean up only what your own changes orphan. |
 | Git Rules | Staged-diff review, safe staging, commit convention and traceability rule when applicable. |
 | Task Router | Routes for project orientation, intake, iteration start, in-iteration change, implementation, testing, Git, diagnosis, document maintenance and decisions; all mandatory targets must exist. |
 | Session End Checklist | Status synchronization, verification evidence, residual-work registration, lessons/decision write-back, and commit readiness checks. |

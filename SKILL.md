@@ -284,6 +284,8 @@ When implementing, also report:
   follow-up registration.
 - [references/standard-structure.md](references/standard-structure.md): convergent target
   structure and scaled profiles.
+- [references/coding-behavior.md](references/coding-behavior.md): full coding behavior guidelines
+  for the Agent Coding Behavior section in AGENTS.md.
 - [references/risk-to-gate-patterns.md](references/risk-to-gate-patterns.md): patterns for
   deriving gates from technical risk.
 - [references/evaluation-cases.md](references/evaluation-cases.md): forward-test scenarios and
