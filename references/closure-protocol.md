@@ -87,6 +87,7 @@ non-terminal iteration inventory and disposition before new backlog selection
 dependency or blocked-plan state
 ADR/supersession mapping
 lessons or known-trap record
+constraint classification of any decisions made (did this work affect Hard, Soft or Assumption constraints?)
 residual follow-up item
 ```
 
@@ -102,6 +103,9 @@ Closure status: complete | partial | blocked
 
 Implemented:
 - <artifact or capability>
+
+Decisions recorded:
+- <ADR or constraint change, or "none affecting Soft/Assumption constraints">
 
 Synchronized:
 - <status/record owner updated, or not applicable with reason>

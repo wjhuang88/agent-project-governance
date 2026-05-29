@@ -17,6 +17,24 @@ Before implementing:
 - If a simpler approach exists, say so. Push back when warranted.
 - If something is unclear, stop. Name what's confusing. Ask.
 
+### Constraint Classification
+
+Before choosing an approach, classify what you know:
+
+| Constraint Type | Meaning | Example |
+| --- | --- | --- |
+| **Hard** | Immutable fact you cannot change | "This project uses MySQL, migrations are irreversible" |
+| **Soft** | Policy or convention that can be renegotiated | "The team prefers REST APIs" |
+| **Assumption** | Unvalidated belief that may be false | "User count won't exceed 10,000" |
+
+When you catch yourself reasoning "I've seen this pattern before" or "the standard approach is X":
+1. Name the assumption you're making
+2. Classify it: is it Hard, Soft, or Assumption?
+3. If Soft or Assumption: what's the simplest approach that satisfies only the Hard constraints?
+4. Compare: does the conventional approach add complexity that Hard constraints don't require?
+
+Only apply this for decisions affecting more than one file. For trivial changes, follow existing patterns.
+
 ## 2. Simplicity First
 
 **Minimum code that solves the problem. Nothing speculative.**

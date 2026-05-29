@@ -1,5 +1,24 @@
 # Risk To Gate Patterns
 
+## Deriving Gates From Constraints
+
+Instead of matching a pattern table by characteristic, derive gates from the project's actual
+constraints:
+
+1. **Identify Hard constraints** — what is physically or technically irreversible? (database writes,
+   deployments, security boundaries, external API contracts)
+2. **Identify Soft constraints** — what is a policy or convention that could change? (coding style,
+   API paradigm, tool choice)
+3. **Identify Assumptions** — what has not been validated? (load expectations, compatibility claims,
+   deployment environment properties)
+
+For each Hard constraint, ask: "What is the simplest check that prevents violating this?"
+That check becomes a gate. The pattern table below provides examples, but every gate should
+trace back to a specific Hard constraint of the target project, not a generic risk catalogue.
+
+Soft constraints and Assumptions do not need gates; they need records in `docs/decisions/`
+when a choice is made that affects them.
+
 ## How To Use
 
 Select only patterns supported by the repository or user intent. For each selected pattern,

@@ -19,6 +19,20 @@ Users do not need process vocabulary before they can make good choices. Start wi
 Introduce `Epic`, `Story` and `Definition of Ready (DoR)` only after connecting each term to
 that practical purpose.
 
+## Decompose Requirements By Constraints
+
+Before splitting a requirement into Epic/Story, decompose what you know about it:
+
+| What to check | Why |
+| --- | --- |
+| Which constraints are **Hard** (cannot change)? | These define the acceptance boundaries of every child Story. |
+| Which constraints are **Soft** (negotiable)? | These may affect scope but should not block decomposition. |
+| Which constraints are **Assumptions** (unvalidated)? | These may need a Spike Story to validate before implementation. |
+| Does the requirement rely on analogy ("we did this before") or on verified constraints? | Analogy-driven requirements may carry unnecessary scope. Strip to what Hard constraints actually require. |
+
+A requirement that depends on multiple unvalidated assumptions is not Ready for implementation.
+Create Spike Stories to validate the assumptions first, then decompose the main requirement.
+
 ## Decide Whether A Parent Container Is Needed
 
 Treat a work item as an **executable Story** when it delivers one independently verifiable
