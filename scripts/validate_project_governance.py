@@ -47,6 +47,26 @@ SRC_PATH_RE = re.compile(r"`(src/[A-Za-z0-9_./@-]+\.[A-Za-z0-9]+)`")
 FENCED_CODE_RE = re.compile(r"```.*?```", re.DOTALL)
 EXAMPLE_PATH_MARKERS = ("MyPage", "Example", "<", ">")
 
+# Warning-only heuristics. Completion is matched only via status-label or all-caps forms so prose
+# like "Definition of Done" or "once complete" does not trigger false positives.
+STATUS_COMPLETE_RE = re.compile(
+    r"(?im)^\s*[*_>\-\s]*status\b.*\b(complete|completed|done|shipped|delivered)\b"
+)
+CAPS_COMPLETE_RE = re.compile(r"\b(COMPLETE|COMPLETED|DONE|SHIPPED|DELIVERED)\b")
+EVIDENCE_RE = re.compile(
+    r"```|\b(test|tests|tested|testing|cargo|npm|pnpm|yarn|pytest|gradle|mvn|make|go test|"
+    r"passed|passing|verified|verify|evidence|exit\s*0|coverage|benchmark|smoke)\b",
+    re.IGNORECASE,
+)
+
+
+def claims_completion(text: str) -> bool:
+    return bool(STATUS_COMPLETE_RE.search(text) or CAPS_COMPLETE_RE.search(text))
+
+
+def shows_evidence(text: str) -> bool:
+    return bool(EVIDENCE_RE.search(text))
+
 
 def parse_manifest(path: Path) -> tuple[dict[str, str], dict[str, dict[str, str]]]:
     scalars: dict[str, str] = {}
@@ -142,6 +162,20 @@ def main() -> int:
         errors.append(
             "iteration records exist but iteration_workflow is marked not_applicable"
         )
+
+    if status in {"degraded", "adopting"}:
+        warnings.append(
+            f"manifest status is '{status}': declared capabilities are not fully trustworthy yet; "
+            "verify they reflect reality before relying on the governance state"
+        )
+
+    for record in iteration_records:
+        text = record.read_text(encoding="utf-8")
+        if claims_completion(text) and not shows_evidence(text):
+            warnings.append(
+                "iteration claims completion but records no validation evidence "
+                f"(command, test, or recorded result): {record.relative_to(root)}"
+            )
 
     for capability, paths in CAPABILITY_FILES.items():
         if capabilities.get(capability) != "conformant":

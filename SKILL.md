@@ -240,6 +240,9 @@ For initialized projects, verify that declared capabilities remain real:
   replacing a committed plan with unrelated completed work;
 - each iteration produces a runnable, testable deliverable; iterations that deliver only internal
   infrastructure without testable output are flagged as incomplete;
+- stories that claim a delivered runtime capability show that capability is reachable through the
+  runnable surface (CLI, interactive/TUI, API, or end-to-end test driving the real entrypoint),
+  not only through an isolated unit test; a built-but-unwired module is `partial`, not `complete`;
 - user-facing documentation (README, usage instructions, changelog, release notes) was updated
   within each iteration that changed observable behavior; documentation debt is tracked as
   residual work, not silently deferred;
@@ -249,6 +252,9 @@ For initialized projects, verify that declared capabilities remain real:
   checked status boxes;
 - transitional architecture is not presented as the final design;
 - new failure lessons have been converted to checks where useful;
+- for languages whose toolchain reports unused or dead code, that signal on the changed surface is
+  not left accumulating across iterations: orphans introduced by recent work are removed and any
+  pre-existing dead code is tracked rather than silently ignored;
 - validation gates cover the changed risk surface.
 
 Read [references/methodology.md](references/methodology.md) when designing or revising the

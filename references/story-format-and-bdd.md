@@ -147,7 +147,10 @@ During requirement intake or document audit, reject stories that:
 - omit exclusions, allowing the Agent to expand scope;
 - mix several independently valid outcomes into one story;
 - use BDD but put implementation details in `Then`;
-- call open-ended research a story without a timebox and decision output.
+- call open-ended research a story without a timebox and decision output;
+- claim completion when acceptance proves only an isolated unit (a passing unit test on a new
+  module) while no user-reachable path in the runnable deliverable invokes that capability; a
+  built-but-unwired capability is `partial`, not `complete`.
 
 Good story format should make these questions answerable before implementation starts:
 

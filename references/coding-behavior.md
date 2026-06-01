@@ -109,6 +109,14 @@ Rules:
 - The model tag is **mandatory** for all commits where the Agent generated or modified code,
   documentation, or configuration.
 - Use the model's commonly known name, not an internal identifier.
+- **Derive the tag from your own current model identity at commit time. Never copy it from a
+  previous commit, an example in this document, or another file.** Reusing a prior commit's tag is
+  the most common way this rule silently fails: the new work gets misattributed to whatever model
+  happened to author the last commit. When in doubt about your own name, ask rather than guess or
+  copy.
+- When amending, rebasing, or squashing, re-verify that each resulting commit's tag matches the
+  model that actually produced that change. Do not let a stale or templated tag carry over from an
+  earlier commit or a copied message.
 - If multiple models were used in the same commit (e.g., one planned, another executed), declare
   the primary model that produced the output.
 - This applies regardless of commit prefix (`feat`, `fix`, `docs`, etc.).

@@ -79,6 +79,13 @@ Capability status values:
 
 Never mark a capability conformant just because a file with a matching name exists.
 
+The manifest records auditable governance state and must be version-controlled (committed),
+not git-ignored. If a project excludes `.agent-governance/manifest.yaml` from version control,
+governance state becomes a local-only artifact: collaborators and CI cannot see the declared
+profile, capability states, or risk gates, and `scripts/validate_project_governance.py` cannot
+run in continuous integration. During audit, treat a git-ignored or untracked manifest as a
+governance-visibility gap and recommend committing it.
+
 ## Profile And Capability Invariants
 
 Use these invariants before writing the manifest and again after every governance edit:

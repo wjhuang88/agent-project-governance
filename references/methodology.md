@@ -109,6 +109,16 @@ Use these completion rules:
 - keep a story in review or create a repair slice when verification finds a blocking defect;
 - for high-risk work, require a distinct review conclusion before completion.
 
+A particularly deceptive omission is the **built-but-unwired** capability: a module is created and
+its unit tests pass, yet no user-reachable path in the delivered runnable surface invokes it.
+Passing unit tests prove a unit works in isolation; they do not prove the capability is reachable
+through the runnable deliverable the iteration claims to produce. For any story that delivers a
+new runtime capability, require evidence that the capability is exercised through the delivered
+surface (CLI invocation, interactive/TUI path, API call, or an end-to-end test that drives the
+real entrypoint), not only through an isolated unit test. "Library exists and is unit-tested" is
+`partial`, not `complete`, until the capability is integrated into a path a user or caller can
+actually reach.
+
 ### Preserve Published Plans As Comparison Evidence
 
 An iteration plan committed before execution is not an unused identifier that later work may

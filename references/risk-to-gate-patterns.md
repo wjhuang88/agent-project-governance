@@ -39,6 +39,7 @@ record the observed signal, likely failure, required check, and appropriate gove
 | Sandbox or optional infrastructure fallback | Feature appears successful while safety mechanism is disabled. | Verify initialization/fallback logging and execution mode. | Operations/Testing SOP |
 | Major architecture or product naming pivot | Current tasks expand obsolete direction. | Pause scope, write decision, retarget backlog and handle partial work. | Change-control SOP + ADR |
 | Documentation tracks execution status | Summary says Done while required commands failed, were not run, or only narrower checks passed. | Create plans before implementation; require command-level evidence for checked acceptance items and a distinct review for high-risk completion. | Iteration/Git/Pairing SOP |
+| Compiled or statically-checked language whose toolchain reports unused/dead code | Dead variants, unused functions, or ignored compiler warnings accumulate across iterations, mask real defects, and erode trust in the build signal. | At iteration closure, treat the toolchain's dead-code/unused warnings on the changed surface as a gate: remove orphans your own changes created, and register pre-existing dead code as tracked cleanup instead of leaving it to accumulate silently. | Iteration/Testing SOP + Agent guide |
 
 ## Selecting Gate Strength
 
