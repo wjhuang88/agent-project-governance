@@ -1,0 +1,87 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+# A tag push is the only thing that triggers a release. Concurrency is set
+# per-tag so two pushes of the same tag don't race on the Release object.
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build and publish release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Verify skill bundle
+        run: |
+          set -euo pipefail
+          if [ ! -d "skills/agent-project-governance" ]; then
+            echo "::error::skills/agent-project-governance/ is missing; cannot package the skill."
+            exit 1
+          fi
+          if [ ! -f "skills/agent-project-governance/SKILL.md" ]; then
+            echo "::error::skills/agent-project-governance/SKILL.md is missing; cannot package the skill."
+            exit 1
+          fi
+          echo "Skill bundle at skills/agent-project-governance/ is ready to package."
+
+      - name: Package skill bundle
+        working-directory: skills
+        run: |
+          set -euo pipefail
+          TAG="${GITHUB_REF_NAME}"
+          # Layout: the zip's top-level directory is `agent-project-governance/`
+          # so that `unzip <asset>.zip -d <skills-dir>/` installs the skill in
+          # one step and produces `<skills-dir>/agent-project-governance/`.
+          zip -r "../agent-project-governance-${TAG}.zip" agent-project-governance
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: ${{ github.ref_name }}
+          generate_release_notes: true
+          fail_on_unmatched_files: true
+          body: |
+            ## Skill bundle
+
+            Download `agent-project-governance-${{ github.ref_name }}.zip` and
+            extract it directly into your agent's skill directory. The zip's
+            top-level directory is `agent-project-governance/`, so a single
+            `unzip` places the skill at the correct path.
+
+            ### Install via the release zip
+
+            ```bash
+            # Pick the directory that matches your agent; examples below.
+            SKILLS_DIR=.opencode/skills   # project-level
+            # SKILLS_DIR=~/.config/opencode/skills   # global
+
+            mkdir -p "$SKILLS_DIR"
+            curl -L --fail -o /tmp/agent-project-governance.zip \
+              "https://github.com/${{ github.repository }}/releases/download/${{ github.ref_name }}/agent-project-governance-${{ github.ref_name }}.zip"
+            unzip -q /tmp/agent-project-governance.zip -d "$SKILLS_DIR"
+            rm /tmp/agent-project-governance.zip
+            ```
+
+            ### Install via Git
+
+            ```bash
+            git clone https://github.com/${{ github.repository }}.git \
+              "$SKILLS_DIR/agent-project-governance"
+            ```
+
+            See the [README](https://github.com/${{ github.repository }}#quick-start)
+            for the full installation guide and per-agent directory conventions.
+          files: |
+            agent-project-governance-${{ github.ref_name }}.zip

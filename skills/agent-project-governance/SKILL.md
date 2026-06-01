@@ -264,9 +264,13 @@ governance model itself.
 
 After editing governance artifacts:
 
-1. Run `python3 <skill-path>/scripts/validate_project_governance.py <project-root>` to check
-   required profile files, capability evidence, `AGENTS.md` execution sections, local Markdown
-   links, and missing explicit `src/...` file references in active governance documents.
+1. Run the validator for the current environment: use
+   `sh <skill-path>/scripts/validate_project_governance.sh <project-root>` on Unix-like
+   environments, or
+   `pwsh -File <skill-path>/scripts/validate_project_governance.ps1 <project-root>` on Windows.
+   The validator checks required profile files, capability evidence, `AGENTS.md` execution
+   sections, local Markdown links, missing explicit `src/...` file references in active governance
+   documents, and completion claims without recorded validation evidence.
 2. Compare inventoried non-standard documents with the new standard owners; confirm every
    still-applicable rule, fact, decision, work item, procedure, or lesson was extracted or
    explicitly mapped for later migration.
@@ -327,5 +331,7 @@ When implementing, also report:
   success criteria.
 - [assets/manifest.template.yaml](assets/manifest.template.yaml): manifest starting point for an
   initialized or adopting project.
-- [scripts/validate_project_governance.py](scripts/validate_project_governance.py): deterministic
-  checks for generated or adopted project governance artifacts.
+- [scripts/validate_project_governance.sh](scripts/validate_project_governance.sh): deterministic
+  POSIX shell checks for generated or adopted project governance artifacts.
+- [scripts/validate_project_governance.ps1](scripts/validate_project_governance.ps1): deterministic
+  Windows PowerShell checks for generated or adopted project governance artifacts.

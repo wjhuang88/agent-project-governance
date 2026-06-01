@@ -82,8 +82,9 @@ Never mark a capability conformant just because a file with a matching name exis
 The manifest records auditable governance state and must be version-controlled (committed),
 not git-ignored. If a project excludes `.agent-governance/manifest.yaml` from version control,
 governance state becomes a local-only artifact: collaborators and CI cannot see the declared
-profile, capability states, or risk gates, and `scripts/validate_project_governance.py` cannot
-run in continuous integration. During audit, treat a git-ignored or untracked manifest as a
+profile, capability states, or risk gates, and the environment-appropriate validator
+(`scripts/validate_project_governance.sh` or `scripts/validate_project_governance.ps1`) cannot run
+in continuous integration. During audit, treat a git-ignored or untracked manifest as a
 governance-visibility gap and recommend committing it.
 
 ## Profile And Capability Invariants
@@ -180,8 +181,8 @@ that Agents need to query independently.
    paths, and current status.
 6. Audit that Agents can reach all active extracted rules through `AGENTS.md` routing or the
    standard document map without reading arbitrary legacy files first.
-7. Run `scripts/validate_project_governance.py` from this skill against the target repository
-   before claiming that the produced or repaired governance baseline is valid.
+7. Run the environment-appropriate validator from this skill against the target repository before
+   claiming that the produced or repaired governance baseline is valid.
 
 ### Completion Rule
 
