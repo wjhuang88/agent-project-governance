@@ -68,6 +68,11 @@ When feasible after packaging changes, locally create and list archive contents 
   - `feat:` for new skill capabilities or new shipped artifacts.
 - Keep the subject imperative, lowercase after the type, and under roughly 72 characters when
   practical.
+- Every Agent-authored or Agent-assisted commit message must end with `[model: <model-name>]`,
+  where `<model-name>` is the true current model name used for that commit.
+- Determine the model tag from the active model identity at commit time. Do not copy it from a
+  previous commit, an example, or documentation. If the current model name is unclear, ask before
+  committing rather than guessing.
 - Do not mix unrelated release, documentation, and skill-behavior changes in one commit unless the
   user asks for a combined release slice.
 - Before committing, inspect `git status --short` and `git diff --cached --stat`.
