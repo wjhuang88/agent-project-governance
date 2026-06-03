@@ -70,22 +70,33 @@ Use this when the skill is not yet installed, or when you want to
 fully replace a previous install. For in-place updates, see
 section 4.
 
+On Unix-like environments, prefer the zstd archive when `zstd` is
+available; otherwise use `tar.gz`. On Windows, use the zip archive
+in the PowerShell section.
+
 ```bash
 # Ensure the parent directory exists.
 mkdir -p "$SKILLS_DIR"
+rm -rf "$SKILLS_DIR/agent-project-governance"
 
-# Download and extract. The zip's top-level directory is
-# `agent-project-governance/`, so a single unzip places the skill
-# at the correct path.
-curl -L --fail -o /tmp/agent-project-governance.zip \
-  "https://github.com/wjhuang88/agent-project-governance/releases/download/${VERSION}/agent-project-governance-${VERSION}.zip"
-unzip -q /tmp/agent-project-governance.zip -d "$SKILLS_DIR"
-rm /tmp/agent-project-governance.zip
+if command -v zstd >/dev/null 2>&1; then
+  ARCHIVE=/tmp/agent-project-governance.tar.zst
+  URL="https://github.com/wjhuang88/agent-project-governance/releases/download/${VERSION}/agent-project-governance-${VERSION}.tar.zst"
+  curl -L --fail -o "$ARCHIVE" "$URL"
+  zstd -dc "$ARCHIVE" | tar -xf - -C "$SKILLS_DIR"
+else
+  ARCHIVE=/tmp/agent-project-governance.tar.gz
+  URL="https://github.com/wjhuang88/agent-project-governance/releases/download/${VERSION}/agent-project-governance-${VERSION}.tar.gz"
+  curl -L --fail -o "$ARCHIVE" "$URL"
+  tar -xzf "$ARCHIVE" -C "$SKILLS_DIR"
+fi
+
+rm "$ARCHIVE"
 ```
 
 ## 4. Update an existing install
 
-A fresh zip always fully replaces the directory; it does **not**
+A fresh archive always fully replaces the directory; it does **not**
 merge with an existing install. Always wipe before extracting:
 
 ```bash
@@ -93,9 +104,8 @@ rm -rf "$SKILLS_DIR/agent-project-governance"
 # Then re-run the install command from section 3.
 ```
 
-If you skip the `rm -rf`, `unzip` prompts interactively to
-overwrite each file, and any files removed in the new version
-remain on disk.
+If you skip the `rm -rf`, extracted files may merge with the old
+install, and any files removed in the new version remain on disk.
 
 ## 5. Verify the installation
 
@@ -133,7 +143,9 @@ For more example prompts, see
 ## Windows PowerShell install
 
 Use this when the user is on Windows and does not have a Unix-like
-shell. Set `$SkillsDir` from section 1 and `$Version` from section 2:
+shell. Windows uses the release zip because PowerShell supports it
+without extra archive tools. Set `$SkillsDir` from section 1 and
+`$Version` from section 2:
 
 ```powershell
 $SkillsDir = ".agents\skills"
@@ -163,10 +175,10 @@ Select-String -Path (Join-Path $SkillsDir "agent-project-governance\SKILL.md") -
 
 | Symptom | Likely cause | Fix |
 | --- | --- | --- |
-| `curl: (22) The requested URL returned error: 404` | `${VERSION}` is not a real release tag | Re-run §2; copy the exact `vX.Y.Z` from the [Releases](https://github.com/wjhuang88/agent-project-governance/releases) page |
-| `unzip` prompts `replace ...? [y]es/[n]o]` interactively | Old install was not removed before extracting | Re-run §4 (`rm -rf` first), then §3 |
+| `curl: (22) The requested URL returned error: 404` / `Invoke-WebRequest` returns 404 | `${VERSION}` is not a real release tag, or that release does not include the selected archive | Re-run §2; copy the exact `vX.Y.Z` from the [Releases](https://github.com/wjhuang88/agent-project-governance/releases) page |
+| Old files remain after update | Old install was not removed before extracting | Re-run §4 (`rm -rf` first), then §3 |
 | Agent does not load the skill after install | Loader started before install, or wrong directory | Restart the agent's session; double-check `SKILLS_DIR` matches the agent's expected path |
 | `Permission denied` writing under `~/.config/opencode/skills` | Path resolved to a system location instead of the user's home | Check `echo "$SKILLS_DIR"`; fall back to the project-level directory |
 | User is on Windows (no shell, no unzip) | Unix shell commands are unavailable | Use the PowerShell install section above |
 | Multiple installs detected (project + global both exist) | User installed at both scopes; agent may load the wrong one | Pick one and remove the other with `rm -rf <unwanted>/agent-project-governance`; project-level wins for that repo, global wins everywhere else |
-| Old version still loaded after update | `rm -rf` was skipped before extracting the new zip | Re-run §4 properly, then restart the agent's session |
+| Old version still loaded after update | `rm -rf` was skipped before extracting the new archive | Re-run §4 properly, then restart the agent's session |

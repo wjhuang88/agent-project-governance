@@ -114,7 +114,7 @@ pwsh -File <skill-path>/scripts/validate_project_governance.ps1 <project-root>
 
 ### 面向 AI Agent 与 LLM
 
-请参见 [INSTALL.zh-CN.md](INSTALL.zh-CN.md)。该文档包含一份引导式对话脚本，
+请参见 [INSTALL.md](INSTALL.md)。该文档包含一份面向 Agent 的引导式对话脚本，
 会先与用户确认所使用的 Agent（OpenCode、Claude Code、Cursor、Codex、
 Copilot、Amp …）与安装范围（项目级 / 全局），再执行相应命令。同一份文档
 同时覆盖全新安装、原地更新、结果校验与常见问题排查。
@@ -130,9 +130,11 @@ Copilot、Amp …）与安装范围（项目级 / 全局），再执行相应命
   Amp …）— `.agents/skills/`（项目级）或 `~/.agents/skills/`（全局）
 
 从 [Releases 页面](https://github.com/wjhuang88/agent-project-governance/releases)
-下载最新 release zip，其顶层目录为 `agent-project-governance/`，一次
-`unzip` 即可把 skill 放到正确位置。原地更新与问题排查参见
-[INSTALL.zh-CN.md §4](INSTALL.zh-CN.md#4-更新已安装的-skill)。
+下载最新 release 压缩包。每个压缩包的顶层目录均为
+`agent-project-governance/`，直接解压到目标目录即可把 skill 放到正确位置。
+Unix-like 环境优先使用 `tar.zst`，无 zstd 时使用 `tar.gz`；Windows 使用 `zip`。
+原地更新与问题排查参见
+[INSTALL.md §4](INSTALL.md#4-update-an-existing-install)。
 
 ### 使用方式
 

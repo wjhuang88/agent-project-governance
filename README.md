@@ -153,11 +153,13 @@ look under:
   Amp, …) — `.agents/skills/` (project) or `~/.agents/skills/`
   (global)
 
-Download the latest release zip from the
+Download the latest release archive from the
 [Releases page](https://github.com/wjhuang88/agent-project-governance/releases);
-its top-level directory is `agent-project-governance/`, so a
-single `unzip` into the target places the skill at the right
-path. For in-place updates and troubleshooting, see
+each archive's top-level directory is `agent-project-governance/`,
+so extracting it into the target places the skill at the right
+path. Unix-like environments should prefer `tar.zst` when zstd is
+available, fall back to `tar.gz`, and Windows should use `zip`.
+For in-place updates and troubleshooting, see
 [INSTALL.md](INSTALL.md#4-update-an-existing-install).
 
 ### Use the skill

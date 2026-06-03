@@ -40,10 +40,12 @@ jobs:
         run: |
           set -euo pipefail
           TAG="${GITHUB_REF_NAME}"
-          # Layout: the zip's top-level directory is `agent-project-governance/`
-          # so that `unzip <asset>.zip -d <skills-dir>/` installs the skill in
-          # one step and produces `<skills-dir>/agent-project-governance/`.
+          # Layout: each archive's top-level directory is
+          # `agent-project-governance/`, so extracting into <skills-dir> installs
+          # the skill in one step.
           zip -r "../agent-project-governance-${TAG}.zip" agent-project-governance
+          tar -czf "../agent-project-governance-${TAG}.tar.gz" agent-project-governance
+          tar -cf - agent-project-governance | zstd -T0 -o "../agent-project-governance-${TAG}.tar.zst"
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
@@ -55,26 +57,41 @@ jobs:
           body: |
             ## Skill bundle
 
-            Download `agent-project-governance-${{ github.ref_name }}.zip` and
-            extract it directly into your agent's skill directory. The zip's
-            top-level directory is `agent-project-governance/`, so a single
-            `unzip` places the skill at the correct path.
+            Download an archive for your environment and extract it directly
+            into your agent's skill directory. Each archive's top-level
+            directory is `agent-project-governance/`, so a single extraction
+            places the skill at the correct path.
 
-            ### Install via the release zip
+            - Windows: use `agent-project-governance-${{ github.ref_name }}.zip`
+            - Unix-like environments with zstd: use `agent-project-governance-${{ github.ref_name }}.tar.zst`
+            - Other Unix-like environments: use `agent-project-governance-${{ github.ref_name }}.tar.gz`
+
+            ### Install on Unix-like environments
 
             ```bash
             # Pick the directory that matches your agent; examples below.
             SKILLS_DIR=.opencode/skills   # project-level
             # SKILLS_DIR=~/.config/opencode/skills   # global
+            VERSION=${{ github.ref_name }}
 
             mkdir -p "$SKILLS_DIR"
-            curl -L --fail -o /tmp/agent-project-governance.zip \
-              "https://github.com/${{ github.repository }}/releases/download/${{ github.ref_name }}/agent-project-governance-${{ github.ref_name }}.zip"
-            unzip -q /tmp/agent-project-governance.zip -d "$SKILLS_DIR"
-            rm /tmp/agent-project-governance.zip
+            rm -rf "$SKILLS_DIR/agent-project-governance"
+            if command -v zstd >/dev/null 2>&1; then
+              curl -L --fail -o /tmp/agent-project-governance.tar.zst \
+                "https://github.com/${{ github.repository }}/releases/download/${VERSION}/agent-project-governance-${VERSION}.tar.zst"
+              zstd -dc /tmp/agent-project-governance.tar.zst | tar -xf - -C "$SKILLS_DIR"
+              rm /tmp/agent-project-governance.tar.zst
+            else
+              curl -L --fail -o /tmp/agent-project-governance.tar.gz \
+                "https://github.com/${{ github.repository }}/releases/download/${VERSION}/agent-project-governance-${VERSION}.tar.gz"
+              tar -xzf /tmp/agent-project-governance.tar.gz -C "$SKILLS_DIR"
+              rm /tmp/agent-project-governance.tar.gz
+            fi
             ```
 
             See the [README](https://github.com/${{ github.repository }}#quick-start)
             for the full installation guide and per-agent directory conventions.
           files: |
             agent-project-governance-${{ github.ref_name }}.zip
+            agent-project-governance-${{ github.ref_name }}.tar.gz
+            agent-project-governance-${{ github.ref_name }}.tar.zst
