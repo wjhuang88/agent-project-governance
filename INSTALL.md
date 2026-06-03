@@ -46,23 +46,38 @@ Set shell variables for the rest of this guide:
 
 ```bash
 SKILLS_DIR="<directory you chose>"
-VERSION=v1.0.0
 # Examples:
 #   SKILLS_DIR=".opencode/skills"
 #   SKILLS_DIR="$HOME/.config/opencode/skills"
-#   VERSION=v1.0.0
 ```
 
 ## 2. Pick a version
 
 Default to the latest published release. If the user names a
-specific version, use that instead.
+specific version, set `VERSION` to that exact tag instead.
 
-Use an exact release tag from
-https://github.com/wjhuang88/agent-project-governance/releases,
-for example `v1.0.0`. Avoid scraping the release API in restricted
-environments; asking the user for the desired tag is more reliable
-than introducing a local scripting dependency.
+Unix-like shell:
+
+```bash
+VERSION=$(curl -fsSL https://api.github.com/repos/wjhuang88/agent-project-governance/releases/latest \
+  | sed -n 's/.*"tag_name"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' \
+  | head -n 1)
+test -n "$VERSION" || { echo "Could not detect latest release tag"; exit 1; }
+echo "Using release: $VERSION"
+```
+
+Manual override:
+
+```bash
+VERSION=<release-tag>
+```
+
+PowerShell:
+
+```powershell
+$Version = (Invoke-RestMethod -Uri "https://api.github.com/repos/wjhuang88/agent-project-governance/releases/latest").tag_name
+Write-Host "Using release: $Version"
+```
 
 ## 3. Install (fresh install)
 
@@ -149,7 +164,7 @@ without extra archive tools. Set `$SkillsDir` from section 1 and
 
 ```powershell
 $SkillsDir = ".agents\skills"
-$Version = "v1.0.0"
+$Version = (Invoke-RestMethod -Uri "https://api.github.com/repos/wjhuang88/agent-project-governance/releases/latest").tag_name
 $ZipPath = Join-Path $env:TEMP "agent-project-governance.zip"
 $Url = "https://github.com/wjhuang88/agent-project-governance/releases/download/$Version/agent-project-governance-$Version.zip"
 
