@@ -1,6 +1,6 @@
 ---
 name: agent-project-governance
-description: Analyze, initialize, migrate, and improve an Agent-friendly project governance system with guided onboarding, task routing, risk-based engineering gates, and feedback-driven process evolution. Use when a user asks to set up project rules for AI coding agents, initialize or audit AGENTS.md/SOP/backlog/iteration/ADR structures, migrate existing project workflows into a standard governance layout, check whether a repository has already been initialized, or improve development process quality after defects, regressions, deployment failures, or planning drift.
+description: Use for project management, project analysis, specs and requirements, refactor planning, technical-debt workflow, AGENTS.md, project rules, AI coding-agent instructions, backlog/story/iteration process, delivery gates, Definition of Done, ADR/SOP structure, release/testing gates, and Agent-friendly engineering governance. Trigger for requests such as audit this project, create or review a spec, decompose requirements, organize backlog or roadmap, prepare an iteration, plan a refactor safely, improve development workflow, set up project rules, write or repair AGENTS.md, migrate existing docs into a standard structure, repair stale process docs, or capture lessons after defects/regressions/deployment failures/planning drift. Also trigger for Chinese requests such as 项目管理, 项目分析, 项目规则, 开发规范, Agent规则, AGENTS.md, spec, 规格说明, 需求规格, 需求分析, 需求拆解, 重构, 重构计划, 技术债, 工程治理, 交付闭环, DoD, 迭代流程, 故障复盘, 经验沉淀, 文档治理, 流程审计, 治理初始化, 治理修复, 发布/测试门禁.
 license: MIT
 ---
 
@@ -12,6 +12,14 @@ Establish a durable governance system for projects developed with AI Agents. Tre
 documentation as assets to assess and migrate, not obstacles to overwrite. Guide users who may
 not know process terminology, while converging suitable projects toward the standard structure
 defined in this skill.
+
+This skill also handles broad project-management requests such as project analysis, specs,
+requirements, refactor planning, roadmap cleanup, technical debt, and iteration planning. Treat
+those requests as governance-facing work: clarify intent, inspect the project, turn ambiguous work
+into auditable artifacts and execution gates, and preserve a trail that future Agents can follow.
+Do not perform unrelated business-code implementation merely because a spec or refactor was
+discussed; create or repair the plan, rules, acceptance criteria, risk gates, and follow-up
+records unless the user explicitly asks for code changes too.
 
 ## First Action: Determine Governance State
 
