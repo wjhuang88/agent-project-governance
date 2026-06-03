@@ -162,6 +162,20 @@ foreach ($Record in $IterationRecords) {
     }
 }
 
+$Board = Join-Path $script:Root "docs/BOARD.md"
+if (Test-Path -LiteralPath $Board) {
+    $BoardText = Get-Content -LiteralPath $Board -Raw
+    if ($BoardText -notmatch "(?i)derived[\s-]+operating[\s-]+view") {
+        Add-WarningMessage "docs/BOARD.md exists but is not explicitly marked as a derived operating view"
+    }
+    if (-not $BoardText.Contains("Owner Doc")) {
+        Add-WarningMessage "docs/BOARD.md exists but does not include an Owner Doc column or equivalent label"
+    }
+    if (-not $BoardText.Contains("Gate")) {
+        Add-WarningMessage "docs/BOARD.md exists but does not include a Gate column or equivalent label"
+    }
+}
+
 Test-CapabilityFile "task_router" @("AGENTS.md")
 Test-CapabilityFile "evolution_feedback" @("EVOLUTION.md")
 Test-CapabilityFile "testing_policy" @("docs/sop/TESTING.md")

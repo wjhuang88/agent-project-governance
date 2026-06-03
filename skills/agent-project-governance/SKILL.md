@@ -219,6 +219,11 @@ After confirmation, build toward the standard structure in stages:
    documentation updates in their acceptance criteria. The iteration template must list affected
    user-facing documentation (README, usage guide, changelog, release notes). Unresolved
    documentation debt is a residual item, not silently deferred.
+   When a product or high-risk project has multiple non-terminal status owners, consider adding
+   `docs/BOARD.md` as a derived operating view. The board is optional and must not become a new
+   state source: owner docs define status, scope, acceptance criteria, and evidence. The board only
+   summarizes Now / Review / Blocked or Paused / Next / Later with an owner-doc link and explicit
+   gate for each row.
 6. Add project-specific gates derived from risk, such as contract-first APIs, database
    migration, release, security, or visual validation rules.
 
@@ -240,6 +245,9 @@ For initialized projects, verify that declared capabilities remain real:
 - task routes lead to existing, current instructions;
 - commands match the repository toolchain and lock files;
 - backlog and iteration states agree;
+- if a derived board exists, it is explicitly marked as a derived operating view, each row links to
+  an owner doc and includes a gate, and its state does not contradict backlog, iteration, roadmap,
+  requirement-convergence or manifest owners;
 - large backlog outcomes are either executable stories or explicitly decomposed Epics whose
   child dependencies and iteration selection can be audited;
 - ready backlog stories use a format appropriate to their type, and behavior-facing stories
@@ -282,12 +290,14 @@ After editing governance artifacts:
 2. Compare inventoried non-standard documents with the new standard owners; confirm every
    still-applicable rule, fact, decision, work item, procedure, or lesson was extracted or
    explicitly mapped for later migration.
-3. Confirm no useful legacy source was unintentionally overwritten or silently discarded.
-4. Run a scenario-based check using real project risks or
+3. If `docs/BOARD.md` exists, confirm owner docs were updated before the board and that the board
+   remains a derived summary rather than a source of truth.
+4. Confirm no useful legacy source was unintentionally overwritten or silently discarded.
+5. Run a scenario-based check using real project risks or
    [references/evaluation-cases.md](references/evaluation-cases.md).
-5. Explain what the user can now ask an Agent to do, and which governance capabilities remain
+6. Explain what the user can now ask an Agent to do, and which governance capabilities remain
    intentionally deferred.
-6. Apply the closure status rule: a failed or unperformed required check, stale status owner, or
+7. Apply the closure status rule: a failed or unperformed required check, stale status owner, or
    unregistered residual gap prevents a `complete` claim.
 
 ## Output Contract

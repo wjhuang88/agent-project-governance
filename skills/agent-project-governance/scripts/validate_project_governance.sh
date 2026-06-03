@@ -188,6 +188,19 @@ $iteration_records
 EOF
 fi
 
+board="$root/docs/BOARD.md"
+if [ -f "$board" ]; then
+  if ! grep -Eiq 'derived[[:space:]-]+operating[[:space:]-]+view' "$board"; then
+    warn "docs/BOARD.md exists but is not explicitly marked as a derived operating view"
+  fi
+  if ! grep -Fq "Owner Doc" "$board"; then
+    warn "docs/BOARD.md exists but does not include an Owner Doc column or equivalent label"
+  fi
+  if ! grep -Fq "Gate" "$board"; then
+    warn "docs/BOARD.md exists but does not include a Gate column or equivalent label"
+  fi
+fi
+
 check_capability_file task_router AGENTS.md
 check_capability_file evolution_feedback EVOLUTION.md
 check_capability_file testing_policy docs/sop/TESTING.md

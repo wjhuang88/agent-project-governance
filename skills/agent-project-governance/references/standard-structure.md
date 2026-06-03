@@ -18,6 +18,7 @@ project-root/
 │   └── manifest.yaml
 └── docs/
     ├── README.md
+    ├── BOARD.md                 (optional derived operating view)
     ├── backlog/
     │   └── PRODUCT-BACKLOG.md
     ├── iterations/
@@ -72,6 +73,7 @@ It is not an excuse for a complex product to omit essential controls.
 | Decisions | Important tradeoffs, alternatives, and supersession. Each decision record should include a constraint decomposition (Hard/Soft/Assumption) and a reversal trigger stating when to revisit the decision. | Routine implementation notes. |
 | Roadmap | Stage ordering and prioritization logic. | A substitute for executable work items. |
 | Proposals | Uncommitted directions not yet executable. | Tasks Agents directly start coding. |
+| Board | Derived operating view of Now, Review, Blocked/Paused, Next and Later work. Each row links to an owner doc and has an explicit gate. | A second backlog, execution log, acceptance checklist, or source of truth for status. |
 | Reference | Stable facts such as architecture, contracts, config, test inventory. | Procedures and moving status. |
 | User Documentation | README, usage/installation instructions, changelog, release notes. Updated as part of each iteration's deliverable, not deferred to a separate documentation phase. | Internal governance procedures. |
 | SOP | Procedures and checks for recurring actions. | Duplicated technical truth that drifts from reference/code. |
@@ -90,7 +92,7 @@ Minimum sections for a `product` or `high-risk` project:
 | Coding Behavior | Rules governing how the Agent writes code. Read [references/coding-behavior.md](coding-behavior.md) for the full guidelines; at minimum include: state assumptions before implementing; only write code directly asked for (no speculative features, no premature abstractions, no unsolicited refactoring); match existing style even if different from personal preference; define verifiable success criteria before starting; clean up only what your own changes orphan. |
 | Git Rules | Staged-diff review, safe staging, commit convention and traceability rule when applicable. When an Agent generates a commit, the commit message must end with `[model: <model-name>]` to identify the AI model used. This applies to all commits where the Agent authored or co-authored the changes. |
 | Task Router | Routes for project orientation, intake, iteration start, in-iteration change, implementation, testing, Git, diagnosis, document maintenance and decisions; all mandatory targets must exist. |
-| Session End Checklist | Status synchronization, verification evidence, residual-work registration, lessons/decision write-back, commit readiness checks, documentation synchronization check ("Did this session change observable behavior? If yes, are user-facing docs updated?"), and a decision review: "Did this session make any technical choice that affects Soft or Assumption constraints? If yes, is it recorded in docs/decisions/?" |
+| Session End Checklist | Status synchronization, verification evidence, residual-work registration, lessons/decision write-back, commit readiness checks, documentation synchronization check ("Did this session change observable behavior? If yes, are user-facing docs updated?"), derived board synchronization when `docs/BOARD.md` exists ("Did owner docs change active/review/paused/next state? If yes, were owner docs updated first and then the board?"), and a decision review: "Did this session make any technical choice that affects Soft or Assumption constraints? If yes, is it recorded in docs/decisions/?" |
 | Current Known Traps | Include when discovery or `EVOLUTION.md` exposes active project-specific traps. |
 
 For `minimal` projects, include the same sections that apply to its actual work; at minimum an
@@ -121,6 +123,7 @@ workflow already depends on.
 | Document | Required when |
 | --- | --- |
 | `docs/README.md` | Profile is `product` or `high-risk`, or governance uses three or more `docs/` responsibility directories. |
+| `docs/BOARD.md` | Optional for product/high-risk projects with multiple active status owners, non-terminal iterations, or frequent Agent handoffs. Must be a derived view only. |
 | `docs/sop/START-ITERATION.md` and `docs/sop/ITERATION-WORKFLOW.md` | Iteration records exist, or the project uses planned feature iterations. |
 | Published-plan baseline rule in iteration SOP/template | Iteration plans may be committed before execution or execution priority can change after planning. |
 | Iteration inventory-before-selection rule in start workflow | Multiple iteration records may coexist or future plans are published ahead of work. |
@@ -133,6 +136,23 @@ workflow already depends on.
 | `docs/sop/RELEASE.md` | Agents support packaging, deployment or release verification. |
 | Iteration MVP deliverable requirement | Profile is `product` or `high-risk`. Each iteration must produce a runnable, testable output. |
 | Documentation synchronization in iteration workflow | Profile is `product` or `high-risk`. User-facing docs (README, usage guide, changelog) are updated as part of each iteration, not deferred. |
+
+## Derived Operating Board
+
+For product or high-risk projects with multiple active status owners, `docs/BOARD.md` may be
+added as a derived operating view. It helps Agents answer current operating questions quickly,
+but owner docs still define truth.
+
+Rules:
+
+- Owner docs define status, scope, acceptance criteria, verification evidence and lifecycle state;
+  the board only summarizes current operating state.
+- Status changes are made in owner docs first, then reflected on the board.
+- Every row links to an owner doc.
+- Every row has an explicit gate: exit, resume, activation or deferral condition.
+- The board must not contain story details, acceptance checklists, execution logs or new
+  requirements.
+- Keep board tables to four columns: `Item`, `State`, `Owner Doc`, `Gate`.
 
 ## Non-Standard Source Migration
 
@@ -164,6 +184,11 @@ A project is structurally conformant only when:
   Agent cannot finish after file creation while omitting status/evidence/follow-up closure;
 - procedures point to current toolchain, paths, and architecture;
 - planned work/status sources do not contradict completed records;
+- if a board exists, it is explicitly marked as a derived operating view rather than a source of
+  truth;
+- board rows link to owner docs and include explicit gates;
+- board state does not contradict backlog, iteration, roadmap, requirement convergence or manifest
+  owners;
 - applicable Epic/child relationships preserve project identifiers, dependency readiness and
   iteration traceability;
 - a committed iteration plan remains identifiable after execution or reprioritization, and
