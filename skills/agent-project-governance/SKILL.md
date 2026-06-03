@@ -1,6 +1,6 @@
 ---
 name: agent-project-governance
-description: Use for project management, project analysis, specs and requirements, refactor planning, technical-debt workflow, AGENTS.md, project rules, AI coding-agent instructions, backlog/story/iteration process, delivery gates, Definition of Done, ADR/SOP structure, release/testing gates, and Agent-friendly engineering governance. Trigger for requests such as audit this project, create or review a spec, decompose requirements, organize backlog or roadmap, prepare an iteration, plan a refactor safely, improve development workflow, set up project rules, write or repair AGENTS.md, migrate existing docs into a standard structure, repair stale process docs, or capture lessons after defects/regressions/deployment failures/planning drift. Also trigger for Chinese requests such as 项目管理, 项目分析, 项目规则, 开发规范, Agent规则, AGENTS.md, spec, 规格说明, 需求规格, 需求分析, 需求拆解, 重构, 重构计划, 技术债, 工程治理, 交付闭环, DoD, 迭代流程, 故障复盘, 经验沉淀, 文档治理, 流程审计, 治理初始化, 治理修复, 发布/测试门禁.
+description: Use for project management, project analysis, project review, specs and requirements, roadmap/backlog work, refactor planning, architecture cleanup, technical-debt workflow, AGENTS.md, project rules, AI coding-agent instructions, backlog/story/iteration process, delivery gates, Definition of Done, ADR/SOP structure, release/testing gates, and Agent-friendly engineering governance. Trigger for requests such as audit this project, analyze or review project structure, create or review a spec, decompose requirements, organize backlog or roadmap, prepare an iteration, plan a refactor safely, improve development workflow, set up project rules, write or repair AGENTS.md, migrate existing docs into a standard structure, repair stale process docs, or capture lessons after defects/regressions/deployment failures/planning drift. Also trigger for Chinese requests such as 项目管理, 项目分析, 项目审查, 项目规则, 开发规范, Agent规则, AGENTS.md, spec, 规格说明, 需求规格, 需求分析, 需求拆解, 架构梳理, 重构, 重构计划, 技术债, 工程治理, 交付闭环, DoD, 迭代流程, 故障复盘, 经验沉淀, 文档治理, 流程审计, 治理初始化, 治理修复, 发布/测试门禁.
 license: MIT
 ---
 
@@ -341,6 +341,8 @@ When implementing, also report:
   questions, explanations, and confirmation flow.
 - [references/initialization-and-adoption.md](references/initialization-and-adoption.md): state
   machine, manifest schema, legacy adoption, and degraded-state repair.
+- [references/schema-migrations.md](references/schema-migrations.md): manifest schema version
+  rules and compact migration note format.
 - [references/methodology.md](references/methodology.md): principles that generate governance
   rules from project conditions and failure history.
 - [references/epic-and-story-decomposition.md](references/epic-and-story-decomposition.md):

@@ -40,9 +40,12 @@ jobs:
           set -euo pipefail
           ruby -e 'require "yaml"; text=File.read("skills/agent-project-governance/SKILL.md"); YAML.safe_load(text.split("---",3)[1]); puts "skill frontmatter ok"'
           ruby -e 'require "yaml"; YAML.load_file("skills/agent-project-governance/agents/openai.yaml"); puts "openai yaml ok"'
+          ruby -e 'require "json"; JSON.parse(File.read("skills/agent-project-governance/assets/manifest.schema.json")); puts "manifest schema json ok"'
           sh -n skills/agent-project-governance/scripts/validate_project_governance.sh
           sh -n skills/agent-project-governance/scripts/test_validate_project_governance.sh
           sh skills/agent-project-governance/scripts/test_validate_project_governance.sh
+          pwsh -NoProfile -Command '$null = [scriptblock]::Create((Get-Content -Raw "skills/agent-project-governance/scripts/validate_project_governance.ps1")); $null = [scriptblock]::Create((Get-Content -Raw "skills/agent-project-governance/scripts/test_validate_project_governance.ps1")); "powershell syntax ok"'
+          pwsh -NoProfile -File skills/agent-project-governance/scripts/test_validate_project_governance.ps1
 
       - name: Package skill bundle
         working-directory: skills

@@ -26,7 +26,8 @@
 - When changing release packaging, update both `.github/workflows/release.yml` and the install or
   README instructions that describe the produced artifacts.
 - Release workflow changes must preserve the pre-package validation step for skill frontmatter,
-  `openai.yaml`, shell syntax and validator fixture tests.
+  `openai.yaml`, manifest schema JSON, shell syntax, shell fixture tests, PowerShell syntax and
+  PowerShell fixture tests.
 - Prefer plain POSIX shell and PowerShell for scripts. Avoid adding runtime dependencies unless the
   user explicitly accepts the tradeoff.
 
@@ -57,6 +58,8 @@ Before claiming completion, run the checks relevant to the change:
   `sh -n skills/agent-project-governance/scripts/validate_project_governance.sh`
 - For shell validator behavior changes:
   `sh skills/agent-project-governance/scripts/test_validate_project_governance.sh`
+- For PowerShell validator changes:
+  `pwsh -NoProfile -File skills/agent-project-governance/scripts/test_validate_project_governance.ps1`
 - For manifest schema changes:
   `ruby -e 'require "json"; JSON.parse(File.read("skills/agent-project-governance/assets/manifest.schema.json")); puts "manifest schema json ok"'`
 - For install or README link changes, search for stale references:
