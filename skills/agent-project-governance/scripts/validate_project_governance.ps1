@@ -194,6 +194,12 @@ if ((Test-Path -LiteralPath $AgentGuide) -and $ProjectProfile -in @("product", "
             Add-ErrorMessage "AGENTS.md is missing required section: $Section"
         }
     }
+    if ($GuideText -notmatch 'type\(scope\):\s+description.*\[model:\s*<model-name>\]') {
+        Add-ErrorMessage "AGENTS.md Git Rules must include the Agent commit model tag format: type(scope): description (#story-id) [model:<model-name>]"
+    }
+    if ($GuideText -notmatch '\[model:\s*<model-name>\].*(required|mandatory)|required.*\[model:\s*<model-name>\]|mandatory.*\[model:\s*<model-name>\]') {
+        Add-ErrorMessage "AGENTS.md Git Rules must say the model tag is required for Agent-authored or Agent-assisted commits"
+    }
 }
 
 $MarkdownFiles = @()

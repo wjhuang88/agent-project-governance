@@ -54,6 +54,9 @@ make_valid_project() {
     "Hard Constraints" \
     "Coding Behavior" \
     "Git Rules" \
+    'Format: type(scope): description (#story-id) [model:<model-name>]' \
+    "Scope = crate name, package, component, or workspace." \
+    "[model:<model-name>] required when Agent authored or assisted the commit." \
     "Task Router" \
     "Session End Checklist" \
     "docs/sop/TESTING.md" \
@@ -120,6 +123,27 @@ make_valid_project "$case_root"
 run_validator "$case_root"
 expect_status "valid project" 0
 expect_contains "valid project" "Governance validation passed: 0 warning(s)."
+
+case_root="$TMP_ROOT/missing-agent-commit-format"
+make_valid_project "$case_root"
+write_file "$case_root/AGENTS.md" \
+  "# Agent Guide" \
+  "Hard Constraints" \
+  "Coding Behavior" \
+  "Git Rules" \
+  "Task Router" \
+  "Session End Checklist" \
+  "docs/sop/TESTING.md" \
+  "docs/sop/GIT-WORKFLOW.md" \
+  "docs/sop/REQUIREMENT-INTAKE.md" \
+  "docs/sop/START-ITERATION.md" \
+  "docs/sop/ITERATION-WORKFLOW.md" \
+  "docs/sop/CHANGE-CONTROL.md" \
+  "docs/decisions/README.md" \
+  "docs/sop/RELEASE.md"
+run_validator "$case_root"
+expect_status "missing agent commit format" 1
+expect_contains "missing agent commit format" "ERROR: AGENTS.md Git Rules must include the Agent commit model tag format"
 
 case_root="$TMP_ROOT/missing-manifest"
 mkdir -p "$case_root"

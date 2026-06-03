@@ -60,6 +60,9 @@ function New-ValidProject {
         "Hard Constraints",
         "Coding Behavior",
         "Git Rules",
+        "Format: type(scope): description (#story-id) [model:<model-name>]",
+        "Scope = crate name, package, component, or workspace.",
+        "[model:<model-name>] required when Agent authored or assisted the commit.",
         "Task Router",
         "Session End Checklist",
         "docs/sop/TESTING.md",
@@ -114,6 +117,28 @@ try {
     Invoke-ValidatorCase $Root
     Expect-Status "valid project" 0
     Expect-Contains "valid project" "Governance validation passed: 0 warning(s)."
+
+    $Root = Join-Path $TmpRoot "missing-agent-commit-format"
+    New-ValidProject $Root
+    Write-FixtureFile (Join-Path $Root "AGENTS.md") @(
+        "# Agent Guide",
+        "Hard Constraints",
+        "Coding Behavior",
+        "Git Rules",
+        "Task Router",
+        "Session End Checklist",
+        "docs/sop/TESTING.md",
+        "docs/sop/GIT-WORKFLOW.md",
+        "docs/sop/REQUIREMENT-INTAKE.md",
+        "docs/sop/START-ITERATION.md",
+        "docs/sop/ITERATION-WORKFLOW.md",
+        "docs/sop/CHANGE-CONTROL.md",
+        "docs/decisions/README.md",
+        "docs/sop/RELEASE.md"
+    )
+    Invoke-ValidatorCase $Root
+    Expect-Status "missing agent commit format" 1
+    Expect-Contains "missing agent commit format" "ERROR: AGENTS.md Git Rules must include the Agent commit model tag format"
 
     $Root = Join-Path $TmpRoot "missing-manifest"
     New-Item -ItemType Directory -Force -Path $Root | Out-Null

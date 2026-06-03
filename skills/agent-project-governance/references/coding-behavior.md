@@ -90,24 +90,32 @@ constant clarification.
 
 **Every Agent-generated commit must declare the AI model used.**
 
-When an Agent authors or co-authors a commit, the commit message must end with a model tag:
+When an Agent authors or co-authors a commit, the full commit format must be visible in
+`AGENTS.md` under `Git Rules`, not only in `docs/sop/GIT-WORKFLOW.md`. Agents often commit through
+direct shell paths without routing through the Git SOP, so any non-standard commit requirement must
+live in the main instruction layer.
+
+Use this format unless the project has an explicitly stricter local convention:
 
 ```text
-[model: <model-name>]
+type(scope): description (#story-id) [model:<model-name>]
 ```
 
 Examples:
 
 ```text
-feat: add role-based access control [model: gpt-5]
-fix: resolve Docker Compose database config key [model: claude-sonnet-4]
-docs: update API documentation [model: glm-4]
+feat(core): add role-based access control (#story-123) [model:gpt-5]
+fix(workspace): resolve Docker Compose database config key (#bug-42) [model:claude-sonnet-4]
+docs(agent): update API documentation (#docs-7) [model:glm-4]
 ```
 
 Rules:
 
 - The model tag is **mandatory** for all commits where the Agent generated or modified code,
   documentation, or configuration.
+- Scope should be the crate, package, component, or `workspace` when the change crosses boundaries.
+- Story or issue linkage should be included when one exists; use the repository's actual identifier
+  style instead of inventing one.
 - Use the model's commonly known name, not an internal identifier.
 - **Derive the tag from your own current model identity at commit time. Never copy it from a
   previous commit, an example in this document, or another file.** Reusing a prior commit's tag is

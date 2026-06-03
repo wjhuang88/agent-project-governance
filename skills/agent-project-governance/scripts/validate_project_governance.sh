@@ -217,6 +217,12 @@ if [ -f "$root/AGENTS.md" ] && { [ "$profile" = "product" ] || [ "$profile" = "h
       error "AGENTS.md is missing required section: $section"
     fi
   done
+  if ! grep -Eq 'type\(scope\):[[:space:]]+description.*\[model:[[:space:]]*<model-name>\]' "$root/AGENTS.md"; then
+    error "AGENTS.md Git Rules must include the Agent commit model tag format: type(scope): description (#story-id) [model:<model-name>]"
+  fi
+  if ! grep -Eq '\[model:[[:space:]]*<model-name>\].*(required|mandatory)|required.*\[model:[[:space:]]*<model-name>\]|mandatory.*\[model:[[:space:]]*<model-name>\]' "$root/AGENTS.md"; then
+    error "AGENTS.md Git Rules must say the model tag is required for Agent-authored or Agent-assisted commits"
+  fi
 fi
 
 markdown_files=""
