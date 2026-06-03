@@ -74,13 +74,6 @@ jobs:
             rm /tmp/agent-project-governance.zip
             ```
 
-            ### Install via Git
-
-            ```bash
-            git clone https://github.com/${{ github.repository }}.git \
-              "$SKILLS_DIR/agent-project-governance"
-            ```
-
             See the [README](https://github.com/${{ github.repository }}#quick-start)
             for the full installation guide and per-agent directory conventions.
           files: |

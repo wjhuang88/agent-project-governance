@@ -110,85 +110,31 @@ pwsh -File <skill-path>/scripts/validate_project_governance.ps1 <project-root>
 
 ## Quick Start
 
-本节同时面向两类读者：
+本节按读者给出两个入口——按需选择即可。
 
-- 替 Agent 安装本 skill 的人类。
-- 需基于本 README 自动完成安装的 AI Agent。下方 shell 片段均为可独立复制运行的命令。
+### 面向 AI Agent 与 LLM
 
-### 1. 选择 skill 目录
+请参见 [INSTALL.zh-CN.md](INSTALL.zh-CN.md)。该文档包含一份引导式对话脚本，
+会先与用户确认所使用的 Agent（OpenCode、Claude Code、Cursor、Codex、
+Copilot、Amp …）与安装范围（项目级 / 全局），再执行相应命令。同一份文档
+同时覆盖全新安装、原地更新、结果校验与常见问题排查。
 
-项目级（仅当前项目）：
+### 面向人类
 
-| Agent | skill 目录 |
-| --- | --- |
-| OpenCode | `.opencode/skills/` |
-| Claude Code | `.claude/skills/` |
-| Codex / Copilot / 其他 | `.agents/skills/` |
+本 skill 是一个名为 `agent-project-governance/` 的目录，放置于 Agent
+的 skill 目录即可。常见路径如下：
 
-全局（本机所有项目）：
+- **OpenCode** — `.opencode/skills/`（项目级）或 `~/.config/opencode/skills/`（全局）
+- **Claude Code** — `.claude/skills/`（项目级）或 `~/.claude/skills/`（全局）
+- **其他遵循 Agent Skills 开放标准的工具**（Cursor、Codex、Copilot、
+  Amp …）— `.agents/skills/`（项目级）或 `~/.agents/skills/`（全局）
 
-| Agent | skill 目录 |
-| --- | --- |
-| OpenCode | `~/.config/opencode/skills/` |
-| Claude Code | `~/.claude/skills/` |
+从 [Releases 页面](https://github.com/wjhuang88/agent-project-governance/releases)
+下载最新 release zip，其顶层目录为 `agent-project-governance/`，一次
+`unzip` 即可把 skill 放到正确位置。原地更新与问题排查参见
+[INSTALL.zh-CN.md §4](INSTALL.zh-CN.md#4-更新已安装的-skill)。
 
-> 本 skill 遵循 [Agent Skills 开放标准](https://agentskills.io)，
-> 兼容所有支持该标准的 Agent 工具（OpenCode、Claude Code、Cursor、
-> GitHub Copilot、Codex、Amp 等）。
-
-### 2. 通过 release zip 安装（推荐方式）
-
-每次 GitHub Release 都附有一个 zip，其顶层目录为 `agent-project-governance/`。
-直接将其解压到 skill 目录即可完成安装。
-
-```bash
-# 调整以下变量以匹配你的 Agent 与目标版本。
-# 最新 tag（例如 v1.0.0）可在
-# https://github.com/wjhuang88/agent-project-governance/releases 查到。
-SKILLS_DIR=.opencode/skills        # 例如：OpenCode 项目级目录
-VERSION=v1.0.0                    # 替换为目标 release tag
-
-mkdir -p "$SKILLS_DIR"
-curl -L --fail -o /tmp/agent-project-governance.zip \
-  "https://github.com/wjhuang88/agent-project-governance/releases/download/${VERSION}/agent-project-governance-${VERSION}.zip"
-unzip -q /tmp/agent-project-governance.zip -d "$SKILLS_DIR"
-rm /tmp/agent-project-governance.zip
-```
-
-执行完成后，目录 `$SKILLS_DIR/agent-project-governance/SKILL.md` 必须存在。
-
-若希望自动获取最新发布版本，可先用 API 取得最新 tag：
-
-```bash
-TAG=$(curl -sL https://api.github.com/repos/wjhuang88/agent-project-governance/releases/latest \
-        | python3 -c "import json,sys;print(json.load(sys.stdin)['tag_name'])")
-echo "最新 tag: $TAG"
-```
-
-### 3. 通过 Git 仓库安装
-
-```bash
-git clone https://github.com/wjhuang88/agent-project-governance.git \
-  "$SKILLS_DIR/agent-project-governance"
-```
-
-### 4. 校验安装结果
-
-已安装的 skill 目录应包含：
-
-```text
-agent-project-governance/
-├── SKILL.md                 # frontmatter: name: agent-project-governance
-├── references/
-├── scripts/
-├── assets/
-└── agents/
-```
-
-Agent 在启动时根据 `SKILL.md` 中的 `name` 字段自动发现并加载该 skill，
-无需额外配置。
-
-### 5. 使用方式
+### 使用方式
 
 安装完成后，以自然语言触发即可。Agent 根据 skill 描述判断何时加载。
 

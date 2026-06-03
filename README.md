@@ -128,90 +128,39 @@ whether completion status is backed by verification evidence.
 
 ## Quick Start
 
-This section is written for two audiences at once:
+This section has two entry points — pick the one that matches you.
 
-- **Humans** setting up the skill for an agent.
-- **AI agents** that need to install the skill autonomously based on
-  this README. The shell snippets below are self-contained and
-  copy-paste runnable.
+### For AI agents and LLMs
 
-### 1. Pick the skill directory
+See [INSTALL.md](INSTALL.md) for the full install and update
+guide. It includes a guided dialog that walks the user through
+choosing their agent (OpenCode, Claude Code, Cursor, Codex,
+Copilot, Amp, …) and the install scope (project vs. global)
+before running any command. Use the same guide for fresh
+installs, in-place updates, verification, and troubleshooting.
 
-Project-level (only the current project):
+### For humans
 
-| Agent | Skill directory |
-| --- | --- |
-| OpenCode | `.opencode/skills/` |
-| Claude Code | `.claude/skills/` |
-| Codex / Copilot / others | `.agents/skills/` |
+The skill is a single directory named `agent-project-governance/`
+that you place under your agent's skill directory. Most agents
+look under:
 
-Global (all projects on the machine):
+- **OpenCode** — `.opencode/skills/` (project) or
+  `~/.config/opencode/skills/` (global)
+- **Claude Code** — `.claude/skills/` (project) or
+  `~/.claude/skills/` (global)
+- **Other Agent-Skills-standard tools** (Cursor, Codex, Copilot,
+  Amp, …) — `.agents/skills/` (project) or `~/.agents/skills/`
+  (global)
 
-| Agent | Skill directory |
-| --- | --- |
-| OpenCode | `~/.config/opencode/skills/` |
-| Claude Code | `~/.claude/skills/` |
+Download the latest release zip from the
+[Releases page](https://github.com/wjhuang88/agent-project-governance/releases);
+its top-level directory is `agent-project-governance/`, so a
+single `unzip` into the target places the skill at the right
+path. For in-place updates and troubleshooting, see
+[INSTALL.md](INSTALL.md#4-update-an-existing-install).
 
-> This skill follows the [Agent Skills open standard](https://agentskills.io)
-> and is compatible with any agent that supports it (OpenCode, Claude
-> Code, Cursor, GitHub Copilot, Codex, Amp, and others).
-
-### 2. Install from the release zip (recommended)
-
-Each GitHub Release attaches a zip whose top-level directory is
-`agent-project-governance/`. Extracting it into the skill directory
-installs the skill in one step.
-
-```bash
-# Set the variables to match your agent and desired version.
-# See https://github.com/wjhuang88/agent-project-governance/releases
-# for the latest tag (e.g., v1.0.0).
-SKILLS_DIR=.opencode/skills        # e.g., project-level OpenCode directory
-VERSION=v1.0.0                    # replace with the desired release tag
-
-mkdir -p "$SKILLS_DIR"
-curl -L --fail -o /tmp/agent-project-governance.zip \
-  "https://github.com/wjhuang88/agent-project-governance/releases/download/${VERSION}/agent-project-governance-${VERSION}.zip"
-unzip -q /tmp/agent-project-governance.zip -d "$SKILLS_DIR"
-rm /tmp/agent-project-governance.zip
-```
-
-After this, the directory `$SKILLS_DIR/agent-project-governance/SKILL.md`
-must exist.
-
-For the most recent published version, list the releases first and pick
-the highest tag:
-
-```bash
-TAG=$(curl -sL https://api.github.com/repos/wjhuang88/agent-project-governance/releases/latest \
-        | python3 -c "import json,sys;print(json.load(sys.stdin)['tag_name'])")
-echo "Latest tag: $TAG"
-```
-
-### 3. Install from the Git repository
-
-```bash
-git clone https://github.com/wjhuang88/agent-project-governance.git \
-  "$SKILLS_DIR/agent-project-governance"
-```
-
-### 4. Verify the installation
-
-The installed skill directory should contain:
-
-```
-agent-project-governance/
-├── SKILL.md                 # frontmatter: name: agent-project-governance
-├── references/
-├── scripts/
-├── assets/
-└── agents/
-```
-
-The agent's skill loader picks up the skill at startup based on the
-`name` field in `SKILL.md`. No further configuration is required.
-
-### 5. Use the skill
+### Use the skill
 
 Trigger the skill with natural language. The agent decides when to load
 it from the skill description.
