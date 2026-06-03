@@ -25,6 +25,8 @@
   `skills/agent-project-governance/agents/openai.yaml`.
 - When changing release packaging, update both `.github/workflows/release.yml` and the install or
   README instructions that describe the produced artifacts.
+- Release workflow changes must preserve the pre-package validation step for skill frontmatter,
+  `openai.yaml`, shell syntax and validator fixture tests.
 - Prefer plain POSIX shell and PowerShell for scripts. Avoid adding runtime dependencies unless the
   user explicitly accepts the tradeoff.
 

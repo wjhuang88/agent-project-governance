@@ -35,6 +35,15 @@ jobs:
           fi
           echo "Skill bundle at skills/agent-project-governance/ is ready to package."
 
+      - name: Validate skill sources
+        run: |
+          set -euo pipefail
+          ruby -e 'require "yaml"; text=File.read("skills/agent-project-governance/SKILL.md"); YAML.safe_load(text.split("---",3)[1]); puts "skill frontmatter ok"'
+          ruby -e 'require "yaml"; YAML.load_file("skills/agent-project-governance/agents/openai.yaml"); puts "openai yaml ok"'
+          sh -n skills/agent-project-governance/scripts/validate_project_governance.sh
+          sh -n skills/agent-project-governance/scripts/test_validate_project_governance.sh
+          sh skills/agent-project-governance/scripts/test_validate_project_governance.sh
+
       - name: Package skill bundle
         working-directory: skills
         run: |
