@@ -237,7 +237,7 @@ foreach ($Folder in @("docs/reference", "docs/sop")) {
 foreach ($Source in $ActiveFiles) {
     $Text = Get-Content -LiteralPath $Source.FullName -Raw
     $TextWithoutCode = [regex]::Replace($Text, "(?s)```.*?```", "")
-    $Refs = [regex]::Matches($TextWithoutCode, "`(src/[A-Za-z0-9_./@-]+\.[A-Za-z0-9]+)`") |
+    $Refs = [regex]::Matches($TextWithoutCode, '`(src/[A-Za-z0-9_./@-]+\.[A-Za-z0-9]+)`') |
         ForEach-Object { $_.Groups[1].Value } |
         Sort-Object -Unique
     foreach ($RelativePath in $Refs) {

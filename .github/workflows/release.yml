@@ -44,7 +44,7 @@ jobs:
           sh -n skills/agent-project-governance/scripts/validate_project_governance.sh
           sh -n skills/agent-project-governance/scripts/test_validate_project_governance.sh
           sh skills/agent-project-governance/scripts/test_validate_project_governance.sh
-          pwsh -NoProfile -Command '$null = [scriptblock]::Create((Get-Content -Raw "skills/agent-project-governance/scripts/validate_project_governance.ps1")); $null = [scriptblock]::Create((Get-Content -Raw "skills/agent-project-governance/scripts/test_validate_project_governance.ps1")); "powershell syntax ok"'
+          pwsh -NoProfile -Command '& { $files = @("skills/agent-project-governance/scripts/validate_project_governance.ps1", "skills/agent-project-governance/scripts/test_validate_project_governance.ps1"); foreach ($file in $files) { $tokens = $null; $errors = $null; [System.Management.Automation.Language.Parser]::ParseFile($file, [ref]$tokens, [ref]$errors) | Out-Null; if ($errors.Count) { $errors | ForEach-Object { Write-Error $_.Message }; exit 1 } }; "powershell syntax ok" }'
           pwsh -NoProfile -File skills/agent-project-governance/scripts/test_validate_project_governance.ps1
 
       - name: Package skill bundle
