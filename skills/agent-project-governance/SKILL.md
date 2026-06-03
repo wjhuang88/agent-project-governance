@@ -21,6 +21,18 @@ Do not perform unrelated business-code implementation merely because a spec or r
 discussed; create or repair the plan, rules, acceptance criteria, risk gates, and follow-up
 records unless the user explicitly asks for code changes too.
 
+## Usage Router
+
+- New or lightly documented repository: discover first, then initialize the smallest useful slice.
+- Existing project needing management, specs, refactor planning, requirements or Agent rules:
+  discover, map risks, then recommend before editing.
+- Existing governance that may be stale: audit and repair the smallest misleading slice.
+- Validation-only or explanation-only request: run the validator or explain the methodology without
+  changing files.
+- Skip one-off typo fixes, isolated code edits and single-file formatting unless the user also asks
+  to update project rules or process records. Do not implement business code from a spec/refactor
+  discussion unless explicitly asked.
+
 ## First Action: Determine Governance State
 
 Before proposing files or editing a project:

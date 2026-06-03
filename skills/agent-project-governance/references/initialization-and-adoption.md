@@ -24,6 +24,15 @@ A custom structure may be respected during migration, but it is not a completed 
 destination is a conformant standard structure, with justified `not_applicable` capabilities for
 smaller projects.
 
+State boundary rules:
+
+- `uninitialized` and `discovered` are pre-manifest findings; do not write them into
+  `manifest.status`.
+- The first committed manifest normally starts as `adopting`; use `conformant` only when applicable
+  owners exist, routes are reachable, checks pass and residual gaps are not applicable.
+- Use `degraded` when a project has or claims a governance baseline but files, commands, routes,
+  evidence or status owners are stale, missing or contradictory.
+
 ## Detection Algorithm
 
 1. Identify the likely repository root.

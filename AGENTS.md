@@ -52,6 +52,8 @@ Before claiming completion, run the checks relevant to the change:
   `ruby -e 'require "yaml"; YAML.load_file(".github/workflows/release.yml"); puts "workflow yaml ok"'`
 - For shell validator changes:
   `sh -n skills/agent-project-governance/scripts/validate_project_governance.sh`
+- For shell validator behavior changes:
+  `sh skills/agent-project-governance/scripts/test_validate_project_governance.sh`
 - For install or README link changes, search for stale references:
   `rg -n "INSTALL\\.zh-CN|validate_project_governance\\.py|git clone|git pull|latest release zip" . --glob '!AGENTS.md'`
 
