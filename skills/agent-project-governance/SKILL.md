@@ -246,7 +246,8 @@ material.
 
 Read [references/standard-structure.md](references/standard-structure.md) for target profiles and
 document responsibilities. Copy and tailor
-[assets/manifest.template.yaml](assets/manifest.template.yaml) when establishing the manifest.
+[assets/manifest.template.yaml](assets/manifest.template.yaml) when establishing the manifest; use
+[assets/manifest.schema.json](assets/manifest.schema.json) only as an editor/documentation aid.
 
 ### 5. Audit and Improve
 
@@ -361,6 +362,8 @@ When implementing, also report:
   success criteria.
 - [assets/manifest.template.yaml](assets/manifest.template.yaml): manifest starting point for an
   initialized or adopting project.
+- [assets/manifest.schema.json](assets/manifest.schema.json): optional manifest editor/schema aid;
+  validators stay dependency-free and do not require schema tooling.
 - [scripts/validate_project_governance.sh](scripts/validate_project_governance.sh): deterministic
   POSIX shell checks for generated or adopted project governance artifacts.
 - [scripts/validate_project_governance.ps1](scripts/validate_project_governance.ps1): deterministic

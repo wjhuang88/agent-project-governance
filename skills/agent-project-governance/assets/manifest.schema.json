@@ -1,0 +1,99 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://example.invalid/agent-project-governance/manifest.schema.json",
+  "title": "Agent Project Governance Manifest",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "managed_by",
+    "profile",
+    "status",
+    "initialized_at",
+    "last_audited_at",
+    "entrypoints",
+    "capabilities",
+    "risk_gates",
+    "migration"
+  ],
+  "properties": {
+    "schema_version": { "const": "1" },
+    "managed_by": { "const": "agent-project-governance" },
+    "profile": { "enum": ["minimal", "product", "high-risk"] },
+    "status": { "enum": ["adopting", "conformant", "degraded"] },
+    "initialized_at": { "$ref": "#/definitions/date" },
+    "last_audited_at": { "$ref": "#/definitions/date" },
+    "entrypoints": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": { "type": "string" }
+    },
+    "capabilities": {
+      "type": "object",
+      "additionalProperties": { "$ref": "#/definitions/capability_status" }
+    },
+    "risk_gates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["signal", "gate", "owner"],
+        "properties": {
+          "signal": { "type": "string" },
+          "gate": { "type": "string" },
+          "owner": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "migration": {
+      "type": "object",
+      "required": ["legacy_assets", "next_actions"],
+      "properties": {
+        "legacy_assets": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/legacy_asset" }
+        },
+        "next_actions": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": true,
+  "definitions": {
+    "date": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+    },
+    "capability_status": {
+      "enum": ["conformant", "legacy", "missing", "not_applicable", "degraded"]
+    },
+    "legacy_asset": {
+      "type": "object",
+      "required": ["path", "maps_to", "action", "status"],
+      "properties": {
+        "path": { "type": "string" },
+        "maps_to": { "type": "string" },
+        "action": {
+          "enum": ["preserve", "link", "extract-and-link", "supersede", "archive"]
+        },
+        "extracted_to": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "status": {
+          "enum": [
+            "inventoried",
+            "partially-extracted",
+            "extracted",
+            "archived",
+            "superseded",
+            "preserved"
+          ]
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

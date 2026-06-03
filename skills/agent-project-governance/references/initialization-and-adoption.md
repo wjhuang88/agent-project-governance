@@ -65,6 +65,8 @@ State boundary rules:
 
 The project-level output `.agent-governance/manifest.yaml` records adoption state, not policy
 text. Begin with `assets/manifest.template.yaml` and tailor it.
+`assets/manifest.schema.json` is an optional editor/documentation aid; the shipped validators do
+not require schema tooling.
 
 Required logical content:
 

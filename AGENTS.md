@@ -39,6 +39,7 @@
 - Chinese project overview: `README.zh-CN.md`.
 - Release archive production: `.github/workflows/release.yml`.
 - Manifest template: `skills/agent-project-governance/assets/manifest.template.yaml`.
+- Manifest schema helper: `skills/agent-project-governance/assets/manifest.schema.json`.
 - Governance references: `skills/agent-project-governance/references/`.
 - Cross-platform validators: `skills/agent-project-governance/scripts/`.
 
@@ -56,6 +57,8 @@ Before claiming completion, run the checks relevant to the change:
   `sh -n skills/agent-project-governance/scripts/validate_project_governance.sh`
 - For shell validator behavior changes:
   `sh skills/agent-project-governance/scripts/test_validate_project_governance.sh`
+- For manifest schema changes:
+  `ruby -e 'require "json"; JSON.parse(File.read("skills/agent-project-governance/assets/manifest.schema.json")); puts "manifest schema json ok"'`
 - For install or README link changes, search for stale references:
   `rg -n "INSTALL\\.zh-CN|validate_project_governance\\.py|git clone|git pull|latest release zip" . --glob '!AGENTS.md'`
 
