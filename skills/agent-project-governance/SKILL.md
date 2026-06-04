@@ -1,6 +1,6 @@
 ---
 name: agent-project-governance
-description: Use for project management, project analysis, project review, specs and requirements, roadmap/backlog work, refactor planning, architecture cleanup, technical-debt workflow, AGENTS.md, project rules, AI coding-agent instructions, backlog/story/iteration process, delivery gates, Definition of Done, ADR/SOP structure, release/testing gates, and Agent-friendly engineering governance. Trigger for requests such as audit this project, analyze or review project structure, create or review a spec, decompose requirements, organize backlog or roadmap, prepare an iteration, plan a refactor safely, improve development workflow, set up project rules, write or repair AGENTS.md, migrate existing docs into a standard structure, repair stale process docs, or capture lessons after defects/regressions/deployment failures/planning drift. Also trigger for Chinese requests such as 项目管理, 项目分析, 项目审查, 项目规则, 开发规范, Agent规则, AGENTS.md, spec, 规格说明, 需求规格, 需求分析, 需求拆解, 架构梳理, 重构, 重构计划, 技术债, 工程治理, 交付闭环, DoD, 迭代流程, 故障复盘, 经验沉淀, 文档治理, 流程审计, 治理初始化, 治理修复, 发布/测试门禁.
+description: Use for project management, project analysis/review, specs and requirements, roadmap/backlog work, refactor planning, architecture cleanup, technical-debt workflow, AGENTS.md, project rules, AI coding-agent instructions, backlog/story/iteration process, delivery gates, DoD, ADR/SOP structure, release/testing gates, and Agent-friendly engineering governance. Trigger for audit this project, review project structure, create/review a spec, decompose requirements, organize backlog or roadmap, prepare an iteration, plan a refactor, improve workflow, set up project rules, write/repair AGENTS.md, migrate docs, repair stale process docs, or capture lessons after defects/regressions/deployment failures/planning drift. Chinese triggers include 项目管理, 项目分析, 项目审查, 项目规则, 开发规范, Agent规则, spec, 需求分析, 需求拆解, 架构梳理, 重构, 技术债, 工程治理, 交付闭环, 迭代流程, 故障复盘, 文档治理, 流程审计.
 license: MIT
 ---
 
@@ -196,9 +196,9 @@ After confirmation, build toward the standard structure in stages:
     abstractions, no unsolicited refactoring); match existing style even if different from personal
     preference; define verifiable success criteria before starting; clean up only what your own
     changes orphan.
-    Create agent-specific redirect files alongside `AGENTS.md` so that agents which read a
+    Create both agent-specific redirect files alongside `AGENTS.md` so that agents which read a
     different entry filename still discover the governance rules. Each redirect file contains a
-    single instruction to load and follow `AGENTS.md`. Known redirect files:
+    single instruction to load and follow `AGENTS.md`:
 
     | File | Agent | Content |
     | --- | --- | --- |
@@ -206,8 +206,8 @@ After confirmation, build toward the standard structure in stages:
     | `GEMINI.md` | Gemini CLI | `Read AGENTS.md and follow all rules defined there.` |
 
     Do not duplicate governance content into these files — `AGENTS.md` remains the single
-    source of truth. Create only the files that match the agents the user actually uses; if
-    unsure, ask.
+    source of truth. Do not ask which redirect files to create during normal initialization; create
+    both unless the user explicitly forbids one.
 2. Extract applicable content from existing non-standard documents into standard owners:
    mandatory rules and routes into `AGENTS.md`, stable facts into `docs/reference/`, procedures
    into `docs/sop/`, executable work into `docs/backlog/` or `docs/iterations/`, significant

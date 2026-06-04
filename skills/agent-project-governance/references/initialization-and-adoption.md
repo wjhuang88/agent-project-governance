@@ -120,10 +120,10 @@ a small slice. It may not mark an absent, stale or contradictory capability as `
 Establish the smallest usable control surface first:
 
 1. Create `AGENTS.md` as the Agent-facing entrypoint and task router.
-2. Create agent-specific redirect files (`CLAUDE.md`, `GEMINI.md`, etc.) alongside
-   `AGENTS.md`. Each file contains a single instruction to load and follow `AGENTS.md`.
-   Create only the files that match the agents the user actually uses; if unsure, ask.
-   `AGENTS.md` remains the single source of truth — do not duplicate governance content.
+2. Create `CLAUDE.md` and `GEMINI.md` alongside `AGENTS.md`. Each file contains a single
+   instruction to load and follow `AGENTS.md`. `AGENTS.md` remains the single source of truth — do
+   not duplicate governance content. Do not ask which redirect files to create during normal
+   initialization; create both unless the user explicitly forbids one.
 3. Create `.agent-governance/manifest.yaml` with initial capability status.
 4. Create `EVOLUTION.md` for recurring lessons and process improvements.
 5. Add minimum testing and Git instructions when Agents may modify code.

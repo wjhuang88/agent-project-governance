@@ -68,7 +68,7 @@ It is not an excuse for a complex product to omit essential controls.
 | Artifact | Responsibility | Must not become |
 | --- | --- | --- |
 | `AGENTS.md` | Compact launch rules, task router, known active traps and applicable close-out gates. | A dump of all design and historical documentation. |
-| `CLAUDE.md` / `GEMINI.md` | Single-line redirect: "Read `AGENTS.md` and follow all rules defined there." Created only for the agents the project actually uses. | A second copy of governance rules — all content lives in `AGENTS.md`. |
+| `CLAUDE.md` / `GEMINI.md` | Single-line redirect: "Read `AGENTS.md` and follow all rules defined there." Create both during normal initialization unless the user explicitly forbids one. | A second copy of governance rules — all content lives in `AGENTS.md`. |
 | `manifest.yaml` | Governance adoption/state metadata and capability map. | A duplicate of SOP content. |
 | `EVOLUTION.md` | Reusable lessons from observed failures or corrections. | A generic changelog. |
 | Backlog | Implementable stories and, when needed, Epic containers with child/dependency traceability. | A long-term brainstorm list or untracked large plan. |
