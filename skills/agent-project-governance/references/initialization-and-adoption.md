@@ -120,12 +120,16 @@ a small slice. It may not mark an absent, stale or contradictory capability as `
 Establish the smallest usable control surface first:
 
 1. Create `AGENTS.md` as the Agent-facing entrypoint and task router.
-2. Create `.agent-governance/manifest.yaml` with initial capability status.
-3. Create `EVOLUTION.md` for recurring lessons and process improvements.
-4. Add minimum testing and Git instructions when Agents may modify code.
-5. If existing non-standard documents were discovered, extract their active content into the
+2. Create agent-specific redirect files (`CLAUDE.md`, `GEMINI.md`, etc.) alongside
+   `AGENTS.md`. Each file contains a single instruction to load and follow `AGENTS.md`.
+   Create only the files that match the agents the user actually uses; if unsure, ask.
+   `AGENTS.md` remains the single source of truth — do not duplicate governance content.
+3. Create `.agent-governance/manifest.yaml` with initial capability status.
+4. Create `EVOLUTION.md` for recurring lessons and process improvements.
+5. Add minimum testing and Git instructions when Agents may modify code.
+6. If existing non-standard documents were discovered, extract their active content into the
    standard owners described below and record source-to-target mappings in the manifest.
-6. Mark later planning or risk workflows as `missing` or `not_applicable`; do not fabricate
+7. Mark later planning or risk workflows as `missing` or `not_applicable`; do not fabricate
    mature process content prematurely.
 
 For projects with continuing features, proceed after user agreement to requirements, iteration,

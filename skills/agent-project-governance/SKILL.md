@@ -196,6 +196,18 @@ After confirmation, build toward the standard structure in stages:
     abstractions, no unsolicited refactoring); match existing style even if different from personal
     preference; define verifiable success criteria before starting; clean up only what your own
     changes orphan.
+    Create agent-specific redirect files alongside `AGENTS.md` so that agents which read a
+    different entry filename still discover the governance rules. Each redirect file contains a
+    single instruction to load and follow `AGENTS.md`. Known redirect files:
+
+    | File | Agent | Content |
+    | --- | --- | --- |
+    | `CLAUDE.md` | Claude Code | `Read AGENTS.md and follow all rules defined there.` |
+    | `GEMINI.md` | Gemini CLI | `Read AGENTS.md and follow all rules defined there.` |
+
+    Do not duplicate governance content into these files — `AGENTS.md` remains the single
+    source of truth. Create only the files that match the agents the user actually uses; if
+    unsure, ask.
 2. Extract applicable content from existing non-standard documents into standard owners:
    mandatory rules and routes into `AGENTS.md`, stable facts into `docs/reference/`, procedures
    into `docs/sop/`, executable work into `docs/backlog/` or `docs/iterations/`, significant
