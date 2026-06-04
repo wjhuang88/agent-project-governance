@@ -43,6 +43,7 @@ project-root/
         ├── DOC-CHECK.md
         ├── PAIRING-WORKFLOW.md
         ├── TESTING.md
+        ├── EVOLUTION-FEEDBACK.md
         ├── GIT-WORKFLOW.md
         └── RELEASE.md
 ```
@@ -71,6 +72,7 @@ It is not an excuse for a complex product to omit essential controls.
 | `CLAUDE.md` / `GEMINI.md` | Single-line redirect: "Read `AGENTS.md` and follow all rules defined there." Create both during normal initialization unless the user explicitly forbids one. | A second copy of governance rules — all content lives in `AGENTS.md`. |
 | `manifest.yaml` | Governance adoption/state metadata and capability map. | A duplicate of SOP content. |
 | `EVOLUTION.md` | Reusable lessons from observed failures or corrections. | A generic changelog. |
+| `docs/sop/EVOLUTION-FEEDBACK.md` | When and how Agents write lessons, promote lessons to rules/checks, and index recurring traps. | The lesson history itself. |
 | Backlog | Implementable stories and, when needed, Epic containers with child/dependency traceability. | A long-term brainstorm list or untracked large plan. |
 | Iterations | Published plan baseline, lifecycle disposition, selected work, execution result, validation and retrospective. | A reusable identifier whose original target can be replaced by unrelated execution or ignored when new work starts. |
 | Decisions | Important tradeoffs, alternatives, and supersession. Each decision record should include a constraint decomposition (Hard/Soft/Assumption) and a reversal trigger stating when to revisit the decision. | Routine implementation notes. |
@@ -107,9 +109,11 @@ End Checklist.
 `EVOLUTION.md` must be usable during diagnosis, not only serve as an append-only lesson list.
 When `evolution_feedback` is applicable:
 
+- create `docs/sop/EVOLUTION-FEEDBACK.md` and route recurring lesson write-back from `AGENTS.md`;
 - state when a new lesson must be written back, such as a corrected omission, repeated failure,
   newly discovered trap, or unexpectedly successful workaround;
-- provide a repeatable entry shape covering symptom, cause, remedy and reusable prevention;
+- provide a repeatable entry shape covering trigger, symptom, cause, remedy, prevention and
+  promotion target;
 - once multiple lessons exist, add a short lookup table or equivalent index so an Agent can find
   likely fixes before rereading the full history;
 - route current mandatory constraints into `AGENTS.md` or an owning SOP rather than relying on

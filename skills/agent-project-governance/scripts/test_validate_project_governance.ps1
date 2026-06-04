@@ -65,6 +65,7 @@ function New-ValidProject {
         "[model:<model-name>] required when Agent authored or assisted the commit.",
         "Task Router",
         "Session End Checklist",
+        "docs/sop/EVOLUTION-FEEDBACK.md",
         "docs/sop/TESTING.md",
         "docs/sop/GIT-WORKFLOW.md",
         "docs/sop/REQUIREMENT-INTAKE.md",
@@ -78,7 +79,7 @@ function New-ValidProject {
     Write-FixtureFile (Join-Path $Root "README.md") @("# Fixture")
     Write-FixtureFile (Join-Path $Root "docs/README.md") @("# Docs")
     Write-FixtureFile (Join-Path $Root "docs/decisions/README.md") @("# Decisions")
-    foreach ($File in @("TESTING", "GIT-WORKFLOW", "REQUIREMENT-INTAKE", "START-ITERATION", "ITERATION-WORKFLOW", "CHANGE-CONTROL", "RELEASE", "DOC-CHECK")) {
+    foreach ($File in @("EVOLUTION-FEEDBACK", "TESTING", "GIT-WORKFLOW", "REQUIREMENT-INTAKE", "START-ITERATION", "ITERATION-WORKFLOW", "CHANGE-CONTROL", "RELEASE", "DOC-CHECK")) {
         Write-FixtureFile (Join-Path $Root "docs/sop/$File.md") @("# $File")
     }
 }
@@ -117,6 +118,31 @@ try {
     Invoke-ValidatorCase $Root
     Expect-Status "valid project" 0
     Expect-Contains "valid project" "Governance validation passed: 0 warning(s)."
+
+    $Root = Join-Path $TmpRoot "missing-evolution-feedback-route"
+    New-ValidProject $Root
+    Write-FixtureFile (Join-Path $Root "AGENTS.md") @(
+        "# Agent Guide",
+        "Hard Constraints",
+        "Coding Behavior",
+        "Git Rules",
+        "Format: type(scope): description (#story-id) [model:<model-name>]",
+        "Scope = crate name, package, component, or workspace.",
+        "[model:<model-name>] required when Agent authored or assisted the commit.",
+        "Task Router",
+        "Session End Checklist",
+        "docs/sop/TESTING.md",
+        "docs/sop/GIT-WORKFLOW.md",
+        "docs/sop/REQUIREMENT-INTAKE.md",
+        "docs/sop/START-ITERATION.md",
+        "docs/sop/ITERATION-WORKFLOW.md",
+        "docs/sop/CHANGE-CONTROL.md",
+        "docs/decisions/README.md",
+        "docs/sop/RELEASE.md"
+    )
+    Invoke-ValidatorCase $Root
+    Expect-Status "missing evolution feedback route" 1
+    Expect-Contains "missing evolution feedback route" "ERROR: conformant evolution_feedback is not routed from AGENTS.md: docs/sop/EVOLUTION-FEEDBACK.md"
 
     $Root = Join-Path $TmpRoot "missing-agent-commit-format"
     New-ValidProject $Root

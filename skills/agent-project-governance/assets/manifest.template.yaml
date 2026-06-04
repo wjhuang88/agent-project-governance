@@ -8,6 +8,7 @@ last_audited_at: "<YYYY-MM-DD>"
 entrypoints:
   agent_guide: "AGENTS.md"
   evolution: "EVOLUTION.md"
+  evolution_feedback: "docs/sop/EVOLUTION-FEEDBACK.md"
   document_map: "docs/README.md"
   # board: "docs/BOARD.md"  # optional derived operating view when used
   backlog: "docs/backlog/PRODUCT-BACKLOG.md"

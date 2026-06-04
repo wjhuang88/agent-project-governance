@@ -177,7 +177,13 @@ if (Test-Path -LiteralPath $Board) {
 }
 
 Test-CapabilityFile "task_router" @("AGENTS.md")
-Test-CapabilityFile "evolution_feedback" @("EVOLUTION.md")
+Test-CapabilityFile "evolution_feedback" @("EVOLUTION.md", "docs/sop/EVOLUTION-FEEDBACK.md")
+$AgentGuide = Join-Path $script:Root "AGENTS.md"
+if ((Get-CapabilityValue "evolution_feedback") -eq "conformant" -and
+    (Test-Path -LiteralPath $AgentGuide) -and
+    -not ((Get-Content -LiteralPath $AgentGuide -Raw).Contains("docs/sop/EVOLUTION-FEEDBACK.md"))) {
+    Add-ErrorMessage "conformant evolution_feedback is not routed from AGENTS.md: docs/sop/EVOLUTION-FEEDBACK.md"
+}
 Test-CapabilityFile "testing_policy" @("docs/sop/TESTING.md")
 Test-CapabilityFile "git_workflow" @("docs/sop/GIT-WORKFLOW.md")
 Test-CapabilityFile "requirement_intake" @("docs/sop/REQUIREMENT-INTAKE.md")
@@ -186,7 +192,6 @@ Test-CapabilityFile "change_control" @("docs/sop/CHANGE-CONTROL.md")
 Test-CapabilityFile "decision_records" @("docs/decisions/README.md")
 Test-CapabilityFile "release_workflow" @("docs/sop/RELEASE.md")
 
-$AgentGuide = Join-Path $script:Root "AGENTS.md"
 if ((Test-Path -LiteralPath $AgentGuide) -and $ProjectProfile -in @("product", "high-risk") -and (Get-CapabilityValue "task_router") -eq "conformant") {
     $GuideText = Get-Content -LiteralPath $AgentGuide -Raw
     foreach ($Section in @("Hard Constraints", "Coding Behavior", "Git Rules", "Task Router", "Session End Checklist")) {

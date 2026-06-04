@@ -125,7 +125,8 @@ Establish the smallest usable control surface first:
    not duplicate governance content. Do not ask which redirect files to create during normal
    initialization; create both unless the user explicitly forbids one.
 3. Create `.agent-governance/manifest.yaml` with initial capability status.
-4. Create `EVOLUTION.md` for recurring lessons and process improvements.
+4. Create `EVOLUTION.md` for recurring lessons and process improvements, plus
+   `docs/sop/EVOLUTION-FEEDBACK.md` to define when and how Agents write lessons.
 5. Add minimum testing and Git instructions when Agents may modify code.
 6. If existing non-standard documents were discovered, extract their active content into the
    standard owners described below and record source-to-target mappings in the manifest.
@@ -172,7 +173,7 @@ that Agents need to query independently.
 | Content found in an existing document | Standard owner | Source handling |
 | --- | --- | --- |
 | Mandatory Agent rules and task routing | `AGENTS.md` | Extract active rules; retain a link or supersession note. |
-| Reusable failures, corrections and checks | `EVOLUTION.md` | Extract lessons; preserve original history or archive it. |
+| Reusable failures, corrections and checks | `EVOLUTION.md`, `docs/sop/EVOLUTION-FEEDBACK.md` | Extract lessons; preserve original history or archive it. |
 | Stable architecture, commands, boundaries and contracts | `docs/reference/` | Extract current facts; do not copy obsolete facts as current. |
 | Repeatable operating procedure | `docs/sop/` | Extract actionable sequence and checks. |
 | Implementable requirement or defect | `docs/backlog/` | Create or update a tracked work item with acceptance evidence. |

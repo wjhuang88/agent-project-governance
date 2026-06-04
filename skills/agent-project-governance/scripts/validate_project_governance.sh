@@ -202,7 +202,10 @@ if [ -f "$board" ]; then
 fi
 
 check_capability_file task_router AGENTS.md
-check_capability_file evolution_feedback EVOLUTION.md
+check_capability_file evolution_feedback EVOLUTION.md docs/sop/EVOLUTION-FEEDBACK.md
+if [ "$(capability_value evolution_feedback)" = "conformant" ] && [ -f "$root/AGENTS.md" ] && ! grep -Fq "docs/sop/EVOLUTION-FEEDBACK.md" "$root/AGENTS.md"; then
+  error "conformant evolution_feedback is not routed from AGENTS.md: docs/sop/EVOLUTION-FEEDBACK.md"
+fi
 check_capability_file testing_policy docs/sop/TESTING.md
 check_capability_file git_workflow docs/sop/GIT-WORKFLOW.md
 check_capability_file requirement_intake docs/sop/REQUIREMENT-INTAKE.md
