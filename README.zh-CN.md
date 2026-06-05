@@ -176,10 +176,11 @@ Unix-like 环境优先使用 `tar.zst`，无 zstd 时使用 `tar.gz`；Windows �
 
 - 匹配 `v*` 的 Git 标签（例如 `v1.0.0`）会触发
   [`.github/workflows/release.yml`](.github/workflows/release.yml)，该 workflow：
-  1. 将 [`skills/agent-project-governance/`](skills/agent-project-governance/)
-     打包为 `agent-project-governance-<tag>.zip`。
-  2. 将 zip 附加到对应 tag 的 GitHub Release，并自动生成 release notes。
-- zip 的顶层目录为 `agent-project-governance/`，可直接解压到 Agent 的
+  1. 要求先提交 `releases/<tag>.md`，其中包含 Agent 撰写的版本说明。
+  2. 将 [`skills/agent-project-governance/`](skills/agent-project-governance/)
+     打包为 `agent-project-governance-<tag>.zip`、`.tar.gz` 和 `.tar.zst`。
+  3. 将所有归档附加到对应 GitHub Release，并追加提交列表和安装说明。
+- 每个归档的顶层目录为 `agent-project-governance/`，可直接解压到 Agent 的
   skill 目录。
 - 已发布版本请参见
   [Releases 页面](https://github.com/wjhuang88/agent-project-governance/releases)。

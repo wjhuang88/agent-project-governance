@@ -207,12 +207,12 @@ Other scenarios:
 
 - **Git tags** matching `v*` (e.g., `v1.0.0`) trigger
   [`.github/workflows/release.yml`](.github/workflows/release.yml), which:
-  1. Zips [`skills/agent-project-governance/`](skills/agent-project-governance/)
-     into `agent-project-governance-<tag>.zip`.
-  2. Attaches the zip to a GitHub Release for that tag, with
-     auto-generated release notes.
-- The zip's top-level directory is `agent-project-governance/`, so it
-  can be extracted directly into an agent's skill directory.
+  1. Requires `releases/<tag>.md` with Agent-authored release notes.
+  2. Packages [`skills/agent-project-governance/`](skills/agent-project-governance/)
+     as `agent-project-governance-<tag>.zip`, `.tar.gz`, and `.tar.zst`.
+  3. Attaches all archives to the GitHub Release and appends the commit list and install notes.
+- Each archive's top-level directory is `agent-project-governance/`, so it can be extracted
+  directly into an agent's skill directory.
 - See the [Releases page](https://github.com/wjhuang88/agent-project-governance/releases)
   for published versions.
 

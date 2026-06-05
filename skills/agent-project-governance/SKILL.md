@@ -354,6 +354,7 @@ When implementing, also report:
 - initialized or updated capabilities;
 - paths created or mapped;
 - checks performed;
+- evidence and uncertainty classification for important closure claims;
 - residual gaps and the next natural stage;
 - closure status (`complete`, `partial`, or `blocked`) and the evidence supporting that status.
 
@@ -378,6 +379,8 @@ When implementing, also report:
   follow-up registration.
 - [references/evidence-and-uncertainty.md](references/evidence-and-uncertainty.md): read when
   claims depend on partial evidence, inference, assumptions or conflicting sources.
+- [references/evolution-feedback.md](references/evolution-feedback.md): read when creating or
+  routing `docs/sop/EVOLUTION-FEEDBACK.md` and `EVOLUTION.md` lesson write-back.
 - [references/standard-structure.md](references/standard-structure.md): convergent target
   structure and scaled profiles.
 - [references/coding-behavior.md](references/coding-behavior.md): full coding behavior guidelines
