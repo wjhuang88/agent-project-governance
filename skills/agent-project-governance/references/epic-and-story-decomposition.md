@@ -73,6 +73,8 @@ A child Story should:
 - identify user-facing documentation affected by the outcome (README, usage guide, API docs,
   changelog, release notes). A Story that changes observable behavior without updating the
   corresponding documentation is incomplete.
+- list mandatory implementation context in the backlog row's `Required Reads`, including the
+  Story file, governing ADRs or specs, hard dependencies and relevant archived predecessors.
 
 If a child cannot be meaningfully validated without a sibling, merge them or describe it as an
 explicit enabling Story with an honest dependency boundary.
@@ -118,6 +120,7 @@ Require every child Story to state:
 - hard dependencies or external blockers;
 - outcome it unlocks, if any;
 - acceptance criteria and minimum validation.
+- governing ADRs, specs or decision records that constrain implementation.
 
 Before marking a child `Ready` or selecting it into an iteration:
 
@@ -127,6 +130,8 @@ Before marking a child `Ready` or selecting it into an iteration:
    recorded execution and validation sequence.
 4. When a child is deferred, dropped or completed, synchronize the Epic summary and revisit its
    completion condition.
+5. Ensure `PRODUCT-BACKLOG.md` points to every mandatory read through `Required Reads`; do not
+   expect the Agent to infer ADR, spec or archive reads from prose alone.
 
 ## Distinguish Readiness Levels
 
@@ -135,7 +140,7 @@ An Epic can be ready for planning without being directly implementable:
 | Readiness subject | Minimum requirement |
 | --- | --- |
 | Epic for roadmap/refinement | Overall outcome and boundary, reason for decomposition, first child set or a bounded decomposition activity, major dependency/risk map, completion condition. |
-| Child Story for implementation | One outcome, small enough scope, acceptance and minimum validation, affected surfaces, exclusions, parent/dependency fields, no unresolved hard prerequisite. |
+| Child Story for implementation | One outcome, small enough scope, acceptance and minimum validation, affected surfaces, exclusions, parent/dependency fields, governing decisions/specs, `Required Reads`, no unresolved hard prerequisite. |
 
 Iteration planning must select ready Stories, not a parent Epic with an unfinished checklist
 inside it.

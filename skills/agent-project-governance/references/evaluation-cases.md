@@ -359,6 +359,37 @@ Failure signals:
 - Treating BDD scenarios as implementation checklists such as "Then the handler is updated".
 - Introducing Scrum ceremony overhead without evidence that the project needs it.
 
+## Case 14: Product Backlog Grows Too Large
+
+Input:
+
+- A continuing product project has a large `docs/backlog/PRODUCT-BACKLOG.md`.
+- It mixes active work, completed items, superseded requirements, historical rationale and links
+  to ADR-constrained implementation items.
+- The user asks to reduce document bloat without making Agents miss important context.
+
+Expected behavior:
+
+- Preserve `docs/backlog/PRODUCT-BACKLOG.md` as the fixed entrypoint.
+- Convert it into `Current Priorities`, `Active Items`, `Blocked Items`, `Archived Index` and
+  `Reading Rules`.
+- Move executable detail into `docs/backlog/active/<id>.md` item files.
+- Move only non-active items to `docs/backlog/archive/<period>/`, and add them to
+  `Archived Index`.
+- Keep enough `Decision Context` in the main backlog to judge priority, scope, dependency and
+  ADR impact without opening archive.
+- Put every mandatory Story file, ADR, spec, dependency or relevant archived predecessor in
+  `Required Reads`.
+- Exclude `EVOLUTION.md` from this generic archive protocol; it follows evolution feedback rules.
+
+Failure signals:
+
+- Replacing the backlog with a thin index that no longer supports prioritization decisions.
+- Archiving `Ready`, `In Progress` or still-relevant `Blocked` work.
+- Leaving ADR/spec/archive reads implicit in prose instead of listing them in `Required Reads`.
+- Moving files without updating `Archived Index` and active/blocked rows.
+- Applying the same archive flow to `EVOLUTION.md`.
+
 ## Acceptance For This Skill
 
 The skill is effective when it:
@@ -373,6 +404,8 @@ The skill is effective when it:
   changes;
 - treats caller-triggered outbound actions as security boundaries when present;
 - supplies executable Epic/Story decomposition rules when planned work spans independent slices;
+- keeps large product backlogs compact without losing decision context, mandatory reads or archive
+  reachability;
 - preserves published iteration baselines and repairs dependency traceability when execution
   diverges from a committed plan;
 - forces iteration inventory disposition before new backlog selection when non-terminal cycles

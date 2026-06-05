@@ -22,7 +22,9 @@ project-root/
     ├── README.md
     ├── BOARD.md                 (optional derived operating view)
     ├── backlog/
-    │   └── PRODUCT-BACKLOG.md
+    │   ├── PRODUCT-BACKLOG.md
+    │   ├── active/
+    │   └── archive/
     ├── iterations/
     │   └── README.md
     ├── decisions/
@@ -73,7 +75,7 @@ It is not an excuse for a complex product to omit essential controls.
 | `manifest.yaml` | Governance adoption/state metadata and capability map. | A duplicate of SOP content. |
 | `EVOLUTION.md` | Reusable lessons from observed failures or corrections. | A generic changelog. |
 | `docs/sop/EVOLUTION-FEEDBACK.md` | When and how Agents write lessons, promote lessons to rules/checks, and index recurring traps. | The lesson history itself. |
-| Backlog | Implementable stories and, when needed, Epic containers with child/dependency traceability. | A long-term brainstorm list or untracked large plan. |
+| Backlog | Compact prioritization surface plus item files for implementable stories and, when needed, Epic containers with child/dependency traceability. `PRODUCT-BACKLOG.md` keeps decision context and `Required Reads`; item files carry execution detail. | A long-term brainstorm list, oversized discussion log, or untracked large plan. |
 | Iterations | Published plan baseline, lifecycle disposition, selected work, execution result, validation and retrospective. | A reusable identifier whose original target can be replaced by unrelated execution or ignored when new work starts. |
 | Decisions | Important tradeoffs, alternatives, and supersession. Each decision record should include a constraint decomposition (Hard/Soft/Assumption) and a reversal trigger stating when to revisit the decision. | Routine implementation notes. |
 | Roadmap | Stage ordering and prioritization logic. | A substitute for executable work items. |
@@ -135,6 +137,7 @@ workflow already depends on.
 | Published-plan baseline rule in iteration SOP/template | Iteration plans may be committed before execution or execution priority can change after planning. |
 | Iteration inventory-before-selection rule in start workflow | Multiple iteration records may coexist or future plans are published ahead of work. |
 | Epic/Story rules inside `docs/sop/REQUIREMENT-INTAKE.md` | Product work includes outcomes that span multiple independently testable slices, ordered stages, or iterations. |
+| Backlog compaction rules | `PRODUCT-BACKLOG.md` is large, expected to grow, or contains mixed active, completed, superseded and historical items. Use `docs/backlog/active/`, `docs/backlog/archive/` and explicit `Required Reads`. |
 | `docs/sop/CHANGE-CONTROL.md` | Profile is `product` or `high-risk`, or work can change after implementation begins. |
 | `docs/sop/LOCAL-DEV.md` | Agents are expected to run or debug the application locally. |
 | `docs/sop/NEW-FEATURE.md` | Agents are expected to add product behavior repeatedly. |
@@ -198,6 +201,10 @@ A project is structurally conformant only when:
   owners;
 - applicable Epic/child relationships preserve project identifiers, dependency readiness and
   iteration traceability;
+- large or growing product backlogs keep `PRODUCT-BACKLOG.md` as a usable decision surface:
+  active rows include `Decision Context` and `Required Reads`, execution detail lives in item
+  files, archived items are indexed, and `EVOLUTION.md` remains governed by its own feedback
+  rules rather than this generic archive protocol;
 - a committed iteration plan remains identifiable after execution or reprioritization, and
   unrelated work has not silently replaced its baseline target;
 - iteration-start procedures inventory non-terminal cycles before selecting new backlog stories,

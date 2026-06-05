@@ -228,6 +228,10 @@ After confirmation, build toward the standard structure in stages:
    For product work containing multi-stage requirements, make requirement intake define Epic
    versus executable Story, parent/child identifiers, dependency readiness, and iteration
    selection rather than leaving large items as informal prose.
+   For continuing product backlogs, keep `docs/backlog/PRODUCT-BACKLOG.md` as a compact
+   prioritization surface and move executable detail into item files with explicit `Required
+   Reads`. Read [references/backlog-compaction.md](references/backlog-compaction.md) when a
+   backlog is large, expected to grow, or being migrated from a monolithic document.
    Make story format explicit: user-visible, API, permission or state-transition work needs a
    role, goal, value and Given/When/Then acceptance; technical, governance and spike work should
    not be forced into fake user-story wording, but must have equivalent verification, state
@@ -282,6 +286,9 @@ For initialized projects, verify that declared capabilities remain real:
   requirement-convergence or manifest owners;
 - large backlog outcomes are either executable stories or explicitly decomposed Epics whose
   child dependencies and iteration selection can be audited;
+- large or growing `PRODUCT-BACKLOG.md` files preserve decision usefulness through active item
+  files, explicit `Required Reads`, and an archive index rather than losing context through
+  summary-only cleanup;
 - ready backlog stories use a format appropriate to their type, and behavior-facing stories
   have testable Given/When/Then acceptance or an explicit non-applicability reason;
 - ADR-constrained requirements link the governing decision record and include the relevant
@@ -374,6 +381,9 @@ When implementing, also report:
 - [references/epic-and-story-decomposition.md](references/epic-and-story-decomposition.md):
   read when a product needs large-requirement decomposition, parent/child tracking, dependency
   readiness, or iteration-selection rules.
+- [references/backlog-compaction.md](references/backlog-compaction.md): read when
+  `PRODUCT-BACKLOG.md` is large, expected to grow, or needs item-file and archive rules that
+  preserve decision context.
 - [references/iteration-baseline-integrity.md](references/iteration-baseline-integrity.md):
   read when a project publishes iteration plans, changes selected work after planning, or must
   repair a plan document that was overwritten by later execution.
