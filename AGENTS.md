@@ -93,6 +93,29 @@ When feasible after packaging changes, locally create and list archive contents 
 - Before pushing a `v*` tag, create and commit `releases/<tag>.md` with an Agent-authored release
   summary. The release workflow fails when the matching file is missing.
 
+## Release Procedure
+
+Use this sequence for every user-requested release:
+
+1. Confirm the worktree is clean except for intended release changes:
+   `git status --short --branch`.
+2. Determine the next semantic version from existing tags:
+   `git tag --list 'v*' --sort=-v:refname`.
+3. Update `skills/agent-project-governance/SKILL.md` metadata version to the release version
+   without the leading `v`.
+4. Create `releases/<tag>.md` before tagging. Write a concise Agent-authored summary with:
+   `Summary`, `Notable Changes`, and `Upgrade Notes`.
+5. Run release-relevant validation:
+   - `ruby -e 'require "yaml"; text=File.read("skills/agent-project-governance/SKILL.md"); YAML.safe_load(text.split("---",3)[1]); puts "skill frontmatter ok"'`
+   - `ruby -e 'require "yaml"; YAML.load_file(".github/workflows/release.yml"); puts "workflow yaml ok"'`
+   - `sh skills/agent-project-governance/scripts/test_validate_project_governance.sh`
+   - `pwsh -NoProfile -File skills/agent-project-governance/scripts/test_validate_project_governance.ps1`
+6. Commit release preparation files with the required commit-message model tag.
+7. Push `main` first.
+8. Create the `v*` tag on the pushed commit, then push the tag.
+9. After pushing the tag, report that the release workflow has been triggered and name the expected
+   archives: `.zip`, `.tar.gz`, and `.tar.zst`.
+
 ## Session End Checklist
 
 - Report changed files and the reason for each change.
