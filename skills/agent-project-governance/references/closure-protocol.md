@@ -14,7 +14,7 @@ A governance change is closed only when all applicable outputs are true:
 | --- | --- |
 | Artifacts | Requested governance files or edits exist and preserve relevant prior content. |
 | State | Manifest, capability, backlog, iteration, dependency or supersession owners are synchronized where applicable. |
-| Evidence | Required validation has been run and its actual result recorded; failures are not marked complete. |
+| Evidence | Required validation has been run and its actual result recorded; failures are not marked complete; important claims do not exceed their evidence. |
 | Residuals | Known omitted work, blockers or failed checks are registered in an owning artifact or explicitly out of scope. |
 | Delivery | The user receives an explicit `complete`, `partial` or `blocked` status with evidence. |
 
@@ -31,6 +31,7 @@ Artifacts to create or update:
 Existing assets to preserve:
 State/status owners to synchronize:
 Validation required:
+Evidence and uncertainty:
 Residual-work destination:
 ```
 
@@ -45,6 +46,8 @@ For implementation, proceed through every stage below.
 4. Record protected existing documents and uncommitted changes.
 5. Add missing work to the project's planned-work owner before implementation when its
    governance already requires this.
+6. Classify important claims as confirmed fact, inference, assumption or unknown when they affect
+   scope, readiness, risk, architecture, status or completion.
 
 Stop as `blocked` if a required source cannot be read or writing requires permission the user
 does not grant. Do not call an unexecuted plan complete.
@@ -74,6 +77,8 @@ Run checks applicable to what changed:
 
 Record commands and true outcomes. A failed required check produces `partial` or `blocked`
 unless the repair scope includes and resolves the failure.
+If a required claim remains inferred or assumed, record the validation path or residual owner
+instead of reporting it as confirmed.
 
 ## Step 4: Synchronize
 
@@ -88,6 +93,7 @@ dependency or blocked-plan state
 ADR/supersession mapping
 lessons or known-trap record
 constraint classification of any decisions made (did this work affect Hard, Soft or Assumption constraints?)
+evidence/uncertainty classification for important claims
 residual follow-up item
 ```
 
@@ -113,6 +119,9 @@ Synchronized:
 Verified:
 - `<command or review>`: <actual result>
 
+Evidence and uncertainty:
+- <confirmed facts, inferences, assumptions or unknowns that affect closure>
+
 Residual:
 - <recorded follow-up and path, or none within authorized scope>
 ```
@@ -126,7 +135,8 @@ Choose status using this table:
 | Progress cannot validly continue without permission, a missing decision, unavailable source or failed prerequisite | `blocked` |
 
 Never report `complete` with unchecked mandatory acceptance items, a failed required validation,
-unmapped preserved assets, or known work that exists only in conversational prose.
+unmapped preserved assets, high-impact assumptions without a validation/residual owner, or known
+work that exists only in conversational prose.
 
 ## Forward-Test Before Trusting The Protocol
 

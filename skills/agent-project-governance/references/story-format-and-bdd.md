@@ -48,6 +48,8 @@ differently:
 - **minimum validation**: command, test, manual check or document consistency check;
 - **state owners**: backlog, iteration, contract, ADR, reference, release notes or lessons to
   synchronize on completion.
+- **uncertainty**: assumptions or unknowns that affect implementation, plus the validation or
+  residual path for each.
 
 ## ADR-Linked Requirement Rule
 
@@ -163,6 +165,7 @@ During requirement intake or document audit, reject stories that:
 - repeat the title as the value statement;
 - omit exclusions, allowing the Agent to expand scope;
 - omit a governing ADR/decision link when implementation choices are constrained by one;
+- treat an assumption or unresolved external fact as confirmed without a validation path;
 - mix several independently valid outcomes into one story;
 - use BDD but put implementation details in `Then`;
 - call open-ended research a story without a timebox and decision output;

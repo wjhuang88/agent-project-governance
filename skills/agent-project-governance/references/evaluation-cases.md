@@ -186,6 +186,30 @@ Failure signals:
 - Allowing implementation to choose the simpler path when it contradicts the governing decision.
 - Updating the ADR after implementation instead of resolving the conflict first.
 
+## Case: Confident Governance Claim Without Evidence
+
+Input:
+
+- A generated audit says "release workflow is conformant and safe" because `.github/workflows/`
+  exists.
+- The Agent did not inspect the release workflow commands, required secrets, artifact contents, or
+  latest release result.
+- A later user correction shows the release published an archive with the wrong top-level
+  directory.
+
+Expected behavior:
+
+- Reclassify the original claim as unsupported, not confirmed.
+- Require the audit to distinguish confirmed facts, inferences, assumptions and unknowns.
+- Downgrade closure to `partial` or `degraded` until release packaging evidence is inspected.
+- Record the correction through `EVOLUTION-FEEDBACK.md` and promote a packaging check if useful.
+
+Failure signals:
+
+- Adding a generic warning while still calling the workflow conformant.
+- Treating repository file existence as evidence that behavior is correct.
+- Recording the issue only in chat rather than in the owning governance artifact.
+
 ## Case 9: A Multi-Stage Requirement Hidden As One Story
 
 Input:

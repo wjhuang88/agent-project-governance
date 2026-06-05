@@ -297,6 +297,8 @@ For initialized projects, verify that declared capabilities remain real:
   because the backlog also contains ready stories;
 - completion claims are backed by recorded commands or concrete manual evidence, not only
   checked status boxes;
+- important governance conclusions distinguish confirmed facts, inferences, assumptions and
+  unknowns; unresolved assumptions have validation paths or residual owners;
 - transitional architecture is not presented as the final design;
 - new failure lessons have been converted to checks where useful;
 - for languages whose toolchain reports unused or dead code, that signal on the changed surface is
@@ -306,6 +308,8 @@ For initialized projects, verify that declared capabilities remain real:
 
 Read [references/methodology.md](references/methodology.md) when designing or revising the
 governance model itself.
+Read [references/evidence-and-uncertainty.md](references/evidence-and-uncertainty.md) when project
+facts, readiness, risk, architecture, status or completion depend on incomplete evidence.
 
 ### 6. Validate the Governance Work
 
@@ -372,6 +376,8 @@ When implementing, also report:
 - [references/closure-protocol.md](references/closure-protocol.md): read before implementing
   governance changes when completion may require status synchronization, evidence recording or
   follow-up registration.
+- [references/evidence-and-uncertainty.md](references/evidence-and-uncertainty.md): read when
+  claims depend on partial evidence, inference, assumptions or conflicting sources.
 - [references/standard-structure.md](references/standard-structure.md): convergent target
   structure and scaled profiles.
 - [references/coding-behavior.md](references/coding-behavior.md): full coding behavior guidelines
