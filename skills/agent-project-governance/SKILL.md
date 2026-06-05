@@ -2,6 +2,9 @@
 name: agent-project-governance
 description: Use for project management, project analysis/review, specs and requirements, roadmap/backlog work, refactor planning, architecture cleanup, technical-debt workflow, AGENTS.md, project rules, AI coding-agent instructions, backlog/story/iteration process, delivery gates, DoD, ADR/SOP structure, release/testing gates, and Agent-friendly engineering governance. Trigger for audit this project, review project structure, create/review a spec, decompose requirements, organize backlog or roadmap, prepare an iteration, plan a refactor, improve workflow, set up project rules, write/repair AGENTS.md, migrate docs, repair stale process docs, or capture lessons after defects/regressions/deployment failures/planning drift. Chinese triggers include 项目管理, 项目分析, 项目审查, 项目规则, 开发规范, Agent规则, spec, 需求分析, 需求拆解, 架构梳理, 重构, 技术债, 工程治理, 交付闭环, 迭代流程, 故障复盘, 文档治理, 流程审计.
 license: MIT
+metadata:
+  author: wjhuang88
+  version: "1.0.7"
 ---
 
 # Agent Project Governance
