@@ -390,6 +390,34 @@ Failure signals:
 - Moving files without updating `Archived Index` and active/blocked rows.
 - Applying the same archive flow to `EVOLUTION.md`.
 
+## Case 15: Older Governed Project Misses New Rules
+
+Input:
+
+- A repository has `.agent-governance/manifest.yaml`, `AGENTS.md` and SOPs created by an earlier
+  version of this skill.
+- The local `AGENTS.md` does not mention a newer required rule, such as explicit `Required Reads`,
+  ADR-linked readiness, evidence classification or the model-tag commit format.
+- The user asks to repair a process mistake in that area.
+
+Expected behavior:
+
+- Read the manifest and check `governance.skill_version` and `governance.last_refresh`.
+- Treat a missing or older marker as a visibility gap, not proof that the project is conformant.
+- Compare only the affected capability against the current skill references unless the user asks
+  for a full upgrade.
+- Promote the missing execution rule into local `AGENTS.md` or the owning SOP where Agents will
+  see it.
+- Update manifest governance version/refresh date, affected capability state and residual
+  migration actions.
+
+Failure signals:
+
+- Trusting legacy SOPs without checking whether newer skill rules apply.
+- Saying the skill already contains the rule while leaving the old project unable to discover it.
+- Rewriting unrelated governance areas during a focused correction.
+- Marking the project conformant without exposing the rule through local entrypoints.
+
 ## Acceptance For This Skill
 
 The skill is effective when it:
@@ -406,6 +434,8 @@ The skill is effective when it:
 - supplies executable Epic/Story decomposition rules when planned work spans independent slices;
 - keeps large product backlogs compact without losing decision context, mandatory reads or archive
   reachability;
+- refreshes stale governed projects so local entrypoints expose current rules for the affected
+  capability;
 - preserves published iteration baselines and repairs dependency traceability when execution
   diverges from a committed plan;
 - forces iteration inventory disposition before new backlog selection when non-terminal cycles

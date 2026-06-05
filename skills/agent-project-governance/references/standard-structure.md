@@ -102,6 +102,10 @@ Minimum sections for a `product` or `high-risk` project:
 | Session End Checklist | Status synchronization, verification evidence, evidence/uncertainty classification for important claims, residual-work registration, lessons/decision write-back, commit readiness checks, documentation synchronization check ("Did this session change observable behavior? If yes, are user-facing docs updated?"), derived board synchronization when `docs/BOARD.md` exists ("Did owner docs change active/review/paused/next state? If yes, were owner docs updated first and then the board?"), and a decision review: "Did this session make any technical choice that affects Soft or Assumption constraints? If yes, is it recorded in docs/decisions/?" |
 | Current Known Traps | Include when discovery or `EVOLUTION.md` exposes active project-specific traps. |
 
+For older governed projects, `AGENTS.md` should also route governance repair or upgrade requests
+through a refresh audit: compare the affected local rules with the current installed
+`agent-project-governance` skill before trusting legacy SOPs.
+
 For `minimal` projects, include the same sections that apply to its actual work; at minimum an
 Agent that edits code needs Hard Constraints, Coding Behavior, Git Rules, Task Router and Session
 End Checklist.
@@ -188,6 +192,8 @@ standard owner or a deliberately retained standard mapping.
 A project is structurally conformant only when:
 
 - the manifest exists and states a justified profile;
+- the manifest records the governing skill version and last refresh date, or the audit identifies
+  the missing marker as a visibility gap;
 - all applicable standard entrypoints exist or explicitly map migrated sources;
 - `AGENTS.md` meets its quality contract and routes recurring process tasks;
 - implementation workflows define when a result is complete versus partial or blocked, so an
@@ -201,6 +207,8 @@ A project is structurally conformant only when:
   owners;
 - applicable Epic/child relationships preserve project identifiers, dependency readiness and
   iteration traceability;
+- governance repair of older projects checks whether local entrypoints expose current rules for
+  the affected capability before changing files;
 - large or growing product backlogs keep `PRODUCT-BACKLOG.md` as a usable decision surface:
   active rows include `Decision Context` and `Required Reads`, execution detail lives in item
   files, archived items are indexed, and `EVOLUTION.md` remains governed by its own feedback

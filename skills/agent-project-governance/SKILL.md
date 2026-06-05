@@ -29,7 +29,8 @@ records unless the user explicitly asks for code changes too.
 - New or lightly documented repository: discover first, then initialize the smallest useful slice.
 - Existing project needing management, specs, refactor planning, requirements or Agent rules:
   discover, map risks, then recommend before editing.
-- Existing governance that may be stale: audit and repair the smallest misleading slice.
+- Existing governance that may be stale: run a refresh audit against the current skill, then
+  repair the smallest misleading slice.
 - Validation-only or explanation-only request: run the validator or explain the methodology without
   changing files.
 - Skip one-off typo fixes, isolated code edits and single-file formatting unless the user also asks
@@ -44,6 +45,9 @@ Before proposing files or editing a project:
 2. Inspect project technology, delivery shape, test/build commands, deployment surface, and risky
    domains such as authentication, databases, payments, permissions, or external integrations.
 3. Look for `.agent-governance/manifest.yaml`.
+   If present, check whether it records `governance.skill_version` and `governance.last_refresh`;
+   when missing or older than the installed skill, treat correction/repair work as a refresh
+   audit for the affected capability.
 4. Look for existing governance assets and non-standard documents: `AGENTS.md`, contribution
    rules, root-level or custom documentation folders, backlog or issue files, ADRs, roadmap,
    iteration notes, test/release instructions, CI files, migration plans, and lessons learned.
@@ -63,6 +67,8 @@ adoption; a capability audit establishes current validity.
 
 Read [references/initialization-and-adoption.md](references/initialization-and-adoption.md) for
 classification, manifest, migration, and upgrade rules.
+Read [references/governance-refresh.md](references/governance-refresh.md) when repairing or
+upgrading an older governed project so new skill rules are not missed.
 
 ## Communicate for Non-Experts
 
@@ -279,6 +285,8 @@ For initialized projects, verify that declared capabilities remain real:
 - profile and capability states satisfy the invariants in
   [references/initialization-and-adoption.md](references/initialization-and-adoption.md);
 - task routes lead to existing, current instructions;
+- stale governed projects expose current rules for the affected capability through local
+  entrypoints, not only through the installed skill;
 - commands match the repository toolchain and lock files;
 - backlog and iteration states agree;
 - if a derived board exists, it is explicitly marked as a derived operating view, each row links to
@@ -374,6 +382,8 @@ When implementing, also report:
   questions, explanations, and confirmation flow.
 - [references/initialization-and-adoption.md](references/initialization-and-adoption.md): state
   machine, manifest schema, legacy adoption, and degraded-state repair.
+- [references/governance-refresh.md](references/governance-refresh.md): read before repairing or
+  upgrading older governed projects whose local rules may not expose current skill behavior.
 - [references/schema-migrations.md](references/schema-migrations.md): manifest schema version
   rules and compact migration note format.
 - [references/methodology.md](references/methodology.md): principles that generate governance

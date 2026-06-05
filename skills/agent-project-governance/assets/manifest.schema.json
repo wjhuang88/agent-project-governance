@@ -22,6 +22,16 @@
     "status": { "enum": ["adopting", "conformant", "degraded"] },
     "initialized_at": { "$ref": "#/definitions/date" },
     "last_audited_at": { "$ref": "#/definitions/date" },
+    "governance": {
+      "type": "object",
+      "required": ["skill_name", "skill_version", "last_refresh"],
+      "properties": {
+        "skill_name": { "const": "agent-project-governance" },
+        "skill_version": { "type": "string", "minLength": 1 },
+        "last_refresh": { "$ref": "#/definitions/date" }
+      },
+      "additionalProperties": false
+    },
     "entrypoints": {
       "type": "object",
       "minProperties": 1,

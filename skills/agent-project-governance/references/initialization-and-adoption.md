@@ -39,6 +39,7 @@ State boundary rules:
 2. Search for `.agent-governance/manifest.yaml`.
 3. If a manifest exists:
    - read its profile, state, entrypoints, and capabilities;
+   - read `governance.skill_version` and `governance.last_refresh` when present;
    - verify declared paths exist;
    - compare declared commands and risks with current code/configuration;
    - classify as `conformant`, `adopting`, or `degraded`.
@@ -72,6 +73,7 @@ Required logical content:
 
 - schema version and managing skill;
 - profile and governance state;
+- governing skill name/version and last refresh date;
 - standard entrypoint paths;
 - capability states;
 - project-derived risk gates;
@@ -89,6 +91,10 @@ Capability status values:
 | `degraded` | Declared capability exists but is obsolete, broken, or contradictory. |
 
 Never mark a capability conformant just because a file with a matching name exists.
+
+If `governance.skill_version` is missing or older than the installed skill during a correction or
+repair task, treat that as a governance visibility gap. Run the affected-capability refresh audit
+from [governance-refresh.md](governance-refresh.md) before trusting local SOPs as current.
 
 The manifest records auditable governance state and must be version-controlled (committed),
 not git-ignored. If a project excludes `.agent-governance/manifest.yaml` from version control,
@@ -125,6 +131,8 @@ Establish the smallest usable control surface first:
    not duplicate governance content. Do not ask which redirect files to create during normal
    initialization; create both unless the user explicitly forbids one.
 3. Create `.agent-governance/manifest.yaml` with initial capability status.
+   Include `governance.skill_name`, `governance.skill_version`, and `governance.last_refresh` so
+   later Agents can detect whether local rules predate the installed skill.
 4. Create `EVOLUTION.md` for recurring lessons and process improvements, plus
    `docs/sop/EVOLUTION-FEEDBACK.md` to define when and how Agents write lessons.
 5. Add minimum testing and Git instructions when Agents may modify code.
@@ -211,6 +219,8 @@ active content are missing, classify the affected capability as `degraded`.
 Treat drift as a process defect:
 
 - identify the discrepancy and its user impact;
+- compare the affected local capability with the current installed skill when the manifest lacks
+  a current `governance.skill_version` or the user is correcting old process behavior;
 - determine whether code, configuration, target architecture, or documentation is authoritative;
 - repair the smallest set of governance files needed to remove misleading instructions;
 - update manifest capability state;

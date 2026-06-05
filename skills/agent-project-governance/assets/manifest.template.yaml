@@ -5,6 +5,11 @@ status: "<adopting|conformant|degraded>"
 initialized_at: "<YYYY-MM-DD>"
 last_audited_at: "<YYYY-MM-DD>"
 
+governance:
+  skill_name: "agent-project-governance"
+  skill_version: "<installed skill metadata.version>"
+  last_refresh: "<YYYY-MM-DD>"
+
 entrypoints:
   agent_guide: "AGENTS.md"
   evolution: "EVOLUTION.md"
