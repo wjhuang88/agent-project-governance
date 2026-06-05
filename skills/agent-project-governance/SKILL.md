@@ -231,6 +231,9 @@ After confirmation, build toward the standard structure in stages:
    owners and residual-work destinations. Read
    [references/story-format-and-bdd.md](references/story-format-and-bdd.md) when designing these
    rules.
+   If a requirement or story is constrained by an ADR or decision record, require the story to link
+   that decision and carry the relevant constraint into acceptance or validation; an implementation
+   item is not Ready when the governing decision is only implicit.
    When iteration plans are published ahead of implementation, make the workflow preserve each
    published plan as a baseline: execution may append results for the same target, while a new
    target receives a new iteration identifier and explicitly blocks affected downstream plans.
@@ -278,6 +281,8 @@ For initialized projects, verify that declared capabilities remain real:
   child dependencies and iteration selection can be audited;
 - ready backlog stories use a format appropriate to their type, and behavior-facing stories
   have testable Given/When/Then acceptance or an explicit non-applicability reason;
+- ADR-constrained requirements link the governing decision record and include the relevant
+  decision constraint in acceptance or validation;
 - published iteration baselines remain traceable; actual execution appends evidence instead of
   replacing a committed plan with unrelated completed work;
 - each iteration produces a runnable, testable deliverable; iterations that deliver only internal

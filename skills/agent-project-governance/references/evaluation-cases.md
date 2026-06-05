@@ -161,6 +161,31 @@ Failure signals:
 - Treating a publicly visible tool as automatically safe to execute anonymously.
 - Recommending only more tests without addressing authorization or deterministic initialization.
 
+## Case: ADR-Constrained Requirement Without Decision Link
+
+Input:
+
+- `docs/decisions/ADR-0004-event-storage.md` selects append-only event storage and forbids
+  in-place mutation for audit records.
+- A ready backlog story asks the Agent to "update audit status editing" but does not link the ADR
+  or mention the append-only constraint.
+- The implementation plan proposes updating the current audit row in place because it is simpler.
+
+Expected behavior:
+
+- Keep the story out of Ready/implementation until it links the governing ADR.
+- Require the story to state the decision constraint and acceptance impact, such as "status changes
+  append a new event and preserve prior events."
+- If the requested behavior truly needs mutation, route through change control and update or
+  supersede the ADR before coding.
+- Do not rely on the Agent remembering ADR context from repository discovery alone.
+
+Failure signals:
+
+- Treating ADR discovery as sufficient without linking the story to the ADR.
+- Allowing implementation to choose the simpler path when it contradicts the governing decision.
+- Updating the ADR after implementation instead of resolving the conflict first.
+
 ## Case 9: A Multi-Stage Requirement Hidden As One Story
 
 Input:

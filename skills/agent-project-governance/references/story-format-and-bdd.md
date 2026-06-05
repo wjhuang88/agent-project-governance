@@ -49,6 +49,23 @@ differently:
 - **state owners**: backlog, iteration, contract, ADR, reference, release notes or lessons to
   synchronize on completion.
 
+## ADR-Linked Requirement Rule
+
+When a story depends on, implements, changes, or is constrained by an ADR/decision record, the
+story must explicitly link that decision before it can be Ready.
+
+Require these fields or local equivalents:
+
+- **decision links**: concrete paths such as `docs/decisions/ADR-0003-cache.md`;
+- **decision constraint**: the part of the ADR that limits implementation choices;
+- **acceptance impact**: the scenario, checklist item, or validation command proving the story
+  followed that constraint.
+
+Do not rely on an issue title, roadmap note, or Agent memory to carry ADR context. If a relevant
+ADR exists but the story does not name it, keep the story in refinement. If implementation would
+violate or supersede the ADR, route through change control and update or supersede the decision
+before coding.
+
 ## Product Or API Story Template
 
 Use this for behavior-facing work:
@@ -145,6 +162,7 @@ During requirement intake or document audit, reject stories that:
 - have no user/caller/maintainer identity;
 - repeat the title as the value statement;
 - omit exclusions, allowing the Agent to expand scope;
+- omit a governing ADR/decision link when implementation choices are constrained by one;
 - mix several independently valid outcomes into one story;
 - use BDD but put implementation details in `Then`;
 - call open-ended research a story without a timebox and decision output;
