@@ -90,6 +90,8 @@ When feasible after packaging changes, locally create and list archive contents 
   user asks for a combined release slice.
 - Before committing, inspect `git status --short` and `git diff --cached --stat`.
 - Tags use semantic versions like `v1.0.2`. Pushing a `v*` tag triggers release publishing.
+- Before pushing a `v*` tag, create and commit `releases/<tag>.md` with an Agent-authored release
+  summary. The release workflow fails when the matching file is missing.
 
 ## Session End Checklist
 
