@@ -17,6 +17,8 @@ project-root/
 ├── GEMINI.md                (redirect — Gemini CLI)
 ├── EVOLUTION.md
 ├── scripts/
+│   ├── assess_project_scale.sh
+│   ├── assess_project_scale.ps1
 │   ├── validate_project_governance.sh
 │   └── validate_project_governance.ps1
 ├── .agent-governance/
@@ -76,7 +78,7 @@ It is not an excuse for a complex product to omit essential controls.
 | `AGENTS.md` | Compact launch rules, task router, known active traps and applicable close-out gates. | A dump of all design and historical documentation. |
 | `CLAUDE.md` / `GEMINI.md` | Single-line redirect: "Read `AGENTS.md` and follow all rules defined there." Create both during normal initialization unless the user explicitly forbids one. | A second copy of governance rules — all content lives in `AGENTS.md`. |
 | `manifest.yaml` | Governance adoption/state metadata and capability map. | A duplicate of SOP content. |
-| Project harness scripts | Deterministic checks for mechanical governance rules. See [references/harness-design.md](harness-design.md). | A replacement for Agent judgment about project-specific risk. |
+| Project harness scripts | Deterministic checks for mechanical governance rules, including scale/mode signals when relevant. See [references/harness-design.md](harness-design.md) and [references/project-scale-harness.md](project-scale-harness.md). | A replacement for Agent judgment about project-specific risk. |
 | `EVOLUTION.md` | Reusable lessons from observed failures or corrections. | A generic changelog. |
 | `docs/sop/EVOLUTION-FEEDBACK.md` | When and how Agents write lessons, promote lessons to rules/checks, and index recurring traps. | The lesson history itself. |
 | Backlog | Compact prioritization surface plus item files for implementable stories and, when needed, Epic containers with child/dependency traceability. `PRODUCT-BACKLOG.md` keeps decision context and `Required Reads`; item files carry execution detail. | A long-term brainstorm list, oversized discussion log, or untracked large plan. |
@@ -101,7 +103,7 @@ Minimum sections for a `product` or `high-risk` project:
 | --- | --- |
 | Hard Constraints | Worktree check, routing-before-process-work, backlog/change-control rules, documentation ownership, lessons and decision write-back, and project-derived prohibitions. |
 | Coding Behavior | Rules governing how the Agent writes code. Read [references/coding-behavior.md](coding-behavior.md) for the full guidelines; at minimum include: state assumptions before implementing; only write code directly asked for (no speculative features, no premature abstractions, no unsolicited refactoring); match existing style even if different from personal preference; define verifiable success criteria before starting; clean up only what your own changes orphan. |
-| Git Rules | Staged-diff review, safe staging, and the complete commit format an Agent must follow before any direct shell commit. Put non-standard commit requirements here, not only in `docs/sop/GIT-WORKFLOW.md`. At minimum, when an Agent generates a commit, `AGENTS.md` must state a full format such as `type(scope): description (#story-id) [model:<model-name>]`, define scope, and say `[model:<model-name>]` is required for Agent-authored or Agent-assisted commits. |
+| Git Rules | Staged-diff review, safe staging, branch/worktree awareness when configured, and the complete commit format an Agent must follow before any direct shell commit. Put non-standard commit requirements here, not only in `docs/sop/GIT-WORKFLOW.md`. At minimum, when an Agent generates a commit, `AGENTS.md` must state a full format such as `type(scope): description (#story-id) [model:<model-name>]`, define scope, and say `[model:<model-name>]` is required for Agent-authored or Agent-assisted commits. |
 | Task Router | Routes for project orientation, intake, iteration start, in-iteration change, implementation, testing, Git, diagnosis, document maintenance and decisions; all mandatory targets must exist. |
 | Session End Checklist | Status synchronization, verification evidence, evidence/uncertainty classification for important claims, residual-work registration, lessons/decision write-back, commit readiness checks, documentation synchronization check ("Did this session change observable behavior? If yes, are user-facing docs updated?"), derived board synchronization when `docs/BOARD.md` exists ("Did owner docs change active/review/paused/next state? If yes, were owner docs updated first and then the board?"), and a decision review: "Did this session make any technical choice that affects Soft or Assumption constraints? If yes, is it recorded in docs/decisions/?" |
 | Current Known Traps | Include when discovery or `EVOLUTION.md` exposes active project-specific traps. |
@@ -150,7 +152,8 @@ workflow already depends on.
 | `docs/sop/LOCAL-DEV.md` | Agents are expected to run or debug the application locally. |
 | `docs/sop/NEW-FEATURE.md` | Agents are expected to add product behavior repeatedly. |
 | `docs/sop/DOC-CHECK.md` | The project uses multiple standard governance document layers or migrates legacy documentation. |
-| Project-local harness scripts | Governance documents introduce rules that can be mechanically checked. |
+| Project-local harness scripts | Governance documents introduce rules that can be mechanically checked, or profile/branch/worktree mode needs repeatable evidence. |
+| `docs/sop/GIT-WORKFLOW.md` branch/worktree mode | Scale assessment or project facts show release-managed or parallel-Agent work; otherwise keep simple mode. |
 | `docs/sop/PAIRING-WORKFLOW.md` | Complex/high-risk work needs staged implementation and review. |
 | `docs/sop/RELEASE.md` | Agents support packaging, deployment or release verification. |
 | Iteration MVP deliverable requirement | Profile is `product` or `high-risk`. Each iteration must produce a runnable, testable output. |
@@ -203,6 +206,8 @@ A project is structurally conformant only when:
 - `AGENTS.md` meets its quality contract and routes recurring process tasks;
 - mechanical governance rules are enforced by project-local harness scripts or explicitly
   registered as residual work;
+- profile, branch mode and worktree mode match scale-harness evidence or record an explicit
+  override reason;
 - implementation workflows define when a result is complete versus partial or blocked, so an
   Agent cannot finish after file creation while omitting status/evidence/follow-up closure;
 - procedures point to current toolchain, paths, and architecture;

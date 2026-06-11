@@ -4,7 +4,7 @@ description: Use for project management, project analysis/review, specs and requ
 license: MIT
 metadata:
   author: wjhuang88
-  version: "1.0.8"
+  version: "2.0.0"
 ---
 
 # Agent Project Governance
@@ -40,6 +40,8 @@ Before proposing files or editing a project:
 1. Locate the project root from repository markers and build files.
 2. Inspect technology, delivery shape, test/build commands, deployment surface, and risky domains
    such as authentication, databases, payments, permissions, or external integrations.
+   When choosing profile, branch mode, worktree mode, or governance depth, run or design the
+   project-scale harness before relying on judgment.
 3. Look for `.agent-governance/manifest.yaml`. If it exists, check
    `governance.skill_version` and `governance.last_refresh`; missing or old values make the
    affected work a refresh audit.
@@ -154,6 +156,8 @@ local tests. Do not import gates merely because another project needed them.
 
 Read [references/risk-to-gate-patterns.md](references/risk-to-gate-patterns.md) when the project
 contains cross-layer, security, data, deployment, or migration risk.
+Read [references/project-scale-harness.md](references/project-scale-harness.md) when choosing or
+auditing profile, branch mode, worktree mode, or governance depth.
 
 ### 3. Recommend
 
@@ -194,6 +198,8 @@ After confirmation, build toward the standard structure in stages:
    mapping. Do not leave active rules discoverable only through non-standard sources.
 6. Add daily execution gates: testing, Git, requirement intake, iteration flow, and change control
    as applicable.
+   When branch or worktree policy is needed, keep it limited to observed project signals and read
+   [references/git-branch-and-worktree.md](references/git-branch-and-worktree.md).
 7. Add planning and stable-fact layers as applicable: backlog, iterations, decisions, roadmap,
    proposals, and reference material.
 8. For product or high-risk projects with multiple non-terminal status owners, consider
@@ -223,6 +229,10 @@ Use these references when the slice touches the named area:
   runtime reachability, and documentation synchronization.
 - [references/harness-design.md](references/harness-design.md): project-local validation scripts
   for mechanical governance rules introduced by generated documents.
+- [references/project-scale-harness.md](references/project-scale-harness.md): mechanical scale
+  signals for profile, branch mode, worktree mode, and governance depth.
+- [references/git-branch-and-worktree.md](references/git-branch-and-worktree.md): limited
+  GitFlow/worktree adoption derived from scale and release risk.
 - [assets/manifest.template.yaml](assets/manifest.template.yaml): manifest starting point.
 - [assets/manifest.schema.json](assets/manifest.schema.json): optional editor aid; validators stay
   dependency-free and do not require schema tooling.
@@ -325,7 +335,9 @@ When implementing, also report:
   [story-format-and-bdd](references/story-format-and-bdd.md),
   [backlog-compaction](references/backlog-compaction.md),
   [iteration-baseline-integrity](references/iteration-baseline-integrity.md),
-  [harness-design](references/harness-design.md).
+  [harness-design](references/harness-design.md),
+  [project-scale-harness](references/project-scale-harness.md),
+  [git-branch-and-worktree](references/git-branch-and-worktree.md).
 - Closure and learning:
   [closure-protocol](references/closure-protocol.md),
   [evolution-feedback](references/evolution-feedback.md),

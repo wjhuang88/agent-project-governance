@@ -25,6 +25,8 @@ Good candidates:
 - derived boards declare themselves as derived views and include owner-doc and gate columns;
 - active backlog rows include `Required Reads` when item files, ADRs or specs are mandatory;
 - completed stories or iterations include validation evidence;
+- profile, branch mode, worktree mode and governance depth recommendations are backed by
+  repeatable scale signals;
 - project-specific Hard constraints produce repeatable checks, such as migration notes, contract
   tests, security review markers, visual evidence, release artifacts, or API compatibility checks.
 
@@ -70,3 +72,5 @@ mechanical checks were only written as prose and neither scripted nor registered
 
 The bundled validators are starting points, not a limit. Tailor checks to the project's actual
 Hard constraints and keep warnings for rules that are useful but may be temporarily transitional.
+Read [project-scale-harness.md](project-scale-harness.md) when scale, branch mode, worktree mode or
+governance depth affects the generated rules.
