@@ -198,7 +198,9 @@ After confirmation, build toward the standard structure in stages:
    proposals, and reference material.
 8. For product or high-risk projects with multiple non-terminal status owners, consider
    `docs/BOARD.md` only as a derived operating view. Owner docs remain the source of truth.
-9. Add project-specific gates derived from risk, such as contract-first APIs, database migration,
+9. For every mechanical rule introduced by the governance documents, create or update a
+   project-local harness check, or register the missing check as residual work with an owner.
+10. Add project-specific gates derived from risk, such as contract-first APIs, database migration,
    release, security, or visual validation rules.
 
 Preserve useful legacy documents during adoption. Non-standard location is not a reason to drop
@@ -219,6 +221,8 @@ Use these references when the slice touches the named area:
 - [references/iteration-baseline-integrity.md](references/iteration-baseline-integrity.md):
   published iteration baselines, active/review/planned/blocked inventory, runnable deliverables,
   runtime reachability, and documentation synchronization.
+- [references/harness-design.md](references/harness-design.md): project-local validation scripts
+  for mechanical governance rules introduced by generated documents.
 - [assets/manifest.template.yaml](assets/manifest.template.yaml): manifest starting point.
 - [assets/manifest.schema.json](assets/manifest.schema.json): optional editor aid; validators stay
   dependency-free and do not require schema tooling.
@@ -241,6 +245,8 @@ For initialized projects, verify that declared capabilities remain real:
   before selection, produce runnable/testable deliverables, and record runtime reachability;
 - observable behavior changes update user-facing documentation or register documentation debt;
 - completion claims cite recorded commands or concrete manual evidence;
+- mechanical governance rules have matching project-local harness checks or explicit residual
+  work records;
 - important conclusions distinguish confirmed facts, inferences, assumptions, and unknowns;
 - transitional architecture is not presented as final design;
 - failure lessons become checks where useful;
@@ -263,6 +269,7 @@ After editing governance artifacts:
    The validator checks required profile files, capability evidence, `AGENTS.md` execution
    sections, local Markdown links, missing explicit `src/...` file references in active governance
    documents, and completion claims without recorded validation evidence.
+   If the project has local harness scripts, run those too.
 2. Compare inventoried non-standard documents with the new standard owners; confirm every
    still-applicable rule, fact, decision, work item, procedure, or lesson was extracted or mapped.
 3. If `docs/BOARD.md` exists, confirm owner docs were updated before the board and that the board
@@ -317,7 +324,8 @@ When implementing, also report:
   [epic-and-story-decomposition](references/epic-and-story-decomposition.md),
   [story-format-and-bdd](references/story-format-and-bdd.md),
   [backlog-compaction](references/backlog-compaction.md),
-  [iteration-baseline-integrity](references/iteration-baseline-integrity.md).
+  [iteration-baseline-integrity](references/iteration-baseline-integrity.md),
+  [harness-design](references/harness-design.md).
 - Closure and learning:
   [closure-protocol](references/closure-protocol.md),
   [evolution-feedback](references/evolution-feedback.md),

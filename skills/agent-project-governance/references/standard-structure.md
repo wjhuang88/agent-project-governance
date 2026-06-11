@@ -16,6 +16,9 @@ project-root/
 ├── CLAUDE.md                (redirect — Claude Code)
 ├── GEMINI.md                (redirect — Gemini CLI)
 ├── EVOLUTION.md
+├── scripts/
+│   ├── validate_project_governance.sh
+│   └── validate_project_governance.ps1
 ├── .agent-governance/
 │   └── manifest.yaml
 └── docs/
@@ -73,6 +76,7 @@ It is not an excuse for a complex product to omit essential controls.
 | `AGENTS.md` | Compact launch rules, task router, known active traps and applicable close-out gates. | A dump of all design and historical documentation. |
 | `CLAUDE.md` / `GEMINI.md` | Single-line redirect: "Read `AGENTS.md` and follow all rules defined there." Create both during normal initialization unless the user explicitly forbids one. | A second copy of governance rules — all content lives in `AGENTS.md`. |
 | `manifest.yaml` | Governance adoption/state metadata and capability map. | A duplicate of SOP content. |
+| Project harness scripts | Deterministic checks for mechanical governance rules. See [references/harness-design.md](harness-design.md). | A replacement for Agent judgment about project-specific risk. |
 | `EVOLUTION.md` | Reusable lessons from observed failures or corrections. | A generic changelog. |
 | `docs/sop/EVOLUTION-FEEDBACK.md` | When and how Agents write lessons, promote lessons to rules/checks, and index recurring traps. | The lesson history itself. |
 | Backlog | Compact prioritization surface plus item files for implementable stories and, when needed, Epic containers with child/dependency traceability. `PRODUCT-BACKLOG.md` keeps decision context and `Required Reads`; item files carry execution detail. | A long-term brainstorm list, oversized discussion log, or untracked large plan. |
@@ -146,6 +150,7 @@ workflow already depends on.
 | `docs/sop/LOCAL-DEV.md` | Agents are expected to run or debug the application locally. |
 | `docs/sop/NEW-FEATURE.md` | Agents are expected to add product behavior repeatedly. |
 | `docs/sop/DOC-CHECK.md` | The project uses multiple standard governance document layers or migrates legacy documentation. |
+| Project-local harness scripts | Governance documents introduce rules that can be mechanically checked. |
 | `docs/sop/PAIRING-WORKFLOW.md` | Complex/high-risk work needs staged implementation and review. |
 | `docs/sop/RELEASE.md` | Agents support packaging, deployment or release verification. |
 | Iteration MVP deliverable requirement | Profile is `product` or `high-risk`. Each iteration must produce a runnable, testable output. |
@@ -196,6 +201,8 @@ A project is structurally conformant only when:
   the missing marker as a visibility gap;
 - all applicable standard entrypoints exist or explicitly map migrated sources;
 - `AGENTS.md` meets its quality contract and routes recurring process tasks;
+- mechanical governance rules are enforced by project-local harness scripts or explicitly
+  registered as residual work;
 - implementation workflows define when a result is complete versus partial or blocked, so an
   Agent cannot finish after file creation while omitting status/evidence/follow-up closure;
 - procedures point to current toolchain, paths, and architecture;
