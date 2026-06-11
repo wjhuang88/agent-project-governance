@@ -256,7 +256,10 @@ After editing governance artifacts:
 
 1. Run the validator for the current environment:
    `sh <skill-path>/scripts/validate_project_governance.sh <project-root>` on Unix-like systems,
-   or `pwsh -File <skill-path>/scripts/validate_project_governance.ps1 <project-root>` on Windows.
+   `powershell -NoProfile -File <skill-path>/scripts/validate_project_governance.ps1 <project-root>`
+   on Windows PowerShell 5.1, or
+   `pwsh -NoProfile -File <skill-path>/scripts/validate_project_governance.ps1 <project-root>`
+   on PowerShell 7+.
    The validator checks required profile files, capability evidence, `AGENTS.md` execution
    sections, local Markdown links, missing explicit `src/...` file references in active governance
    documents, and completion claims without recorded validation evidence.

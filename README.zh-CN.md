@@ -101,8 +101,11 @@ AI Agent 无条件执行预设的检查项，消除了人为遵守规则时可�
 # macOS / Linux / Unix-like shell
 sh <skill-path>/scripts/validate_project_governance.sh <project-root>
 
-# Windows PowerShell
-pwsh -File <skill-path>/scripts/validate_project_governance.ps1 <project-root>
+# Windows PowerShell 5.1
+powershell -NoProfile -File <skill-path>/scripts/validate_project_governance.ps1 <project-root>
+
+# PowerShell 7+
+pwsh -NoProfile -File <skill-path>/scripts/validate_project_governance.ps1 <project-root>
 ```
 
 校验项包括：Manifest 声明文件完整性、`AGENTS.md` 结构合规性、内部链接

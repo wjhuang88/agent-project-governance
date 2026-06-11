@@ -68,6 +68,29 @@ function Test-Evidence {
     return $Text -match "(?is)```|\b(test|tests|tested|testing|cargo|npm|pnpm|yarn|pytest|gradle|mvn|make|go test|passed|passing|verified|verify|evidence|exit\s*0|coverage|benchmark|smoke)\b"
 }
 
+function ConvertTo-RelativePath {
+    param(
+        [string]$BasePath,
+        [string]$TargetPath
+    )
+    $BaseFullPath = [System.IO.Path]::GetFullPath($BasePath)
+    $TargetFullPath = [System.IO.Path]::GetFullPath($TargetPath)
+    if (-not $BaseFullPath.EndsWith([System.IO.Path]::DirectorySeparatorChar.ToString())) {
+        $BaseFullPath = $BaseFullPath + [System.IO.Path]::DirectorySeparatorChar
+    }
+    $BaseUri = New-Object System.Uri($BaseFullPath)
+    $TargetUri = New-Object System.Uri($TargetFullPath)
+    if ($BaseUri.Scheme -ne $TargetUri.Scheme) {
+        return $TargetFullPath
+    }
+    $RelativeUri = $BaseUri.MakeRelativeUri($TargetUri)
+    $RelativePath = [System.Uri]::UnescapeDataString($RelativeUri.ToString())
+    if ($TargetUri.Scheme -eq "file") {
+        $RelativePath = $RelativePath -replace '/', [System.IO.Path]::DirectorySeparatorChar
+    }
+    return $RelativePath
+}
+
 function Test-CapabilityFile {
     param(
         [string]$Capability,
@@ -157,7 +180,7 @@ if ($ManifestStatus -in @("degraded", "adopting")) {
 
 foreach ($Record in $IterationRecords) {
     if ((Test-CompletionClaim $Record.FullName) -and -not (Test-Evidence $Record.FullName)) {
-        $Relative = [System.IO.Path]::GetRelativePath($script:Root, $Record.FullName)
+        $Relative = ConvertTo-RelativePath $script:Root $Record.FullName
         Add-WarningMessage "iteration claims completion but records no validation evidence (command, test, or recorded result): $Relative"
     }
 }
@@ -228,7 +251,7 @@ foreach ($Source in $MarkdownFiles) {
         }
         $Target = Join-Path $Source.DirectoryName $Link
         if (-not (Test-Path -LiteralPath $Target)) {
-            $RelativeSource = [System.IO.Path]::GetRelativePath($script:Root, $Source.FullName)
+            $RelativeSource = ConvertTo-RelativePath $script:Root $Source.FullName
             Add-ErrorMessage "broken Markdown link: $RelativeSource -> $Link"
         }
     }
@@ -256,7 +279,7 @@ foreach ($Source in $ActiveFiles) {
             continue
         }
         if (-not (Test-Path -LiteralPath (Join-Path $script:Root $RelativePath))) {
-            $RelativeSource = [System.IO.Path]::GetRelativePath($script:Root, $Source.FullName)
+            $RelativeSource = ConvertTo-RelativePath $script:Root $Source.FullName
             Add-ErrorMessage "missing explicit source path referenced by active governance: $RelativeSource -> $RelativePath"
         }
     }

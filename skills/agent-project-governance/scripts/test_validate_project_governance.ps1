@@ -4,6 +4,15 @@ $ErrorActionPreference = "Stop"
 $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $Validator = Join-Path $ScriptDir "validate_project_governance.ps1"
 $TmpRoot = Join-Path ([System.IO.Path]::GetTempPath()) ("agent-governance-validator-tests-" + [guid]::NewGuid())
+$PowerShellExe = [System.Diagnostics.Process]::GetCurrentProcess().MainModule.FileName
+if (-not $PowerShellExe) {
+    if ($PSVersionTable.PSEdition -eq "Core") {
+        $PowerShellExe = "pwsh"
+    }
+    else {
+        $PowerShellExe = "powershell"
+    }
+}
 $PassCount = 0
 $FailCount = 0
 $Status = 0
@@ -86,7 +95,7 @@ function New-ValidProject {
 
 function Invoke-ValidatorCase {
     param([string]$Root)
-    $script:Output = (& pwsh -NoProfile -File $Validator $Root 2>&1) -join "`n"
+    $script:Output = (& $PowerShellExe -NoProfile -File $Validator $Root 2>&1) -join "`n"
     $script:Status = $LASTEXITCODE
 }
 

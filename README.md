@@ -118,8 +118,11 @@ Python or third-party dependencies required.
 # macOS / Linux / Unix-like shell
 sh <skill-path>/scripts/validate_project_governance.sh <project-root>
 
-# Windows PowerShell
-pwsh -File <skill-path>/scripts/validate_project_governance.ps1 <project-root>
+# Windows PowerShell 5.1
+powershell -NoProfile -File <skill-path>/scripts/validate_project_governance.ps1 <project-root>
+
+# PowerShell 7+
+pwsh -NoProfile -File <skill-path>/scripts/validate_project_governance.ps1 <project-root>
 ```
 
 Checks include: manifest file integrity, `AGENTS.md` structure
