@@ -70,6 +70,33 @@ mechanical checks were only written as prose and neither scripted nor registered
 6. Promote repeated failures from `EVOLUTION.md` into the harness when the prevention is
    deterministic.
 
+## Shell Harness Construction Rules
+
+Keep generated shell checks simple under `set -eu`:
+
+- Do not implement checks as strings passed to `eval`.
+- Do not embed command substitutions such as `$(find ... | head -1)` inside a check expression
+  argument. Compute the result first, then check the variable.
+- Prefer helper functions that return normal shell status, such as `check_file_exists`,
+  `check_dir_exists`, `check_dir_has_md`, and `check_contains`.
+- For directory content checks, use a count or a precomputed result:
+
+```sh
+check_dir_has_md() {
+  _dir="$1"
+  _desc="$2"
+  _count="$(find "$ROOT/$_dir" -maxdepth 1 -type f -name '*.md' 2>/dev/null | wc -l | tr -d ' ')"
+  if [ -d "$ROOT/$_dir" ] && [ "$_count" -ge 1 ]; then
+    pass "$_desc"
+  else
+    fail "$_desc"
+  fi
+}
+```
+
+This avoids quoting drift, early command substitution surprises, and `set -e` interactions that
+make a generated harness report false failures.
+
 The bundled validators are starting points, not a limit. Tailor checks to the project's actual
 Hard constraints and keep warnings for rules that are useful but may be temporarily transitional.
 Read [project-scale-harness.md](project-scale-harness.md) when scale, branch mode, worktree mode or

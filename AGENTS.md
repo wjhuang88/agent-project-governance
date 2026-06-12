@@ -86,6 +86,9 @@ When feasible after packaging changes, locally create and list archive contents 
 - Determine the model tag from the active model identity at commit time. Do not copy it from a
   previous commit, an example, or documentation. If the current model name is unclear, ask before
   committing rather than guessing.
+- Before starting a new staged development phase, commit the current intended checkpoint first.
+  Do not begin the next phase on top of uncommitted completed work unless the user explicitly asks
+  to keep the checkpoint uncommitted.
 - Do not mix unrelated release, documentation, and skill-behavior changes in one commit unless the
   user asks for a combined release slice.
 - Before committing, inspect `git status --short` and `git diff --cached --stat`.
