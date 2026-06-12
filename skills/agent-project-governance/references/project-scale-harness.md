@@ -25,6 +25,11 @@ Recommended signal groups:
 | Planning | backlog, iteration records, roadmap, ADRs, proposals |
 | Parallel work | multiple worktrees, dirty worktree plus urgent work, multiple active owner docs |
 
+Exclude local Agent/tool caches and generated dependency/build directories from scale counts, such
+as `.git/`, `.codex/`, `.opencode/`, `.sisyphus/`, `.agents/`, `node_modules/`, `target/`, `dist/`
+and `build/`. Scale evidence should reflect repository-owned source and governance artifacts, not
+per-user caches.
+
 ## Mapping
 
 Use explicit thresholds, then explain the evidence:

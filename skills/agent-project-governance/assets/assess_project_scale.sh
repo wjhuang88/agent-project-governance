@@ -10,6 +10,10 @@ root=$(cd "$root" 2>/dev/null && pwd) || {
 count_files() {
   find "$root" \
     -path "$root/.git" -prune -o \
+    -path "$root/.codex" -prune -o \
+    -path "$root/.opencode" -prune -o \
+    -path "$root/.sisyphus" -prune -o \
+    -path "$root/.agents" -prune -o \
     -path "$root/node_modules" -prune -o \
     -path "$root/target" -prune -o \
     -path "$root/dist" -prune -o \
@@ -32,6 +36,10 @@ has_text() {
   pattern="$1"
   find "$root" \
     -path "$root/.git" -prune -o \
+    -path "$root/.codex" -prune -o \
+    -path "$root/.opencode" -prune -o \
+    -path "$root/.sisyphus" -prune -o \
+    -path "$root/.agents" -prune -o \
     -path "$root/node_modules" -prune -o \
     -path "$root/target" -prune -o \
     -type f \( -name '*.js' -o -name '*.ts' -o -name '*.tsx' -o -name '*.py' -o -name '*.go' -o -name '*.rs' -o -name '*.java' -o -name '*.rb' -o -name '*.php' -o -name '*.cs' -o -name '*.json' -o -name '*.toml' \) -print 2>/dev/null |

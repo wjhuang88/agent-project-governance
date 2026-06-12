@@ -15,7 +15,7 @@ function Get-ProjectFiles {
     param([string[]]$Extensions)
     Get-ChildItem -LiteralPath $Root -Recurse -File -ErrorAction SilentlyContinue |
         Where-Object {
-            $_.FullName -notmatch '[\\/](\.git|node_modules|target|dist|build)[\\/]' -and
+            $_.FullName -notmatch '[\\/](\.git|\.codex|\.opencode|\.sisyphus|\.agents|node_modules|target|dist|build)[\\/]' -and
             $Extensions -contains $_.Extension.ToLowerInvariant()
         }
 }
@@ -46,7 +46,7 @@ $SourceExtensions = @(".js", ".ts", ".tsx", ".py", ".go", ".rs", ".java", ".rb",
 $SourceFiles = @(Get-ProjectFiles $SourceExtensions).Count
 $PackageFiles = @(Get-ChildItem -LiteralPath $Root -Recurse -File -ErrorAction SilentlyContinue |
     Where-Object {
-        $_.FullName -notmatch '[\\/](\.git|node_modules|target|dist|build)[\\/]' -and
+        $_.FullName -notmatch '[\\/](\.git|\.codex|\.opencode|\.sisyphus|\.agents|node_modules|target|dist|build)[\\/]' -and
         ($_.Name -in @("package.json", "Cargo.toml", "go.mod", "pyproject.toml", "pom.xml") -or
         $_.Name -like "*.csproj")
     }).Count

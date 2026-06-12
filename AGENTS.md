@@ -92,6 +92,9 @@ When feasible after packaging changes, locally create and list archive contents 
 - Tags use semantic versions like `v1.0.2`. Pushing a `v*` tag triggers release publishing.
 - Before pushing a `v*` tag, create and commit `releases/<tag>.md` with an Agent-authored release
   summary. The release workflow fails when the matching file is missing.
+- Before creating or pushing a `v*` tag, verify that
+  `skills/agent-project-governance/SKILL.md` metadata version exactly matches the tag without the
+  leading `v` by running `sh scripts/validate_repository_harness.sh <tag>`.
 
 ## Release Procedure
 
@@ -106,6 +109,7 @@ Use this sequence for every user-requested release:
 4. Create `releases/<tag>.md` before tagging. Write a concise Agent-authored summary with:
    `Summary`, `Notable Changes`, and `Upgrade Notes`.
 5. Run release-relevant validation:
+   - `sh scripts/validate_repository_harness.sh <tag>`
    - `ruby -e 'require "yaml"; text=File.read("skills/agent-project-governance/SKILL.md"); YAML.safe_load(text.split("---",3)[1]); puts "skill frontmatter ok"'`
    - `ruby -e 'require "yaml"; YAML.load_file(".github/workflows/release.yml"); puts "workflow yaml ok"'`
    - `sh skills/agent-project-governance/scripts/test_validate_project_governance.sh`
