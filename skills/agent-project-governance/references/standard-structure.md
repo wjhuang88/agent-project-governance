@@ -45,6 +45,7 @@ project-root/
         ├── START-ITERATION.md
         ├── ITERATION-WORKFLOW.md
         ├── CHANGE-CONTROL.md
+        ├── LONG-RUNNING-TASK.md
         ├── LOCAL-DEV.md
         ├── NEW-FEATURE.md
         ├── DOC-CHECK.md
@@ -149,6 +150,7 @@ workflow already depends on.
 | Epic/Story rules inside `docs/sop/REQUIREMENT-INTAKE.md` | Product work includes outcomes that span multiple independently testable slices, ordered stages, or iterations. |
 | Backlog compaction rules | `PRODUCT-BACKLOG.md` is large, expected to grow, or contains mixed active, completed, superseded and historical items. Use `docs/backlog/active/`, `docs/backlog/archive/` and explicit `Required Reads`. |
 | `docs/sop/CHANGE-CONTROL.md` | Profile is `product` or `high-risk`, or work can change after implementation begins. |
+| `docs/sop/LONG-RUNNING-TASK.md` | Work may run unattended, span three or more ordered phases, exceed 30 minutes, coordinate multiple systems/worktrees, or require durable resume checkpoints. |
 | `docs/sop/LOCAL-DEV.md` | Agents are expected to run or debug the application locally. |
 | `docs/sop/NEW-FEATURE.md` | Agents are expected to add product behavior repeatedly. |
 | `docs/sop/DOC-CHECK.md` | The project uses multiple standard governance document layers or migrates legacy documentation. |

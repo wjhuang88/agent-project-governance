@@ -27,6 +27,8 @@ Good candidates:
 - completed stories or iterations include validation evidence;
 - profile, branch mode, worktree mode and governance depth recommendations are backed by
   repeatable scale signals;
+- long-running task records contain the startup contract, consolidated confirmation, task gates,
+  checkpoints, and recovery evidence required by the local SOP;
 - project-specific Hard constraints produce repeatable checks, such as migration notes, contract
   tests, security review markers, visual evidence, release artifacts, or API compatibility checks.
 

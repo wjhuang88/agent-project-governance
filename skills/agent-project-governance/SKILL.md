@@ -200,6 +200,8 @@ After confirmation, build toward the standard structure in stages:
    as applicable.
    When branch or worktree policy is needed, keep it limited to observed project signals and read
    [references/git-branch-and-worktree.md](references/git-branch-and-worktree.md).
+   When work must run through multiple phases without repeated user interaction, generate a
+   long-running task SOP and read [references/long-running-task.md](references/long-running-task.md).
 7. Add planning and stable-fact layers as applicable: backlog, iterations, decisions, roadmap,
    proposals, and reference material.
 8. For product or high-risk projects with multiple non-terminal status owners, consider
@@ -233,6 +235,8 @@ Use these references when the slice touches the named area:
   signals for profile, branch mode, worktree mode, and governance depth.
 - [references/git-branch-and-worktree.md](references/git-branch-and-worktree.md): limited
   GitFlow/worktree adoption derived from scale and release risk.
+- [references/long-running-task.md](references/long-running-task.md): complete task inventory,
+  consolidated confirmation, autonomous execution, checkpoint, and interruption rules.
 - [assets/manifest.template.yaml](assets/manifest.template.yaml): manifest starting point.
 - [assets/manifest.schema.json](assets/manifest.schema.json): optional editor aid; validators stay
   dependency-free and do not require schema tooling.
@@ -337,7 +341,8 @@ When implementing, also report:
   [iteration-baseline-integrity](references/iteration-baseline-integrity.md),
   [harness-design](references/harness-design.md),
   [project-scale-harness](references/project-scale-harness.md),
-  [git-branch-and-worktree](references/git-branch-and-worktree.md).
+  [git-branch-and-worktree](references/git-branch-and-worktree.md),
+  [long-running-task](references/long-running-task.md).
 - Closure and learning:
   [closure-protocol](references/closure-protocol.md),
   [evolution-feedback](references/evolution-feedback.md),
